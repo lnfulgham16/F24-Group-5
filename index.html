@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,11 +8,31 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Allow top bar and content to stack vertically */
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+        }
+        /* Navigation bar styling */
+        .navbar {
+            width: 100%; /* Full width */
+            background-color: #4CAF50; /* Green background */
+            padding: 10px; /* Padding around the content */
+            text-align: center; /* Center the link inside */
+            position: relative; /* For proper button positioning */
+        }
+        .navbar a {
+            background-color: white; /* White button */
+            color: #4CAF50; /* Green text */
+            padding: 10px 20px; /* Padding for the button */
+            text-decoration: none; /* No underline */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 16px; /* Font size */
+        }
+        .navbar a:hover {
+            background-color: #45a049; /* Darker green on hover */
+            color: white; /* White text on hover */
         }
         h1 {
             color: #333;
@@ -20,6 +41,11 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="Jobboard.html">Go to Job Board</a>
+    </div>
+
     <h1>Welcome to Group 5's Project</h1>
 </body>
 </html>
