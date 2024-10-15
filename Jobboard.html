@@ -98,6 +98,9 @@
         }
 
         .job-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             background-color: #f9f9f9;
             margin: 10px 0;
             padding: 15px;
@@ -107,6 +110,20 @@
 
         .job-list li:hover {
             background-color: #e8f5e9;
+        }
+
+        .apply-link {
+            margin-left: 20px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .apply-link:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -133,21 +150,66 @@
 
             <div class="job-list">
                 <ul>
-                    <li><strong>Assistant Professor of Computer Science</strong><br>Location: Stanford University<br>Department: School of Engineering</li>
-                    <li><strong>Admissions Counselor</strong><br>Location: Harvard University<br>Department: Undergraduate Admissions</li>
-                    <li><strong>Director of Student Affairs</strong><br>Location: University of California, Berkeley<br>Department: Student Services</li>
-                    <li><strong>Academic Advisor</strong><br>Location: New York University<br>Department: College of Arts and Science</li>
-                    <li><strong>Library Technician</strong><br>Location: University of Texas, Austin<br>Department: University Library</li>
-                    <li><strong>Research Scientist</strong><br>Location: Massachusetts Institute of Technology (MIT)<br>Department: Artificial Intelligence Lab</li>
-                    <li><strong>Financial Aid Officer</strong><br>Location: University of Michigan<br>Department: Financial Aid Services</li>
-                    <li><strong>Campus Security Officer</strong><br>Location: University of Southern California<br>Department: Campus Safety</li>
-                    <li><strong>Registrar</strong><br>Location: Princeton University<br>Department: Registrar's Office</li>
-                    <li><strong>Communications Specialist</strong><br>Location: University of Chicago<br>Department: Office of Communications</li>
-                    <li><strong>Event Coordinator</strong><br>Location: University of North Carolina at Chapel Hill<br>Department: Campus Events</li>
-                    <li><strong>IT Support Specialist</strong><br>Location: Duke University<br>Department: Information Technology Services</li>
-                    <li><strong>Head of Campus Housing</strong><br>Location: Ohio State University<br>Department: Housing and Residence Life</li>
-                    <li><strong>Dean of Faculty</strong><br>Location: University of Pennsylvania<br>Department: Faculty Affairs</li>
-                    <li><strong>HR Specialist</strong><br>Location: Columbia University<br>Department: Human Resources</li>
+                    <li>
+                        <span><strong>Assistant Professor of Computer Science</strong><br>Location: Stanford University<br>Department: School of Engineering</span>
+                        <a href="http://dummy-address.com/apply/assistant-professor" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Admissions Counselor</strong><br>Location: Harvard University<br>Department: Undergraduate Admissions</span>
+                        <a href="http://dummy-address.com/apply/admissions-counselor" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Director of Student Affairs</strong><br>Location: University of California, Berkeley<br>Department: Student Services</span>
+                        <a href="http://dummy-address.com/apply/director-student-affairs" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Academic Advisor</strong><br>Location: New York University<br>Department: College of Arts and Science</span>
+                        <a href="http://dummy-address.com/apply/academic-advisor" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Library Technician</strong><br>Location: University of Texas, Austin<br>Department: University Library</span>
+                        <a href="http://dummy-address.com/apply/library-technician" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Research Scientist</strong><br>Location: Massachusetts Institute of Technology (MIT)<br>Department: Artificial Intelligence Lab</span>
+                        <a href="http://dummy-address.com/apply/research-scientist" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Financial Aid Officer</strong><br>Location: University of Michigan<br>Department: Financial Aid Services</span>
+                        <a href="http://dummy-address.com/apply/financial-aid-officer" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Campus Security Officer</strong><br>Location: University of Southern California<br>Department: Campus Safety</span>
+                        <a href="http://dummy-address.com/apply/campus-security-officer" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Registrar</strong><br>Location: Princeton University<br>Department: Registrar's Office</span>
+                        <a href="http://dummy-address.com/apply/registrar" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Communications Specialist</strong><br>Location: University of Chicago<br>Department: Office of Communications</span>
+                        <a href="http://dummy-address.com/apply/communications-specialist" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Event Coordinator</strong><br>Location: University of North Carolina at Chapel Hill<br>Department: Campus Events</span>
+                        <a href="http://dummy-address.com/apply/event-coordinator" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>IT Support Specialist</strong><br>Location: Duke University<br>Department: Information Technology Services</span>
+                        <a href="http://dummy-address.com/apply/it-support-specialist" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Head of Campus Housing</strong><br>Location: Ohio State University<br>Department: Housing and Residence Life</span>
+                        <a href="http://dummy-address.com/apply/head-campus-housing" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>Dean of Faculty</strong><br>Location: University of Pennsylvania<br>Department: Faculty Affairs</span>
+                        <a href="http://dummy-address.com/apply/dean-faculty" class="apply-link" target="_blank">Apply</a>
+                    </li>
+                    <li>
+                        <span><strong>HR Specialist</strong><br>Location: Columbia University<br>Department: Human Resources</span>
+                        <a href="http://dummy-address.com/apply/hr-specialist" class="apply-link" target="_blank">Apply</a>
+                    </li>
                 </ul>
             </div>
         </div>
