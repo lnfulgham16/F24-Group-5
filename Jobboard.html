@@ -14,25 +14,23 @@
             background-color: #f4f4f9;
         }
 
-        /* Flexbox layout for sidebar and job list */
         .container {
             display: flex;
             height: 100vh;
             width: 100vw;
         }
 
-        /* Back button styling */
         .back-button {
             position: absolute;
             top: 10px;
-            right: 10px; /* Position in the top right corner */
+            right: 10px;
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
             text-decoration: none;
             font-size: 1em;
             border-radius: 5px;
-            border: 2px solid black; /* Black outline */
+            border: 2px solid black;
             cursor: pointer;
         }
 
@@ -40,14 +38,13 @@
             background-color: #45a049;
         }
 
-        /* Sidebar styling */
         .sidebar {
             width: 25vw;
             background-color: #333;
             color: white;
             padding: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            flex-shrink: 0; /* Prevent the sidebar from shrinking */
+            flex-shrink: 0;
         }
 
         .sidebar h2 {
@@ -60,9 +57,8 @@
             text-align: center;
         }
 
-        /* Job board styling */
         .job-board-container {
-            flex-grow: 1; /* Job board takes up the rest of the space */
+            flex-grow: 1;
             background-color: white;
             display: flex;
             flex-direction: column;
@@ -88,7 +84,7 @@
         .job-list {
             flex-grow: 1;
             padding: 10px;
-            overflow-y: auto; /* Scrollable job list */
+            overflow-y: auto;
         }
 
         .job-list ul {
@@ -106,10 +102,20 @@
             padding: 15px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
         }
 
         .job-list li:hover {
             background-color: #e8f5e9;
+        }
+
+        .job-title {
+            transition: background-color 0.3s;
+        }
+
+        .job-title:hover {
+            background-color: #d1e7dd;
         }
 
         .apply-link {
@@ -124,6 +130,58 @@
 
         .apply-link:hover {
             background-color: #45a049;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            position: relative;
+            text-align: left;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .job-details {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .job-detail-item {
+            margin-bottom: 10px;
+        }
+
+        .job-detail-title {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -151,68 +209,121 @@
             <div class="job-list">
                 <ul>
                     <li>
-                        <span><strong>Assistant Professor of Computer Science</strong><br>Location: Stanford University<br>Department: School of Engineering</span>
+                        <div class="job-info">
+                            <span class="job-title" data-location="Stanford University" data-experience="3-5 years" data-job-description="Assistant Professor in Computer Science, focusing on teaching and research." data-job-role="Academic" data-full-time="Full-Time" data-expectations="Develop curriculum, supervise research projects.">Assistant Professor of Computer Science</span>
+                            <div class="job-details">Location: Stanford University<br>Department: School of Engineering</div>
+                        </div>
                         <a href="http://dummy-address.com/apply/assistant-professor" class="apply-link" target="_blank">Apply</a>
                     </li>
                     <li>
-                        <span><strong>Admissions Counselor</strong><br>Location: Harvard University<br>Department: Undergraduate Admissions</span>
+                        <div class="job-info">
+                            <span class="job-title" data-location="Harvard University" data-experience="2 years" data-job-description="Admissions Counselor, responsible for recruitment and application evaluation." data-job-role="Admissions" data-full-time="Part-Time" data-expectations="Conduct information sessions, review applications.">Admissions Counselor</span>
+                            <div class="job-details">Location: Harvard University<br>Department: Undergraduate Admissions</div>
+                        </div>
                         <a href="http://dummy-address.com/apply/admissions-counselor" class="apply-link" target="_blank">Apply</a>
                     </li>
                     <li>
-                        <span><strong>Director of Student Affairs</strong><br>Location: University of California, Berkeley<br>Department: Student Services</span>
+                        <div class="job-info">
+                            <span class="job-title" data-location="UC Berkeley" data-experience="5 years" data-job-description="Director of Student Affairs, managing student programs and services." data-job-role="Management" data-full-time="Full-Time" data-expectations="Oversee staff, develop programs.">Director of Student Affairs</span>
+                            <div class="job-details">Location: University of California, Berkeley<br>Department: Student Services</div>
+                        </div>
                         <a href="http://dummy-address.com/apply/director-student-affairs" class="apply-link" target="_blank">Apply</a>
                     </li>
                     <li>
-                        <span><strong>Academic Advisor</strong><br>Location: New York University<br>Department: College of Arts and Science</span>
+                        <div class="job-info">
+                            <span class="job-title" data-location="New York University" data-experience="1-2 years" data-job-description="Academic Advisor, supporting students in the College of Arts and Science." data-job-role="Advising" data-full-time="Part-Time" data-expectations="Assist students with course selection.">Academic Advisor</span>
+                            <div class="job-details">Location: New York University<br>Department: College of Arts and Science</div>
+                        </div>
                         <a href="http://dummy-address.com/apply/academic-advisor" class="apply-link" target="_blank">Apply</a>
                     </li>
                     <li>
-                        <span><strong>Library Technician</strong><br>Location: University of Texas, Austin<br>Department: University Library</span>
+                        <div class="job-info">
+                            <span class="job-title" data-location="University of Texas, Austin" data-experience="3 years" data-job-description="Library Technician, assisting with the library’s daily operations." data-job-role="Library Services" data-full-time="Full-Time" data-expectations="Manage check-outs and cataloging.">Library Technician</span>
+                            <div class="job-details">Location: University of Texas, Austin<br>Department: University Library</div>
+                        </div>
                         <a href="http://dummy-address.com/apply/library-technician" class="apply-link" target="_blank">Apply</a>
                     </li>
                     <li>
-                        <span><strong>Research Scientist</strong><br>Location: Massachusetts Institute of Technology (MIT)<br>Department: Artificial Intelligence Lab</span>
+                        <div class="job-info">
+                            <span class="job-title" data-location="MIT" data-experience="5+ years" data-job-description="Research Scientist at AI Lab, conducting cutting-edge research." data-job-role="Research" data-full-time="Full-Time" data-expectations="Lead projects and mentor students.">Research Scientist</span>
+                            <div class="job-details">Location: Massachusetts Institute of Technology (MIT)<br>Department: Artificial Intelligence Lab</div>
+                        </div>
                         <a href="http://dummy-address.com/apply/research-scientist" class="apply-link" target="_blank">Apply</a>
                     </li>
                     <li>
-                        <span><strong>Financial Aid Officer</strong><br>Location: University of Michigan<br>Department: Financial Aid Services</span>
-                        <a href="http://dummy-address.com/apply/financial-aid-officer" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li>
-                        <span><strong>Campus Security Officer</strong><br>Location: University of Southern California<br>Department: Campus Safety</span>
-                        <a href="http://dummy-address.com/apply/campus-security-officer" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li>
-                        <span><strong>Registrar</strong><br>Location: Princeton University<br>Department: Registrar's Office</span>
-                        <a href="http://dummy-address.com/apply/registrar" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li>
-                        <span><strong>Communications Specialist</strong><br>Location: University of Chicago<br>Department: Office of Communications</span>
-                        <a href="http://dummy-address.com/apply/communications-specialist" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li>
-                        <span><strong>Event Coordinator</strong><br>Location: University of North Carolina at Chapel Hill<br>Department: Campus Events</span>
-                        <a href="http://dummy-address.com/apply/event-coordinator" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li>
-                        <span><strong>IT Support Specialist</strong><br>Location: Duke University<br>Department: Information Technology Services</span>
-                        <a href="http://dummy-address.com/apply/it-support-specialist" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li>
-                        <span><strong>Head of Campus Housing</strong><br>Location: Ohio State University<br>Department: Housing and Residence Life</span>
-                        <a href="http://dummy-address.com/apply/head-campus-housing" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li>
-                        <span><strong>Dean of Faculty</strong><br>Location: University of Pennsylvania<br>Department: Faculty Affairs</span>
-                        <a href="http://dummy-address.com/apply/dean-faculty" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li>
-                        <span><strong>HR Specialist</strong><br>Location: Columbia University<br>Department: Human Resources</span>
-                        <a href="http://dummy-address.com/apply/hr-specialist" class="apply-link" target="_blank">Apply</a>
+                        <div class="job-info">
+                            <span class="job-title" data-location="University of Washington" data-experience="4 years" data-job-description="Career Services Advisor, providing guidance to students on job placements." data-job-role="Career Services" data-full-time="Part-Time" data-expectations="Conduct workshops and individual advising.">Career Services Advisor</span>
+                            <div class="job-details">Location: University of Washington<br>Department: Career Services</div>
+                        </div>
+                        <a href="http://dummy-address.com/apply/career-services-advisor" class="apply-link" target="_blank">Apply</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
+
+    <!-- Modal Structure -->
+    <div id="jobModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalJobTitle">Job Title</h2>
+            <div class="job-detail-item"><span class="job-detail-title">Location:</span> <span id="modalJobLocation"></span></div>
+            <div class="job-detail-item"><span class="job-detail-title">Experience Requirement:</span> <span id="modalJobExperience"></span></div>
+            <div class="job-detail-item"><span class="job-detail-title">Job Role:</span> <span id="modalJobRole"></span></div>
+            <div class="job-detail-item"><span class="job-detail-title">Full/Part Time:</span> <span id="modalJobFullPartTime"></span></div>
+            <div class="job-detail-item"><span class="job-detail-title">Expectations:</span> <span id="modalJobExpectations"></span></div>
+            <div class="job-detail-item"><span class="job-detail-title">Description:</span> <span id="modalJobDescription"></span></div>
+        </div>
+    </div>
+
+    <script>
+        // Get modal and close button
+        var modal = document.getElementById("jobModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        // Get all job listings and add click event listener
+        var jobListings = document.querySelectorAll(".job-info");
+
+        jobListings.forEach(function(listing) {
+            listing.addEventListener("click", function(event) {
+                // Prevent modal from opening if the apply button is clicked
+                if (event.target.classList.contains("apply-link")) {
+                    return;
+                }
+
+                var jobTitle = this.querySelector(".job-title").textContent;
+                var jobLocation = this.querySelector(".job-title").getAttribute("data-location");
+                var jobExperience = this.querySelector(".job-title").getAttribute("data-experience");
+                var jobDescription = this.querySelector(".job-title").getAttribute("data-job-description");
+                var jobRole = this.querySelector(".job-title").getAttribute("data-job-role");
+                var jobFullPartTime = this.querySelector(".job-title").getAttribute("data-full-time");
+                var jobExpectations = this.querySelector(".job-title").getAttribute("data-expectations");
+
+                // Populate modal content
+                document.getElementById("modalJobTitle").textContent = jobTitle;
+                document.getElementById("modalJobLocation").textContent = jobLocation;
+                document.getElementById("modalJobExperience").textContent = jobExperience;
+                document.getElementById("modalJobDescription").textContent = jobDescription;
+                document.getElementById("modalJobRole").textContent = jobRole;
+                document.getElementById("modalJobFullPartTime").textContent = jobFullPartTime;
+                document.getElementById("modalJobExpectations").textContent = jobExpectations;
+
+                // Show modal
+                modal.style.display = "block";
+            });
+        });
+
+        // When the user clicks on the close button, close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
