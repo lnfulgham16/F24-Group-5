@@ -3,18 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Search Results</title>
-        <title>College Search Results</title>
-</head>
-<body>
-    <p>
-        <strong>Search Bar Instructions:</strong> </p>You can search for colleges using various criteria such as:</p></br> - The college name (e.g., "Harvard")</p>- Location (e.g., "Massachusetts"),</p>- Type (e.g., "Private"), acceptance rate (e.g., "5%"),</p>- SAT score (e.g., "1500"),</p>- ACT score (e.g., "34").</p>- Type: "Home" to go back to the Homepage/Landing page (this page).
-    </p>
-</body>
-</html>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>College Search and Comparison</title>
     <style>
-        #search-results {
+        #search-results, #college-list, #comparison-results {
             margin-top: 20px;
             border: 1px solid #ccc;
             padding: 10px;
@@ -24,12 +15,36 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
         }
+        #comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #comparison-table th, #comparison-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #comparison-table th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
-    <h1>College Search Results</h1>
+    <h1>College Search and Comparison</h1>
 
+    <!-- College Search Section -->
     <div>
+        <h2>Search Colleges</h2>
+        <h5>You can search for colleges using various criteria such as:</p>
+
+<br>
+- The college name (e.g., "Harvard")</p>
+- Type (e.g., "Private")</p>
+- SAT score (e.g., "1500")</p>
+- ACT score (e.g., "34")</p>
+- Type: "Home" to go back to the Homepage/Landing page (this page)</p>
+
+</h5>
         <form id="search-form" action="#" method="get" onsubmit="filterColleges(event)">
             <input type="text" id="search-input" name="q" placeholder="Enter college name, criteria, or ACT/SAT score" required>
             <input type="submit" value="Search">
@@ -40,109 +55,195 @@
 
     <div style="height: 500px; overflow-y: scroll; border: 1px solid black; padding: 10px;">
         <ul>
-            <li data-name="Harvard University"
-                data-location="Cambridge, Massachusetts"
-                data-type="Private Ivy League research university"
-                data-founded="1636"
-                data-acceptance-rate="4.6%"
-                data-website="https://www.harvard.edu/"
-                data-sat-range="1460-1570"
-                data-act-range="33-35">
+            <li data-name="Harvard University" data-location="Cambridge, Massachusetts" data-type="Private Ivy League research university" data-founded="1636" data-acceptance-rate="4.6%" data-website="https://www.harvard.edu/" data-sat-range="1460-1570" data-act-range="33-35">
                 <a href="#" onclick="document.getElementById('harvard').showModal()">Harvard University</a>
             </li>
-            <li data-name="Stanford University"
-                data-location="Stanford, California"
-                data-type="Private research university"
-                data-founded="1885"
-                data-acceptance-rate="4.3%"
-                data-website="https://www.stanford.edu/"
-                data-sat-range="1420-1570"
-                data-act-range="32-35">
+            <li data-name="Stanford University" data-location="Stanford, California" data-type="Private research university" data-founded="1885" data-acceptance-rate="4.3%" data-website="https://www.stanford.edu/" data-sat-range="1420-1570" data-act-range="32-35">
                 <a href="#" onclick="document.getElementById('stanford').showModal()">Stanford University</a>
             </li>
-            <li data-name="Massachusetts Institute of Technology (MIT)"
-                data-location="Cambridge, Massachusetts"
-                data-type="Private research university"
-                data-founded="1861"
-                data-acceptance-rate="6.7%"
-                data-website="https://www.mit.edu/"
-                data-sat-range="1510-1570"
-                data-act-range="34-36">
+            <li data-name="Massachusetts Institute of Technology (MIT)" data-location="Cambridge, Massachusetts" data-type="Private research university" data-founded="1861" data-acceptance-rate="6.7%" data-website="https://www.mit.edu/" data-sat-range="1510-1570" data-act-range="34-36">
                 <a href="#" onclick="document.getElementById('mit').showModal()">Massachusetts Institute of Technology (MIT)</a>
             </li>
-            <li data-name="University of California, Berkeley"
-                data-location="Berkeley, California"
-                data-type="Public research university"
-                data-founded="1868"
-                data-acceptance-rate="14.5%"
-                data-website="https://www.berkeley.edu/"
-                data-sat-range="1330-1530"
-                data-act-range="29-35">
+            <li data-name="University of California, Berkeley" data-location="Berkeley, California" data-type="Public research university" data-founded="1868" data-acceptance-rate="14.5%" data-website="https://www.berkeley.edu/" data-sat-range="1330-1530" data-act-range="29-35">
                 <a href="#" onclick="document.getElementById('berkeley').showModal()">University of California, Berkeley</a>
             </li>
-            <li data-name="Yale University"
-                data-location="New Haven, Connecticut"
-                data-type="Private Ivy League research university"
-                data-founded="1701"
-                data-acceptance-rate="6.1%"
-                data-website="https://www.yale.edu/"
-                data-sat-range="1460-1570"
-                data-act-range="33-35">
+            <li data-name="Yale University" data-location="New Haven, Connecticut" data-type="Private Ivy League research university" data-founded="1701" data-acceptance-rate="6.1%" data-website="https://www.yale.edu/" data-sat-range="1460-1570" data-act-range="33-35">
                 <a href="#" onclick="document.getElementById('yale').showModal()">Yale University</a>
             </li>
-            <li data-name="Princeton University"
-                data-location="Princeton, New Jersey"
-                data-type="Private Ivy League research university"
-                data-founded="1746"
-                data-acceptance-rate="5.8%"
-                data-website="https://www.princeton.edu/"
-                data-sat-range="1450-1570"
-                data-act-range="32-35">
+            <li data-name="Princeton University" data-location="Princeton, New Jersey" data-type="Private Ivy League research university" data-founded="1746" data-acceptance-rate="5.8%" data-website="https://www.princeton.edu/" data-sat-range="1450-1570" data-act-range="32-35">
                 <a href="#" onclick="document.getElementById('princeton').showModal()">Princeton University</a>
             </li>
-            <li data-name="California Institute of Technology (Caltech)"
-                data-location="Pasadena, California"
-                data-type="Private research university"
-                data-founded="1891"
-                data-acceptance-rate="6.4%"
-                data-website="https://www.caltech.edu/"
-                data-sat-range="1530-1570"
-                data-act-range="35-36">
+            <li data-name="California Institute of Technology (Caltech)" data-location="Pasadena, California" data-type="Private research university" data-founded="1891" data-acceptance-rate="6.4%" data-website="https://www.caltech.edu/" data-sat-range="1530-1570" data-act-range="35-36">
                 <a href="#" onclick="document.getElementById('caltech').showModal()">California Institute of Technology (Caltech)</a>
             </li>
-            <li data-name="University of Chicago"
-                data-location="Chicago, Illinois"
-                data-type="Private research university"
-                data-founded="1890"
-                data-acceptance-rate="6.2%"
-                data-website="https://www.uchicago.edu/"
-                data-sat-range="1500-1570"
-                data-act-range="33-35">
+            <li data-name="University of Chicago" data-location="Chicago, Illinois" data-type="Private research university" data-founded="1890" data-acceptance-rate="6.2%" data-website="https://www.uchicago.edu/" data-sat-range="1500-1570" data-act-range="33-35">
                 <a href="#" onclick="document.getElementById('uchicago').showModal()">University of Chicago</a>
             </li>
-            <li data-name="Columbia University"
-                data-location="New York City, New York"
-                data-type="Private Ivy League research university"
-                data-founded="1754"
-                data-acceptance-rate="5.4%"
-                data-website="https://www.columbia.edu/"
-                data-sat-range="1450-1560"
-                data-act-range="33-35">
+            <li data-name="Columbia University" data-location="New York City, New York" data-type="Private Ivy League research university" data-founded="1754" data-acceptance-rate="5.4%" data-website="https://www.columbia.edu/" data-sat-range="1450-1560" data-act-range="33-35">
                 <a href="#" onclick="document.getElementById('columbia').showModal()">Columbia University</a>
             </li>
-            <li data-name="University of Pennsylvania"
-                data-location="Philadelphia, Pennsylvania"
-                data-type="Private Ivy League research university"
-                data-founded="1740"
-                data-acceptance-rate="7.7%"
-                data-website="https://www.upenn.edu/"
-                data-sat-range="1460-1570"
-                data-act-range="33-35">
+            <li data-name="University of Pennsylvania" data-location="Philadelphia, Pennsylvania" data-type="Private Ivy League research university" data-founded="1740" data-acceptance-rate="7.7%" data-website="https://www.upenn.edu/" data-sat-range="1460-1570" data-act-range="33-35">
                 <a href="#" onclick="document.getElementById('upenn').showModal()">University of Pennsylvania</a>
             </li>
         </ul>
     </div>
 
+    <!-- College Comparison Section -->
+    <div id="college-list">
+        <h2>Select Colleges to Compare</h2>
+        <form id="college-compare-form">
+            <ul>
+                <li>
+                    <input type="checkbox" id="harvard-checkbox" name="college-compare" value="harvard">
+                    <label for="harvard-checkbox">Harvard University</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="stanford-checkbox" name="college-compare" value="stanford">
+                    <label for="stanford-checkbox">Stanford University</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="mit-checkbox" name="college-compare" value="mit">
+                    <label for="mit-checkbox">Massachusetts Institute of Technology (MIT)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="berkeley-checkbox" name="college-compare" value="berkeley">
+                    <label for="berkeley-checkbox">University of California, Berkeley</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="yale-checkbox" name="college-compare" value="yale">
+                    <label for="yale-checkbox">Yale University</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="princeton-checkbox" name="college-compare" value="princeton">
+                    <label for="princeton-checkbox">Princeton University</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="caltech-checkbox" name="college-compare" value="caltech">
+                    <label for="caltech-checkbox">California Institute of Technology (Caltech)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="uchicago-checkbox" name="college-compare" value="uchicago">
+                    <label for="uchicago-checkbox">University of Chicago</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="columbia-checkbox" name="college-compare" value="columbia">
+                    <label for="columbia-checkbox">Columbia University</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="upenn-checkbox" name="college-compare" value="upenn">
+                    <label for="upenn-checkbox">University of Pennsylvania</label>
+                </li>
+            </ul>
+            <input type="button" value="Compare Selected Colleges" onclick="compareColleges()">
+        </form>
+    </div>
+
+    <div id="comparison-results">
+        <h2>Comparison Results</h2>
+        <table id="comparison-table">
+            <tr>
+                <th>College</th>
+                <th>Location</th>
+                <th>Type</th>
+                <th>Founded</th>
+                <th>Acceptance Rate</th>
+                <th>SAT Range</th>
+                <th>ACT Range</th>
+            </tr>
+            <tr id="harvard-row" hidden>
+                <td>Harvard University</td>
+                <td>Cambridge, Massachusetts</td>
+                <td>Private Ivy League research university</td>
+                <td>1636</td>
+                <td>4.6%</td>
+                <td>1460-1570</td>
+                <td>33-35</td>
+            </tr>
+            <tr id="stanford-row" hidden>
+                <td>Stanford University</td>
+                <td>Stanford, California</td>
+                <td>Private research university</td>
+                <td>1885</td>
+                <td>4.3%</td>
+                <td>1420-1570</td>
+                <td>32-35</td>
+            </tr>
+            <tr id="mit-row" hidden>
+                <td>Massachusetts Institute of Technology (MIT)</td>
+                <td>Cambridge, Massachusetts</td>
+                <td>Private research university</td>
+                <td>1861</td>
+                <td>6.7%</td>
+                <td>1510-1570</td>
+                <td>34-36</td>
+            </tr>
+            <tr id="berkeley-row" hidden>
+                <td>University of California, Berkeley</td>
+                <td>Berkeley, California</td>
+                <td>Public research university</td>
+                <td>1868</td>
+                <td>14.5%</td>
+                <td>1330-1530</td>
+                <td>29-35</td>
+            </tr>
+            <tr id="yale-row" hidden>
+                <td>Yale University</td>
+                <td>New Haven, Connecticut</td>
+                <td>Private Ivy League research university</td>
+                <td>1701</td>
+                <td>6.1%</td>
+                <td>1460-1570</td>
+                <td>33-35</td>
+            </tr>
+            <tr id="princeton-row" hidden>
+                <td>Princeton University</td>
+                <td>Princeton, New Jersey</td>
+                <td>Private Ivy League research university</td>
+                <td>1746</td>
+                <td>5.8%</td>
+                <td>1450-1570</td>
+                <td>32-35</td>
+            </tr>
+            <tr id="caltech-row" hidden>
+                <td>California Institute of Technology (Caltech)</td>
+                <td>Pasadena, California</td>
+                <td>Private research university</td>
+                <td>1891</td>
+                <td>6.4%</td>
+                <td>1530-1570</td>
+                <td>35-36</td>
+            </tr>
+            <tr id="uchicago-row" hidden>
+                <td>University of Chicago</td>
+                <td>Chicago, Illinois</td>
+                <td>Private research university</td>
+                <td>1890</td>
+                <td>6.2%</td>
+                <td>1500-1570</td>
+                <td>33-35</td>
+            </tr>
+            <tr id="columbia-row" hidden>
+                <td>Columbia University</td>
+                <td>New York City, New York</td>
+                <td>Private Ivy League research university</td>
+                <td>1754</td>
+                <td>5.4%</td>
+                <td>1450-1560</td>
+                <td>33-35</td>
+            </tr>
+            <tr id="upenn-row" hidden>
+                <td>University of Pennsylvania</td>
+                <td>Philadelphia, Pennsylvania</td>
+                <td>Private Ivy League research university</td>
+                <td>1740</td>
+                <td>7.7%</td>
+                <td>1460-1570</td>
+                <td>33-35</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Dialogs for Detailed College Info -->
     <dialog id="harvard">
         <h2>Harvard University</h2>
         <p><strong>Location:</strong> Cambridge, Massachusetts</p>
@@ -154,7 +255,6 @@
         <p><strong>Website:</strong> <a href="https://www.harvard.edu/" target="_blank">https://www.harvard.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
     </dialog>
-
     <dialog id="stanford">
         <h2>Stanford University</h2>
         <p><strong>Location:</strong> Stanford, California</p>
@@ -166,7 +266,6 @@
         <p><strong>Website:</strong> <a href="https://www.stanford.edu/" target="_blank">https://www.stanford.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
     </dialog>
-
     <dialog id="mit">
         <h2>Massachusetts Institute of Technology (MIT)</h2>
         <p><strong>Location:</strong> Cambridge, Massachusetts</p>
@@ -178,7 +277,6 @@
         <p><strong>Website:</strong> <a href="https://www.mit.edu/" target="_blank">https://www.mit.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
     </dialog>
-
     <dialog id="berkeley">
         <h2>University of California, Berkeley</h2>
         <p><strong>Location:</strong> Berkeley, California</p>
@@ -190,7 +288,6 @@
         <p><strong>Website:</strong> <a href="https://www.berkeley.edu/" target="_blank">https://www.berkeley.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
     </dialog>
-
     <dialog id="yale">
         <h2>Yale University</h2>
         <p><strong>Location:</strong> New Haven, Connecticut</p>
@@ -202,7 +299,6 @@
         <p><strong>Website:</strong> <a href="https://www.yale.edu/" target="_blank">https://www.yale.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
     </dialog>
-
     <dialog id="princeton">
         <h2>Princeton University</h2>
         <p><strong>Location:</strong> Princeton, New Jersey</p>
@@ -214,7 +310,6 @@
         <p><strong>Website:</strong> <a href="https://www.princeton.edu/" target="_blank">https://www.princeton.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
     </dialog>
-
     <dialog id="caltech">
         <h2>California Institute of Technology (Caltech)</h2>
         <p><strong>Location:</strong> Pasadena, California</p>
@@ -226,7 +321,6 @@
         <p><strong>Website:</strong> <a href="https://www.caltech.edu/" target="_blank">https://www.caltech.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
     </dialog>
-
     <dialog id="uchicago">
         <h2>University of Chicago</h2>
         <p><strong>Location:</strong> Chicago, Illinois</p>
@@ -238,7 +332,6 @@
         <p><strong>Website:</strong> <a href="https://www.uchicago.edu/" target="_blank">https://www.uchicago.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
     </dialog>
-
     <dialog id="columbia">
         <h2>Columbia University</h2>
         <p><strong>Location:</strong> New York City, New York</p>
@@ -250,7 +343,6 @@
         <p><strong>Website:</strong> <a href="https://www.columbia.edu/" target="_blank">https://www.columbia.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
     </dialog>
-
     <dialog id="upenn">
         <h2>University of Pennsylvania</h2>
         <p><strong>Location:</strong> Philadelphia, Pennsylvania</p>
@@ -282,14 +374,12 @@
             var match = false;
             
             if (!isNaN(input) && input.length > 0) {
-                // If input is a number, assume it's an ACT/SAT score
                 var satRange = data.satRange ? data.satRange.split("-") : [0, 1600];
                 var actRange = data.actRange ? data.actRange.split("-") : [0, 36];
                 var inputScore = parseInt(input);
                 match = (inputScore >= parseInt(satRange[0]) && inputScore <= parseInt(satRange[1])) ||
                         (inputScore >= parseInt(actRange[0]) && inputScore <= parseInt(actRange[1]));
             } else {
-                // If input is not a number, search as before
                 match = Object.values(data).some(value => value && value.toLowerCase().includes(input));
             }
             
@@ -309,6 +399,25 @@
                 resultsDiv.innerHTML += resultHTML;
             }
         }
+    }
+
+    function compareColleges() {
+        var checkboxes = document.querySelectorAll('input[name="college-compare"]:checked');
+        var table = document.getElementById('comparison-table');
+        var rows = table.getElementsByTagName('tr');
+        
+        // Hide all rows except the header
+        for (var i = 1; i < rows.length; i++) {
+            rows[i].hidden = true;
+        }
+        
+        // Show selected college rows
+        checkboxes.forEach(function(checkbox) {
+            var row = document.getElementById(checkbox.value + '-row');
+            if (row) {
+                row.hidden = false;
+            }
+        });
     }
 
     document.getElementById("search-form").onsubmit = filterColleges;
