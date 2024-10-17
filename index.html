@@ -57,32 +57,38 @@
     <h1>Welcome to Group 5's Project</h1>
 </body>
 </html>
-
 <title>College Wiki Button</title>
-    <style>
-        .wiki-button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .wiki-button:hover {
-            background-color: #45a049;
-        }
-    </style>
+<style>
+.wiki-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  
+  /* New styles for positioning */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  margin: 0; /* Remove margin */
+}
+.wiki-button:hover {
+  background-color: #45a049;
+}
+</style>
 </head>
 <body>
 <!-- Navigation Bar -->
-    <div class="navbar">
-    <a href="wiki.html" class="wiki-button">College Specific Wiki Page</a>
+<div class="navbar">
+  <!-- ... existing code ... -->
+</div>
 
+<!-- Move the button outside of the navbar -->
+<a href="wiki.html" class="wiki-button">College Specific Wiki Page</a>
 </body>
 </html>
