@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Search Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .college {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+
+<h1>College Search</h1>
+
+<div class="filter-section">
+    <label for="setting">Select your preferred setting:</label>
+    <select id="setting" onchange="filterColleges()">
+        <option value="all">All</option>
+        <option value="online">Online</option>
+        <option value="inperson">In-Person</option>
+    </select>
+</div>
+
+<div id="collegeList">
+    <div class="college" data-setting="online">
+        <h3>Online University A</h3>
+        <p>Location: Anywhere (Online)</p>
+        <p>Setting: Online</p>
+    </div>
+    <div class="college" data-setting="inperson">
+        <h3>In-Person College B</h3>
+        <p>Location: City, State</p>
+        <p>Setting: In-Person</p>
+    </div>
+    <div class="college" data-setting="online">
+        <h3>Online College C</h3>
+        <p>Location: Anywhere (Online)</p>
+        <p>Setting: Online</p>
+    </div>
+    <div class="college" data-setting="inperson">
+        <h3>In-Person University D</h3>
+        <p>Location: City, State</p>
+        <p>Setting: In-Person</p>
+    </div>
+</div>
+
+<script>
+    function filterColleges() {
+        var selectedSetting = document.getElementById("setting").value;
+        var colleges = document.querySelectorAll(".college");
+
+        colleges.forEach(function(college) {
+            if (selectedSetting === "all") {
+                college.style.display = "block";
+            } else if (college.getAttribute("data-setting") === selectedSetting) {
+                college.style.display = "block";
+            } else {
+                college.style.display = "none";
+            }
+        });
+    }
+
+    // Initial display of all colleges
+    filterColleges();
+</script>
+
+</body>
+</html>
