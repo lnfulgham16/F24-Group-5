@@ -28,6 +28,31 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
         }
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+        }
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+        .autocomplete-active {
+            background-color: #e9e9e9;
+        }
+        .search-container {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -35,7 +60,10 @@
 
     <div>
         <form id="search-form" action="#" method="get" onsubmit="filterColleges(event)">
-            <input type="text" id="search-input" name="q" placeholder="Enter name, criteria, etc." required>
+            <div class="search-container">
+                <input type="text" id="search-input" name="q" placeholder="Enter name, criteria, etc." required>
+                <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
             <input type="submit" value="Search">
         </form>
     </div>
@@ -272,6 +300,97 @@
     </p>
 
     <script>
+    // Store all searchable terms
+    const searchableTerms = [];
+    const collegeElements = document.querySelectorAll('li');
+    collegeElements.forEach(element => {
+        const data = element.dataset;
+        // Add College Name
+        searchableTerms.push(data.name);
+        // Add College Location
+        searchableTerms.push(data.location);
+        // Add College Type
+        searchableTerms.push(data.type);
+    });
+
+    function autocomplete(inp) {
+        let currentFocus;
+
+        inp.addEventListener("input", function(e) {
+            let val = this.value;
+            closeAllLists();
+            if (!val) { return false; }
+            currentFocus = -1;
+
+            const autocompleteList = document.getElementById("autocomplete-list");
+        
+            const matches = searchableTerms.filter(term => 
+                term.toLowerCase().includes(val.toLowerCase())
+        );
+
+            matches.forEach(match => {
+                const div = document.createElement("DIV");
+                // Highlight matching text
+                const matchIndex = match.toLowerCase().indexOf(val.toLowerCase());
+                div.innerHTML = match.substr(0, matchIndex);
+                div.innerHTML += "<strong>" + match.substr(matchIndex, val.length) + "</strong>";
+                div.innerHTML += match.substr(matchIndex + val.length);
+            
+                div.addEventListener("click", function(e) {
+                    inp.value = match;
+                    closeAllLists();
+                    // Trigger form submit
+                    filterColleges(e);
+                });
+                autocompleteList.appendChild(div);
+            });
+        });
+
+        inp.addEventListener("keydown", function(e) {
+            let x = document.getElementById("autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) { // arrow DOWN
+                currentFocus++;
+                addActive(x);
+            } else if (e.keyCode == 38) { // arrow UP
+                currentFocus--;
+                addActive(x);
+            } else if (e.keyCode == 13) { // ENTER
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+
+        function addActive(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+
+        function removeActive(x) {
+            for (let i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+
+        function closeAllLists(elmnt) {
+            const x = document.getElementById("autocomplete-list");
+            while (x.firstChild) {
+                x.removeChild(x.firstChild);
+            }
+        }
+
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+    // Initialize autocomplete
+    autocomplete(document.getElementById("search-input"));
+    
     function filterColleges(event) {
         event.preventDefault();
         var input = document.getElementById("search-input").value.toLowerCase();
