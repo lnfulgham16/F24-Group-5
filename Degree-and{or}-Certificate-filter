@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Filter System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .program-card {
+            display: none; /* All programs are hidden by default until filters are applied */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Filter Programs</h2>
+        <form id="program-filter-form">
+            <h4>Credential Level</h4>
+            <ul>
+                <li><input type="checkbox" name="credential-level" value="Associate"><label>Associate</label></li>
+                <li><input type="checkbox" name="credential-level" value="Bachelors"><label>Bachelors</label></li>
+                <li><input type="checkbox" name="credential-level" value="Masters"><label>Masters</label></li>
+                <li><input type="checkbox" name="credential-level" value="PhD"><label>PhD</label></li>
+                <li><input type="checkbox" name="credential-level" value="Certificate"><label>Certificate</label></li>
+            </ul>
+
+            <h4>Type</h4>
+            <ul>
+                <li><input type="checkbox" name="program-type" value="Degree"><label>Degree</label></li>
+                <li><input type="checkbox" name="program-type" value="Certificate"><label>Certificate</label></li>
+            </ul>
+
+            <h4>Institution</h4>
+            <ul>
+                <li><input type="checkbox" name="institution" value="Harvard University"><label>Harvard University</label></li>
+                <li><input type="checkbox" name="institution" value="Stanford University"><label>Stanford University</label></li>
+                <li><input type="checkbox" name="institution" value="MIT"><label>MIT</label></li>
+                <li><input type="checkbox" name="institution" value="UC Berkeley"><label>UC Berkeley</label></li>
+                <li><input type="checkbox" name="institution" value="Yale University"><label>Yale University</label></li>
+                <li><input type="checkbox" name="institution" value="Princeton University"><label>Princeton University</label></li>
+                <li><input type="checkbox" name="institution" value="Caltech"><label>Caltech</label></li>
+                <li><input type="checkbox" name="institution" value="University of Chicago"><label>University of Chicago</label></li>
+                <li><input type="checkbox" name="institution" value="Columbia University"><label>Columbia University</label></li>
+                <li><input type="checkbox" name="institution" value="University of Pennsylvania"><label>University of Pennsylvania</label></li>
+                <li><input type="checkbox" name="institution" value="Data Institute"><label>Data Institute</label></li>
+            </ul>
+        </form>
+
+        <h3>Available Programs</h3>
+        <div id="program-list" class="row">
+
+
+
+            <!-- Harvard University Programs -->
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Harvard University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Humanities</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Harvard University</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $20,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Harvard University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Humanities</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Harvard University</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $50,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Harvard University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Humanities</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Harvard University</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $70,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Harvard University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Humanities</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Harvard University</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Harvard University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Information Systems</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Harvard University</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $20,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Harvard University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Information Systems</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Harvard University</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $50,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Harvard University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Information Systems</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Harvard University</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $70,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Harvard University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Information Systems</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Harvard University</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Stanford University Programs -->
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Stanford University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Administration</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Stanford University</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $25,000</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Stanford University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Administration</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Stanford University</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $55,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Stanford University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Administration</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Stanford University</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $72,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Stanford University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Administration</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Stanford University</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Stanford University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Education</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Stanford University</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $25,000</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Stanford University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Education</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Stanford University</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $55,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Stanford University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Education</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Stanford University</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $72,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Stanford University">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Education</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> Stanford University</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- MIT University Programs -->
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="MIT">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">History</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> MIT</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $25,000</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="MIT">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">History</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> MIT</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $55,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="MIT">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">History</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> MIT</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $72,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="MIT">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">History</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> MIT</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="MIT">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> MIT</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $25,000</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="MIT">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> MIT</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $55,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="MIT">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> MIT</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $72,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="MIT">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> MIT</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+<!-- UC Berkeley Programs -->
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="UC Berkeley">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Humanities</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> UC Berkeley</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $20,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="UC Berkeley">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Humanities</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> UC Berkeley</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $50,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="UC Berkeley">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Humanities</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> UC Berkeley</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $70,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="UC Berkeley">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Humanities</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> UC Berkeley</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="UC Berkeley">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Information Systems</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> UC Berkeley</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $20,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="UC Berkeley">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Information Systems</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> UC Berkeley</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $50,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="UC Berkeley">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Information Systems</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> UC Berkeley</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $70,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="UC Berkeley">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Information Systems</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> UC Berkeley</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+<!-- Yale University Programs -->
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Yale University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Business Administration</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Yale University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Yale University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Business Administration</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Yale University</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Yale University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Business Administration</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Yale University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Yale University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Business Administration</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Yale University</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Yale University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Education</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Yale University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Yale University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Education</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Yale University</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Yale University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Education</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Yale University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Yale University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Education</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Yale University</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+<!-- Princeton University Programs -->
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Princeton University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Princeton University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Princeton University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Princeton University</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Princeton University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Princeton University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Princeton University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Princeton University</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Princeton University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Princeton University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Princeton University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Princeton University</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Princeton University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Princeton University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Princeton University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Princeton University</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Princeton University Programs -->
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Caltech">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Caltech</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Caltech">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Caltech</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Caltech">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Caltech</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Caltech">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Caltech</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Caltech">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Caltech</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Caltech">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Caltech</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Caltech">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Caltech</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Caltech">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Caltech</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- University of Chicago Programs -->
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="University of Chicago">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Business Administration</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> University of Chicago</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="University of Chicago">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Business Administration</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> University of Chicago</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="University of Chicago">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Business Administration</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> University of Chicago</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="University of Chicago">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Business Administration</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> University of Chicago</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="University of Chicago">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Education</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> University of Chicago</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="University of Chicago">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Education</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> University of Chicago</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="University of Chicago">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Education</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> University of Chicago</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="University of Chicago">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Education</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> University of Chicago</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+<!-- Columbia University Programs -->
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Columbia University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Columbia University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Columbia University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Columbia University</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Columbia University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Columbia University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Columbia University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">History</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Columbia University</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="Columbia University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> Associate</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Columbia University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $25,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="Columbia University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> Bachelors</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Columbia University</p>
+            <p><strong>Duration:</strong> 48 months</p>
+            <p><strong>Tuition:</strong> $55,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="Columbia University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> Masters</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Columbia University</p>
+            <p><strong>Duration:</strong> 24 months</p>
+            <p><strong>Tuition:</strong> $72,000</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="Columbia University">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Engineering</h5>
+            <p><strong>Credential:</strong> PhD</p>
+            <p><strong>Type:</strong> Degree</p>
+            <p><strong>Institution:</strong> Columbia University</p>
+            <p><strong>Duration:</strong> 60 months</p>
+            <p><strong>Tuition:</strong> $75,000</p>
+        </div>
+    </div>
+</div>
+
+            <!-- Stanford University Programs -->
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Administration</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $25,000</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Administration</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $55,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Administration</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $72,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Administration</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Education</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $25,000</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Education</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $55,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Education</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $72,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Education</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Stanford University Programs -->
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">History</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $25,000</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">History</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $55,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">History</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $72,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">History</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 program-card" data-credential="Associate" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering</h5>
+                        <p><strong>Credential:</strong> Associate</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $25,000</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Bachelors" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering</h5>
+                        <p><strong>Credential:</strong> Bachelors</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 48 months</p>
+                        <p><strong>Tuition:</strong> $55,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="Masters" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering</h5>
+                        <p><strong>Credential:</strong> Masters</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 24 months</p>
+                        <p><strong>Tuition:</strong> $72,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 program-card" data-credential="PhD" data-type="Degree" data-institution="University of Pennsylvania">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering</h5>
+                        <p><strong>Credential:</strong> PhD</p>
+                        <p><strong>Type:</strong> Degree</p>
+                        <p><strong>Institution:</strong> University of Pennsylvania</p>
+                        <p><strong>Duration:</strong> 60 months</p>
+                        <p><strong>Tuition:</strong> $75,000</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Data Institute Program -->
+            <div class="col-md-6 program-card" data-credential="Certificate" data-type="Certificate" data-institution="Data Institute">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Data Analytics</h5>
+                        <p><strong>Credential:</strong> Certificate</p>
+                        <p><strong>Type:</strong> Certificate</p>
+                        <p><strong>Institution:</strong> Data Institute</p>
+                        <p><strong>Duration:</strong> 6 months</p>
+                        <p><strong>Tuition:</strong> $5,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue with other programs like University of California, Berkeley, and more -->
+
+        </div>
+    </div>
+
+    <script>
+        // Function to handle filtering logic
+        function filterPrograms() {
+            const filters = {
+                credential: Array.from(document.querySelectorAll('input[name="credential-level"]:checked')).map(cb => cb.value),
+                type: Array.from(document.querySelectorAll('input[name="program-type"]:checked')).map(cb => cb.value),
+                institution: Array.from(document.querySelectorAll('input[name="institution"]:checked')).map(cb => cb.value),
+            };
+
+            // Get all program cards
+            const programs = document.querySelectorAll('.program-card');
+
+            // Loop through each program and show/hide based on filters
+            programs.forEach(program => {
+                const programCredential = program.getAttribute('data-credential');
+                const programType = program.getAttribute('data-type');
+                const programInstitution = program.getAttribute('data-institution');
+
+                const credentialMatch = filters.credential.length === 0 || filters.credential.includes(programCredential);
+                const typeMatch = filters.type.length === 0 || filters.type.includes(programType);
+                const institutionMatch = filters.institution.length === 0 || filters.institution.includes(programInstitution);
+
+                if (credentialMatch && typeMatch && institutionMatch) {
+                    program.style.display = 'block';  // Show the program
+                } else {
+                    program.style.display = 'none';  // Hide the program
+                }
+            });
+        }
+
+        // Attach the filter function to checkbox change events
+        document.querySelectorAll('input[name="credential-level"], input[name="program-type"], input[name="institution"]').forEach(input => {
+            input.addEventListener('change', filterPrograms);
+        });
+
+        // Initialize the program list to show all programs by default
+        window.onload = filterPrograms;
+    </script>
+
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
