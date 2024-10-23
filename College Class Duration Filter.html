@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>College Class Search</title>
+<style>
+body {
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+</style>
+</head>
+<body>
+
+<h1>College Class Search</h1>
+
+<label for="durationFilter">Filter by Duration:</label>
+<select id="durationFilter">
+  <option value="">All Durations</option>
+  <option value="1">1 Hour</option>
+  <option value="1.5">1.5 Hours</option>
+  <option value="2">2 Hours</option>
+  <option value="2.5">2.5 Hours</option>
+  <option value="3">3 Hours</option>
+</select>
+
+<ul id="classList">
+  <!-- Class items will be added here -->
+</ul>
+
+<script>
+const durationFilter = document.getElementById('durationFilter');
+const classList = document.getElementById('classList');
