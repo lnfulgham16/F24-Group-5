@@ -56,3 +56,31 @@ li {
 <script>
 const durationFilter = document.getElementById('durationFilter');
 const classList = document.getElementById('classList');
+
+const classes = [
+  { name: 'Intro to Programming', duration: 2 },
+  { name: 'Calculus I', duration: 1.5 },
+  { name: 'Linear Algebra', duration: 2.5 },
+  { name: 'History 101', duration: 1 },
+  { name: 'Physics I', duration: 3 }
+];
+
+function updateClassList() {
+  const selectedDuration = parseFloat(durationFilter.value);
+  classList.innerHTML = '';
+
+  classes.forEach(cls => {
+    if (selectedDuration === 0 || cls.duration === selectedDuration) {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${cls.name} (${cls.duration} hours)`;
+      classList.appendChild(listItem);
+    }
+  });
+}
+
+durationFilter.addEventListener('change', updateClassList);
+updateClassList();
+</script>
+
+</body>
+</html>
