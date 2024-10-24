@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Search Results</title>
+        <title>College Search Results</title>
+</head>
+<body>
+    <p>
+        <strong>Search Bar Instructions:</strong> </p>Welcome! here, you can search for anything related to the website. Such as professors, programs, classes, greek life, etc:</p>
+        
+<br><br>- For colleges in particular, here are some examples of what you can search for: 
+
+        </p></br>- The college name (e.g., "Harvard")</p>- Location (e.g., "Massachusetts"),</p>- Type (e.g., "Private"), acceptance rate (e.g., "5%"),</p>- SAT score (e.g., "1500"),</p>- ACT score (e.g., "34").</p> <br>- <strong>Note:</strong> Type "Home" to go back to the Homepage/Landing page (this page) after searching.
+    </p>
+</body>
+</html>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        #search-results {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .college-result {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+        }
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+        .autocomplete-active {
+            background-color: #e9e9e9;
+        }
+        .search-container {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    <div>
+        <form id="search-form" action="#" method="get" onsubmit="filterColleges(event)">
+            <div class="search-container">
+                <input type="text" id="search-input" name="q" placeholder="Enter name, criteria, etc." required>
+                <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+
+    <div id="search-results"></div>
+
+    <div style="height: 500px; overflow-y: scroll; border: 1px solid black; padding: 10px;">
+        <ul>
+            <li data-name="Harvard University"
+                data-location="Cambridge, Massachusetts"
+                data-type="Private Ivy League research university"
+                data-founded="1636"
+                data-acceptance-rate="4.6%"
+                data-website="https://www.harvard.edu/"
+                data-sat-range="1460-1570"
+                data-act-range="33-35">
+                <a href="#" onclick="document.getElementById('harvard').showModal()">Harvard University</a>
+            </li>
+            <li data-name="Stanford University"
+                data-location="Stanford, California"
+                data-type="Private research university"
+                data-founded="1885"
+                data-acceptance-rate="4.3%"
+                data-website="https://www.stanford.edu/"
+                data-sat-range="1420-1570"
+                data-act-range="32-35">
+                <a href="#" onclick="document.getElementById('stanford').showModal()">Stanford University</a>
+            </li>
+            <li data-name="Massachusetts Institute of Technology (MIT)"
+                data-location="Cambridge, Massachusetts"
+                data-type="Private research university"
+                data-founded="1861"
+                data-acceptance-rate="6.7%"
+                data-website="https://www.mit.edu/"
+                data-sat-range="1510-1570"
+                data-act-range="34-36">
+                <a href="#" onclick="document.getElementById('mit').showModal()">Massachusetts Institute of Technology (MIT)</a>
+            </li>
+            <li data-name="University of California, Berkeley"
+                data-location="Berkeley, California"
+                data-type="Public research university"
+                data-founded="1868"
+                data-acceptance-rate="14.5%"
+                data-website="https://www.berkeley.edu/"
+                data-sat-range="1330-1530"
+                data-act-range="29-35">
+                <a href="#" onclick="document.getElementById('berkeley').showModal()">University of California, Berkeley</a>
+            </li>
+            <li data-name="Yale University"
+                data-location="New Haven, Connecticut"
+                data-type="Private Ivy League research university"
+                data-founded="1701"
+                data-acceptance-rate="6.1%"
+                data-website="https://www.yale.edu/"
+                data-sat-range="1460-1570"
+                data-act-range="33-35">
+                <a href="#" onclick="document.getElementById('yale').showModal()">Yale University</a>
+            </li>
+            <li data-name="Princeton University"
+                data-location="Princeton, New Jersey"
+                data-type="Private Ivy League research university"
+                data-founded="1746"
+                data-acceptance-rate="5.8%"
+                data-website="https://www.princeton.edu/"
+                data-sat-range="1450-1570"
+                data-act-range="32-35">
+                <a href="#" onclick="document.getElementById('princeton').showModal()">Princeton University</a>
+            </li>
+            <li data-name="California Institute of Technology (Caltech)"
+                data-location="Pasadena, California"
+                data-type="Private research university"
+                data-founded="1891"
+                data-acceptance-rate="6.4%"
+                data-website="https://www.caltech.edu/"
+                data-sat-range="1530-1570"
+                data-act-range="35-36">
+                <a href="#" onclick="document.getElementById('caltech').showModal()">California Institute of Technology (Caltech)</a>
+            </li>
+            <li data-name="University of Chicago"
+                data-location="Chicago, Illinois"
+                data-type="Private research university"
+                data-founded="1890"
+                data-acceptance-rate="6.2%"
+                data-website="https://www.uchicago.edu/"
+                data-sat-range="1500-1570"
+                data-act-range="33-35">
+                <a href="#" onclick="document.getElementById('uchicago').showModal()">University of Chicago</a>
+            </li>
+            <li data-name="Columbia University"
+                data-location="New York City, New York"
+                data-type="Private Ivy League research university"
+                data-founded="1754"
+                data-acceptance-rate="5.4%"
+                data-website="https://www.columbia.edu/"
+                data-sat-range="1450-1560"
+                data-act-range="33-35">
+                <a href="#" onclick="document.getElementById('columbia').showModal()">Columbia University</a>
+            </li>
+            <li data-name="University of Pennsylvania"
+                data-location="Philadelphia, Pennsylvania"
+                data-type="Private Ivy League research university"
+                data-founded="1740"
+                data-acceptance-rate="7.7%"
+                data-website="https://www.upenn.edu/"
+                data-sat-range="1460-1570"
+                data-act-range="33-35">
+                <a href="#" onclick="document.getElementById('upenn').showModal()">University of Pennsylvania</a>
+            </li>
+        </ul>
+    </div>
+
+    <dialog id="harvard">
+        <h2>Harvard University</h2>
+        <p><strong>Location:</strong> Cambridge, Massachusetts</p>
+        <p><strong>Type:</strong> Private Ivy League research university</p>
+        <p><strong>Founded:</strong> 1636</p>
+        <p><strong>Acceptance Rate:</strong> 4.6%</p>
+        <p><strong>SAT Range:</strong> 1460-1570</p>
+        <p><strong>ACT Range:</strong> 33-35</p>
+        <p><strong>Website:</strong> <a href="https://www.harvard.edu/" target="_blank">https://www.harvard.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="stanford">
+        <h2>Stanford University</h2>
+        <p><strong>Location:</strong> Stanford, California</p>
+        <p><strong>Type:</strong> Private research university</p>
+        <p><strong>Founded:</strong> 1885</p>
+        <p><strong>Acceptance Rate:</strong> 4.3%</p>
+        <p><strong>SAT Range:</strong> 1420-1570</p>
+        <p><strong>ACT Range:</strong> 32-35</p>
+        <p><strong>Website:</strong> <a href="https://www.stanford.edu/" target="_blank">https://www.stanford.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="mit">
+        <h2>Massachusetts Institute of Technology (MIT)</h2>
+        <p><strong>Location:</strong> Cambridge, Massachusetts</p>
+        <p><strong>Type:</strong> Private research university</p>
+        <p><strong>Founded:</strong> 1861</p>
+        <p><strong>Acceptance Rate:</strong> 6.7%</p>
+        <p><strong>SAT Range:</strong> 1510-1570</p>
+        <p><strong>ACT Range:</strong> 34-36</p>
+        <p><strong>Website:</strong> <a href="https://www.mit.edu/" target="_blank">https://www.mit.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="berkeley">
+        <h2>University of California, Berkeley</h2>
+        <p><strong>Location:</strong> Berkeley, California</p>
+        <p><strong>Type:</strong> Public research university</p>
+        <p><strong>Founded:</strong> 1868</p>
+        <p><strong>Acceptance Rate:</strong> 14.5%</p>
+        <p><strong>SAT Range:</strong> 1330-1530</p>
+        <p><strong>ACT Range:</strong> 29-35</p>
+        <p><strong>Website:</strong> <a href="https://www.berkeley.edu/" target="_blank">https://www.berkeley.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="yale">
+        <h2>Yale University</h2>
+        <p><strong>Location:</strong> New Haven, Connecticut</p>
+        <p><strong>Type:</strong> Private Ivy League research university</p>
+        <p><strong>Founded:</strong> 1701</p>
+        <p><strong>Acceptance Rate:</strong> 6.1%</p>
+        <p><strong>SAT Range:</strong> 1460-1570</p>
+        <p><strong>ACT Range:</strong> 33-35</p>
+        <p><strong>Website:</strong> <a href="https://www.yale.edu/" target="_blank">https://www.yale.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="princeton">
+        <h2>Princeton University</h2>
+        <p><strong>Location:</strong> Princeton, New Jersey</p>
+        <p><strong>Type:</strong> Private Ivy League research university</p>
+        <p><strong>Founded:</strong> 1746</p>
+        <p><strong>Acceptance Rate:</strong> 5.8%</p>
+        <p><strong>SAT Range:</strong> 1450-1570</p>
+        <p><strong>ACT Range:</strong> 32-35</p>
+        <p><strong>Website:</strong> <a href="https://www.princeton.edu/" target="_blank">https://www.princeton.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="caltech">
+        <h2>California Institute of Technology (Caltech)</h2>
+        <p><strong>Location:</strong> Pasadena, California</p>
+        <p><strong>Type:</strong> Private research university</p>
+        <p><strong>Founded:</strong> 1891</p>
+        <p><strong>Acceptance Rate:</strong> 6.4%</p>
+        <p><strong>SAT Range:</strong> 1530-1570</p>
+        <p><strong>ACT Range:</strong> 35-36</p>
+        <p><strong>Website:</strong> <a href="https://www.caltech.edu/" target="_blank">https://www.caltech.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="uchicago">
+        <h2>University of Chicago</h2>
+        <p><strong>Location:</strong> Chicago, Illinois</p>
+        <p><strong>Type:</strong> Private research university</p>
+        <p><strong>Founded:</strong> 1890</p>
+        <p><strong>Acceptance Rate:</strong> 6.2%</p>
+        <p><strong>SAT Range:</strong> 1500-1570</p>
+        <p><strong>ACT Range:</strong> 33-35</p>
+        <p><strong>Website:</strong> <a href="https://www.uchicago.edu/" target="_blank">https://www.uchicago.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="columbia">
+        <h2>Columbia University</h2>
+        <p><strong>Location:</strong> New York City, New York</p>
+        <p><strong>Type:</strong> Private Ivy League research university</p>
+        <p><strong>Founded:</strong> 1754</p>
+        <p><strong>Acceptance Rate:</strong> 5.4%</p>
+        <p><strong>SAT Range:</strong> 1450-1560</p>
+        <p><strong>ACT Range:</strong> 33-35</p>
+        <p><strong>Website:</strong> <a href="https://www.columbia.edu/" target="_blank">https://www.columbia.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="upenn">
+        <h2>University of Pennsylvania</h2>
+        <p><strong>Location:</strong> Philadelphia, Pennsylvania</p>
+        <p><strong>Type:</strong> Private Ivy League research university</p>
+        <p><strong>Founded:</strong> 1740</p>
+        <p><strong>Acceptance Rate:</strong> 7.7%</p>
+        <p><strong>SAT Range:</strong> 1460-1570</p>
+        <p><strong>ACT Range:</strong> 33-35</p>
+        <p><strong>Website:</strong> <a href="https://www.upenn.edu/" target="_blank">https://www.upenn.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <p style="margin-top: 20px; font-size: 14px; color: #666;">
+        Group 5  |  2024
+    </p>
+
+    <script>
+    // Store all searchable terms
+    const searchableTerms = [];
+    const collegeElements = document.querySelectorAll('li');
+    collegeElements.forEach(element => {
+        const data = element.dataset;
+        // Add College Name
+        searchableTerms.push(data.name);
+        // Add College Location
+        searchableTerms.push(data.location);
+        // Add College Type
+        searchableTerms.push(data.type);
+    });
+
+    function autocomplete(inp) {
+        let currentFocus;
+
+        inp.addEventListener("input", function(e) {
+            let val = this.value;
+            closeAllLists();
+            if (!val) { return false; }
+            currentFocus = -1;
+
+            const autocompleteList = document.getElementById("autocomplete-list");
+        
+            const matches = searchableTerms.filter(term => 
+                term.toLowerCase().includes(val.toLowerCase())
+        );
+
+            matches.forEach(match => {
+                const div = document.createElement("DIV");
+                // Highlight matching text
+                const matchIndex = match.toLowerCase().indexOf(val.toLowerCase());
+                div.innerHTML = match.substr(0, matchIndex);
+                div.innerHTML += "<strong>" + match.substr(matchIndex, val.length) + "</strong>";
+                div.innerHTML += match.substr(matchIndex + val.length);
+            
+                div.addEventListener("click", function(e) {
+                    inp.value = match;
+                    closeAllLists();
+                    // Trigger form submit
+                    filterColleges(e);
+                });
+                autocompleteList.appendChild(div);
+            });
+        });
+
+        inp.addEventListener("keydown", function(e) {
+            let x = document.getElementById("autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) { // arrow DOWN
+                currentFocus++;
+                addActive(x);
+            } else if (e.keyCode == 38) { // arrow UP
+                currentFocus--;
+                addActive(x);
+            } else if (e.keyCode == 13) { // ENTER
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+
+        function addActive(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+
+        function removeActive(x) {
+            for (let i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+
+        function closeAllLists(elmnt) {
+            const x = document.getElementById("autocomplete-list");
+            while (x.firstChild) {
+                x.removeChild(x.firstChild);
+            }
+        }
+
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+    // Initialize autocomplete
+    autocomplete(document.getElementById("search-input"));
+    
+    function filterColleges(event) {
+        event.preventDefault();
+        var input = document.getElementById("search-input").value.toLowerCase();
+        var list = document.querySelector("ul");
+        var items = list.getElementsByTagName("li");
+        var resultsDiv = document.getElementById("search-results");
+        resultsDiv.innerHTML = "";
+        
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            var data = item.dataset;
+            var match = false;
+            
+            if (!isNaN(input) && input.length > 0) {
+                // If input is a number, assume it's an ACT/SAT score
+                var satRange = data.satRange ? data.satRange.split("-") : [0, 1600];
+                var actRange = data.actRange ? data.actRange.split("-") : [0, 36];
+                var inputScore = parseInt(input);
+                match = (inputScore >= parseInt(satRange[0]) && inputScore <= parseInt(satRange[1])) ||
+                        (inputScore >= parseInt(actRange[0]) && inputScore <= parseInt(actRange[1]));
+            } else {
+                // If input is not a number, search as before
+                match = Object.values(data).some(value => value && value.toLowerCase().includes(input));
+            }
+            
+            if (match) {
+                var resultHTML = `
+                    <div class="college-result">
+                        <h3>${data.name}</h3>
+                        <p><strong>Location:</strong> ${data.location}</p>
+                        <p><strong>Type:</strong> ${data.type}</p>
+                        <p><strong>Founded:</strong> ${data.founded}</p>
+                        <p><strong>Acceptance Rate:</strong> ${data.acceptanceRate}</p>
+                        <p><strong>SAT Range:</strong> ${data.satRange || 'N/A'}</p>
+                        <p><strong>ACT Range:</strong> ${data.actRange || 'N/A'}</p>
+                        <p><strong>Website:</strong> <a href="${data.website}" target="_blank">${data.website}</a></p>
+                    </div>
+                `;
+                resultsDiv.innerHTML += resultHTML;
+            }
+        }
+    }
+
+    document.getElementById("search-form").onsubmit = filterColleges;
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #search-results {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .college-result {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+        }
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+        .autocomplete-active {
+            background-color: #e9e9e9;
+        }
+        .search-container {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+        }
+        /* Style for the filter button */
+        .filter-button {
+            background-color: #ff6600; /* Orange color based on the image */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            border-radius: 5px;
+        }
+        .filter-button:hover {
+            background-color: #e65c00; /* Slightly darker orange on hover */
+        }
+    </style>
+</head>
+<body>
+   
+    
+
+ 
+            <!-- New Filter Button that links to the provided URL -->
+            <a href="https://react-javascript-hsowda.replit.app" class="filter-button">Filter</a>
+        </form>
+    </div></br></br></br></br></br></br></br></br></li>Need more results, try searching with our new built in search bar, powered by — Google®<br>
+<script async src="https://cse.google.com/cse.js?cx=749eae6f3fa4849eb">
+</script>
+<div class="gcse-search"></div>
+
+    <div id="search-results"></div>
+
+    <div style="height: 500px; overflow-y: scroll; border: 1px solid black; padding: 10px;">
+
+            <!-- Add more items here -->
+        </ul>
+    </div>
+
+    <dialog id="harvard">
+        <h2>Harvard University</h2>
+        <p><strong>Location:</strong> Cambridge, Massachusetts</p>
+        <p><strong>Type:</strong> Private Ivy League research university</p>
+        <p><strong>Founded:</strong> 1636</p>
+        <p><strong>Acceptance Rate:</strong> 4.6%</p>
+        <p><strong>SAT Range:</strong> 1460-1570</p>
+        <p><strong>ACT Range:</strong> 33-35</p>
+        <p><strong>Website:</strong> <a href="https://www.harvard.edu/" target="_blank">https://www.harvard.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <dialog id="stanford">
+        <h2>Stanford University</h2>
+        <p><strong>Location:</strong> Stanford, California</p>
+        <p><strong>Type:</strong> Private research university</p>
+        <p><strong>Founded:</strong> 1885</p>
+        <p><strong>Acceptance Rate:</strong> 4.3%</p>
+        <p><strong>SAT Range:</strong> 1420-1570</p>
+        <p><strong>ACT Range:</strong> 32-35</p>
+        <p><strong>Website:</strong> <a href="https://www.stanford.edu/" target="_blank">https://www.stanford.edu/</a></p>
+        <button onclick="this.closest('dialog').close()">Close</button>
+    </dialog>
+
+    <!-- Add more dialog elements here if needed -->
+
+    <script>
+        // JavaScript to handle autocomplete and filtering goes here
+        function autocomplete(inp) {
+            let currentFocus;
+
+            inp.addEventListener("input", function(e) {
+                let val = this.value;
+                closeAllLists();
+                if (!val) { return false; }
+                currentFocus = -1;
+
+                const autocompleteList = document.getElementById("autocomplete-list");
+
+                const matches = searchableTerms.filter(term =>
+                    term.toLowerCase().includes(val.toLowerCase())
+                );
+
+                matches.forEach(match => {
+                    const div = document.createElement("DIV");
+                    div.innerHTML = match.substr(0, match.toLowerCase().indexOf(val.toLowerCase()));
+                    div.innerHTML += "<strong>" + match.substr(match.toLowerCase().indexOf(val.toLowerCase()), val.length) + "</strong>";
+                    div.innerHTML += match.substr(match.toLowerCase().indexOf(val.toLowerCase()) + val.length);
+                    div.addEventListener("click", function(e) {
+                        inp.value = match;
+                        closeAllLists();
+                        filterColleges(e);
+                    });
+                    autocompleteList.appendChild(div);
+                });
+            });
+
+            function closeAllLists() {
+                const x = document.getElementById("autocomplete-list");
+                while (x.firstChild) {
+                    x.removeChild(x.firstChild);
+                }
+            }
+
+            document.addEventListener("click", function() {
+                closeAllLists();
+            });
+        }
+        autocomplete(document.getElementById("search-input"));
+
+        function filterColleges(event) {
+            event.preventDefault();
+            const input = document.getElementById("search-input").value.toLowerCase();
+            const items = document.querySelectorAll('ul li');
+            const resultsDiv = document.getElementById("search-results");
+            resultsDiv.innerHTML = "";
+
+            items.forEach(item => {
+                const data = item.dataset;
+                const match = Object.values(data).some(value => value.toLowerCase().includes(input));
+                if (match) {
+                    const resultHTML = `
+                        <div class="college-result">
+                            <h3>${data.name}</h3>
+                            <p><strong>Location:</strong> ${data.location}</p>
+                            <p><strong>Type:</strong> ${data.type}</p>
+                            <p><strong>Founded:</strong> ${data.founded}</p>
+                            <p><strong>Acceptance Rate:</strong> ${data.acceptanceRate}</p>
+                            <p><strong>SAT Range:</strong> ${data.satRange || 'N/A'}</p>
+                            <p><strong>ACT Range:</strong> ${data.actRange || 'N/A'}</p>
+                            <p><strong>Website:</strong> <a href="${data.website}" target="_blank">${data.website}</a></p>
+                        </div>
+                    `;
+                    resultsDiv.innerHTML += resultHTML;
+                }
+            });
+        }
+
+        document.getElementById("search-form").onsubmit = filterColleges;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
