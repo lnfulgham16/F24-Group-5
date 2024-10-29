@@ -39,6 +39,50 @@
             color: #333;
             text-align: center;
         }
+        .search-container {
+            display: flex;
+            align-items: center; /* Vertically align items */
+            position: relative; /* Make search container a positioning context */
+        }
+        .search-container input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 5px; /* Add margin between input and select */
+        }
+        .search-container select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 5px; /* Add margin between select and button */
+        }
+        .search-container button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #classList {
+            list-style: none;
+            padding: 0;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 10;
+            top: 100%; /* Position below the search bar */
+            left: 0; /* Align to the left */
+            margin-top: 5px; /* Add a small margin */
+        }
+        #classList li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -51,13 +95,61 @@
 
         
         <!-- Search bar on the right -->
-<div class="search-container">
-    <input type="text" id="search-bar" placeholder="Type here to search..." />
-    <button onclick="searchFunction()">Search</button>
-</div>
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Type here to search..." />
+            <select id="durationFilter">
+              <option value="">All Durations</option>
+              <option value="1">1 Hour</option>
+              <option value="1.5">1.5 Hours</option>
+              <option value="2">2 Hours</option>
+              <option value="2.5">2.5 Hours</option>
+              <option value="3">3 Hours</option>
+            </select>
+            <button onclick="searchFunction()">Search</button>
+            <ul id="classList"></ul>
+        </div>
 
     </div>
     <h1>Welcome to Group 5's Project</h1>
+    <script>
+        const durationFilter = document.getElementById('durationFilter');
+        const classList = document.getElementById('classList');
+
+        const classes = [
+          { name: 'Intro to Programming', duration: 2 },
+          { name: 'Calculus I', duration: 1.5 },
+          { name: 'Linear Algebra', duration: 2.5 },
+          { name: 'History 101', duration: 1 },
+          { name: 'Physics I', duration: 3 }
+        ];
+
+        function updateClassList() {
+          const selectedDuration = parseFloat(durationFilter.value);
+          classList.innerHTML = '';
+
+          classes.forEach(cls => {
+            if (selectedDuration === 0 || cls.duration === selectedDuration) {
+              const listItem = document.createElement('li');
+              listItem.textContent = `${cls.name} (${cls.duration} hours)`;
+              listItem.addEventListener('click', function() {
+                // Add logic to handle subject selection here
+                alert(`Selected: ${cls.name}`);
+                classList.style.display = 'none'; // Hide the list after selection
+              });
+              classList.appendChild(listItem);
+            }
+          });
+          classList.style.display = 'block'; // Show the list
+        }
+
+        durationFilter.addEventListener('change', updateClassList);
+        //updateClassList(); //remove this line
+
+        function searchFunction() {
+            // Add your search logic here
+            alert("Search function not implemented yet.");
+        }
+    </script>
 </body>
 </html>
 <title>College Wiki Button</title>
