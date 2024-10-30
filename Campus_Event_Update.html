@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-University Event Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        select, form, #eventList {
+            margin-bottom: 20px;
+        }
+        input, button, select {
+            margin: 5px 0;
+            padding: 5px;
+        }
+        .event-item {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #eventManagement {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multi-University Event Management</h1>
+    
+    <div id="universitySelection">
+        <select id="universitySelector">
+            <option value="">Select University</option>
+            <option value="Stanford">Stanford University</option>
+            <option value="MIT">MIT</option>
+            <option value="Brown">Brown University</option>
+            <option value="Columbia">Columbia University</option>
+            <option value="Cornell">Cornell University</option>
+            <option value="Dartmouth">Dartmouth College</option>
+            <option value="Harvard">Harvard University</option>
+            <option value="Princeton">Princeton University</option>
+            <option value="Yale">Yale University</option>
+            <option value="Duke">Duke University</option>
+            <option value="JohnsHopkins">Johns Hopkins University</option>
+            <option value="UPenn">University of Pennsylvania</option>
+            <option value="Caltech">California Institute of Technology</option>
+        </select>
+    </div>
+
+    <div id="eventManagement">
+        <h2 id="universityName"></h2>
+        <button id="backButton">&larr; Back to University Selection</button>
+        
+        <form id="eventForm">
+            <h3>Add/Edit Event</h3>
+            <input type="hidden" id="eventId">
+            <input type="text" id="eventName" placeholder="Event Name" required>
+            <input type="date" id="eventDate" required>
+            <input type="time" id="eventTime" required>
+            <input type="text" id="eventLocation" placeholder="Event Location" required>
+            <button type="submit">Save Event</button>
+        </form>
+
+        <div id="eventList">
+            <h3>Upcoming Events</h3>
+            <!-- Events will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        const universitySelection = document.getElementById('universitySelection');
+        const universitySelector = document.getElementById('universitySelector');
+        const eventManagement = document.getElementById('eventManagement');
+        const universityName = document.getElementById('universityName');
+        const backButton = document.getElementById('backButton');
+        const eventForm = document.getElementById('eventForm');
+        const eventList = document.getElementById('eventList');
+
+        let events = {};
+
+        universitySelector.addEventListener('change', function() {
+            const university = this.value;
+            if (university) {
+                universityName.textContent = this.options[this.selectedIndex].text;
+                universitySelection.style.display = 'none';
+                eventManagement.style.display = 'block';
+                if (!events[university]) {
+                    events[university] = JSON.parse(localStorage.getItem(university)) || [];
+                }
+                renderEvents(university);
+            }
+        });
+
+        backButton.addEventListener('click', function() {
+            universitySelection.style.display = 'block';
+            eventManagement.style.display = 'none';
+            universitySelector.value = '';
+        });
+
+        eventForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const university = universitySelector.value;
+            const eventId = document.getElementById('eventId').value;
+            const eventName = document.getElementById('eventName').value;
+            const eventDate = document.getElementById('eventDate').value;
+            const eventTime = document.getElementById('eventTime').value;
+            const eventLocation = document.getElementById('eventLocation').value;
+
+            if (eventId) {
+                // Edit existing event
+                const index = events[university].findIndex(event => event.id === eventId);
+                events[university][index] = { id: eventId, name: eventName, date: eventDate, time: eventTime, location: eventLocation };
+            } else {
+                // Add new event
+                const newEvent = { id: Date.now().toString(), name: eventName, date: eventDate, time: eventTime, location: eventLocation };
+                events[university].push(newEvent);
+            }
+
+            localStorage.setItem(university, JSON.stringify(events[university]));
+            renderEvents(university);
+            eventForm.reset();
+            document.getElementById('eventId').value = '';
+        });
+
+        function renderEvents(university) {
+            eventList.innerHTML = '<h3>Upcoming Events</h3>';
+            events[university].forEach(event => {
+                const eventElement = document.createElement('div');
+                eventElement.className = 'event-item';
+                eventElement.innerHTML = `
+                    <h4>${event.name}</h4>
+                    <p>Date: ${event.date} Time: ${event.time}</p>
+                    <p>Location: ${event.location}</p>
+                    <button onclick="editEvent('${university}', '${event.id}')">Edit</button>
+                    <button onclick="removeEvent('${university}', '${event.id}')">Remove</button>
+                `;
+                eventList.appendChild(eventElement);
+            });
+        }
+
+        function editEvent(university, id) {
+            const event = events[university].find(event => event.id === id);
+            document.getElementById('eventId').value = event.id;
+            document.getElementById('eventName').value = event.name;
+            document.getElementById('eventDate').value = event.date;
+            document.getElementById('eventTime').value = event.time;
+            document.getElementById('eventLocation').value = event.location;
+        }
+
+        function removeEvent(university, id) {
+            events[university] = events[university].filter(event => event.id !== id);
+            localStorage.setItem(university, JSON.stringify(events[university]));
+            renderEvents(university);
+        }
+    </script>
+</body>
+</html>
