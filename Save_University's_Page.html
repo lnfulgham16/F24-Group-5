@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Research Tool</title>
+    <style>
+        /* Basic styling for demonstration purposes */
+        body { font-family: Arial, sans-serif; }
+        .tab { cursor: pointer; padding: 10px; display: inline-block; }
+        .active { background-color: #ddd; }
+        .content { display: none; }
+        .visible { display: block; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>University Research Tool</h1>
+        <nav>
+            <div class="tab active" onclick="showTab('search')">Search Universities</div>
+            <div class="tab" onclick="showTab('saved')">Saved Universities</div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="search" class="content visible">
+            <h2>Search Universities</h2>
+            <input type="text" id="searchInput" placeholder="Search for a university">
+            <button onclick="searchUniversities()">Search</button>
+            <div id="searchResults">
+                <!-- Search results will be dynamically added here -->
+                <div class="university">
+                    <h3>Sample University</h3>
+                    <p>Description of the university...</p>
+                    <button onclick="saveUniversity('Sample University')">Save</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="saved" class="content">
+            <h2>Saved Universities</h2>
+            <div id="savedUniversities">
+                <!-- Saved universities will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.content').forEach(content => content.classList.remove('visible'));
+            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('visible');
+        }
+
+        function searchUniversities() {
+            // Implement search functionality
+            console.log('Searching universities...');
+        }
+
+        function saveUniversity(universityName) {
+            // Implement save functionality
+            console.log('Saving university:', universityName);
+            const savedUniversities = document.getElementById('savedUniversities');
+            const universityElement = document.createElement('div');
+            universityElement.innerHTML = `
+                <h3>${universityName}</h3>
+                <p>Saved university information...</p>
+            `;
+            savedUniversities.appendChild(universityElement);
+        }
+    </script>
+</body>
+</html>
