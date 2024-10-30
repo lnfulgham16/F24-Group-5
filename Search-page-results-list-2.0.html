@@ -300,6 +300,25 @@
     </p>
 
     <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Get search query from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('q');
+    
+    if (searchQuery) {
+        // Set the search input value
+        const searchInput = document.getElementById("search-input");
+        searchInput.value = searchQuery;
+        
+        // Trigger the search
+        filterColleges(new Event('submit'));
+    }
+    
+    // Special handling for "Home" query
+    if (searchQuery && searchQuery.toLowerCase() === "home") {
+        window.location.href = "index.html"; // Redirect to homepage
+    }
+});
     // Store all searchable terms
     const searchableTerms = [];
     const collegeElements = document.querySelectorAll('li');
@@ -392,18 +411,29 @@
     autocomplete(document.getElementById("search-input"));
     
     function filterColleges(event) {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+    
         var input = document.getElementById("search-input").value.toLowerCase();
         var list = document.querySelector("ul");
         var items = list.getElementsByTagName("li");
         var resultsDiv = document.getElementById("search-results");
         resultsDiv.innerHTML = "";
-        
+    
+        // Handle "Home" search
+        if (input === "home") {
+            window.location.href = "index.html";
+            return;
+        }
+    
+        var foundResults = false;
+    
         for (var i = 0; i < items.length; i++) {
             var item = items[i];
             var data = item.dataset;
             var match = false;
-            
+        
             if (!isNaN(input) && input.length > 0) {
                 // If input is a number, assume it's an ACT/SAT score
                 var satRange = data.satRange ? data.satRange.split("-") : [0, 1600];
@@ -415,8 +445,9 @@
                 // If input is not a number, search as before
                 match = Object.values(data).some(value => value && value.toLowerCase().includes(input));
             }
-            
+        
             if (match) {
+                foundResults = true;
                 var resultHTML = `
                     <div class="college-result">
                         <h3>${data.name}</h3>
@@ -428,10 +459,24 @@
                         <p><strong>ACT Range:</strong> ${data.actRange || 'N/A'}</p>
                         <p><strong>Website:</strong> <a href="${data.website}" target="_blank">${data.website}</a></p>
                     </div>
-                `;
+            `   ;
                 resultsDiv.innerHTML += resultHTML;
             }
         }
+    
+        // Show "no results" message if nothing was found
+        if (!foundResults) {
+            resultsDiv.innerHTML = `
+                <div class="alert alert-info" role="alert">
+                    No results found for "${input}". Try another search term.
+                </div>
+        `   ;
+        }
+    
+        // Update URL with search query without reloading the page
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('q', input);
+        window.history.pushState({}, '', newUrl);
     }
 
     document.getElementById("search-form").onsubmit = filterColleges;
