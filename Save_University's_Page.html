@@ -11,6 +11,23 @@
         .active { background-color: #ddd; }
         .content { display: none; }
         .visible { display: block; }
+        /* New styles for the dropdown */
+        #searchInput { position: relative; }
+        #universityDropdown {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        #universityDropdown div {
+            padding: 12px 16px;
+            cursor: pointer;
+        }
+        #universityDropdown div:hover {
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 <body>
@@ -25,7 +42,23 @@
     <main>
         <section id="search" class="content visible">
             <h2>Search Universities</h2>
-            <input type="text" id="searchInput" placeholder="Search for a university">
+            <div style="position: relative;">
+                <input type="text" id="searchInput" placeholder="Search for a university" onkeyup="filterUniversities()">
+                <div id="universityDropdown">
+                    <div onclick="selectUniversity('Stanford University')">Stanford University</div>
+                    <div onclick="selectUniversity('Brown University')">Brown University</div>
+                    <div onclick="selectUniversity('Columbia University')">Columbia University</div>
+                    <div onclick="selectUniversity('Cornell University')">Cornell University</div>
+                    <div onclick="selectUniversity('Dartmouth College')">Dartmouth College</div>
+                    <div onclick="selectUniversity('Harvard University')">Harvard University</div>
+                    <div onclick="selectUniversity('Princeton University')">Princeton University</div>
+                    <div onclick="selectUniversity('Yale University')">Yale University</div>
+                    <div onclick="selectUniversity('Duke University')">Duke University</div>
+                    <div onclick="selectUniversity('Johns Hopkins University')">Johns Hopkins University</div>
+                    <div onclick="selectUniversity('University of Pennsylvania')">University of Pennsylvania</div>
+                    <div onclick="selectUniversity('California Institute of Technology')">California Institute of Technology</div>
+                </div>
+            </div>
             <button onclick="searchUniversities()">Search</button>
             <div id="searchResults">
                 <!-- Search results will be dynamically added here -->
@@ -46,29 +79,33 @@
     </main>
 
     <script>
-        function showTab(tabName) {
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.content').forEach(content => content.classList.remove('visible'));
-            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
-            document.getElementById(tabName).classList.add('visible');
+        // ... existing code ...
+
+        function filterUniversities() {
+            var input, filter, dropdown, div, i;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            dropdown = document.getElementById("universityDropdown");
+            div = dropdown.getElementsByTagName("div");
+            let matchFound = false;
+            for (i = 0; i < div.length; i++) {
+                txtValue = div[i].textContent || div[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    div[i].style.display = "";
+                    matchFound = true;
+                } else {
+                    div[i].style.display = "none";
+                }
+            }
+            dropdown.style.display = matchFound ? "block" : "none";
         }
 
-        function searchUniversities() {
-            // Implement search functionality
-            console.log('Searching universities...');
+        function selectUniversity(universityName) {
+            document.getElementById("searchInput").value = universityName;
+            document.getElementById("universityDropdown").style.display = "none";
         }
 
-        function saveUniversity(universityName) {
-            // Implement save functionality
-            console.log('Saving university:', universityName);
-            const savedUniversities = document.getElementById('savedUniversities');
-            const universityElement = document.createElement('div');
-            universityElement.innerHTML = `
-                <h3>${universityName}</h3>
-                <p>Saved university information...</p>
-            `;
-            savedUniversities.appendChild(universityElement);
-        }
+        // ... existing code ...
     </script>
 </body>
 </html>
