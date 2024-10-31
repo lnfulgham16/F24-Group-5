@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-/* Landing Page for Wiki */
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,31 +8,30 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column; /* Allow top bar and content to stack vertically */
+            flex-direction: column;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
         }
-        /* Navigation bar styling */
         .navbar {
-            width: 100%; /* Full width */
-            background-color: #4CAF50; /* Green background */
-            padding: 10px; /* Padding around the content */
-            text-align: center; /* Center the link inside */
-            position: relative; /* For proper button positioning */
+            width: 100%;
+            background-color: #4CAF50;
+            padding: 10px;
+            text-align: center;
+            position: relative;
         }
         .navbar a {
-            background-color: white; /* White button */
-            color: #4CAF50; /* Green text */
-            padding: 10px 20px; /* Padding for the button */
-            text-decoration: none; /* No underline */
-            border-radius: 5px; /* Rounded corners */
-            font-size: 16px; /* Font size */
+            background-color: white;
+            color: #4CAF50;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
         }
         .navbar a:hover {
-            background-color: #45a049; /* Darker green on hover */
-            color: white; /* White text on hover */
+            background-color: #45a049;
+            color: white;
         }
         h1 {
             color: #333;
@@ -43,11 +41,11 @@
             display: flex;
             align-items: center;
             position: relative;
-            width: auto; /* Changed from 100% */
-            margin-right: 10px; /* Add some spacing from the right */
+            width: auto;
+            margin-right: 10px;
         }
         .search-container input[type="text"] {
-            width: 200px; /* Set a fixed width for the search input */
+            width: 200px;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -57,7 +55,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            width: 200px; /* Match the width of the search input */
+            width: 200px;
             max-height: 300px;
             overflow-y: auto;
             background-color: white;
@@ -67,17 +65,14 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             z-index: 1000;
         }
-
         #global-autocomplete-list div {
             padding: 8px 10px;
             cursor: pointer;
             border-bottom: 1px solid #eee;
         }
-
         #global-autocomplete-list div:hover {
             background-color: #f8f8f8;
         }
-
         #global-autocomplete-list div:last-child {
             border-bottom: none;
         }
@@ -85,7 +80,7 @@
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            margin-right: 5px; /* Add margin between select and button */
+            margin-right: 5px;
         }
         .search-container button {
             padding: 8px 15px;
@@ -104,10 +99,9 @@
             padding: 10px;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
             display: none;
-            z-index: 10;
-            top: 100%; /* Position below the search bar */
-            left: 0; /* Align to the left */
-            margin-top: 5px; /* Add a small margin */
+            z-index: 1001;
+            margin-top: 5px;
+            width: 200px;
         }
         #classList li {
             padding: 5px 0;
@@ -166,6 +160,7 @@
             <button type="submit">Search</button>
         </div>
     </div>
+    <ul id="classList"></ul>
     <h1>Welcome to Group 5's Project</h1>
     <script>
         const durationFilter = document.getElementById('durationFilter');
@@ -321,21 +316,20 @@
         function updateClassList() {
             const selectedDuration = parseFloat(durationFilter.value);
             classList.innerHTML = '';
-        
+            const durationFilterRect = durationFilter.getBoundingClientRect();
+            classList.style.top = `${durationFilterRect.bottom + 5}px`;
+            classList.style.left = `${durationFilterRect.left}px`;
+
             classes.forEach(cls => {
                 if (!selectedDuration || cls.duration === selectedDuration) {
                     const listItem = document.createElement('li');
                     listItem.textContent = `${cls.name} (${cls.duration} hours)`;
-                    listItem.addEventListener('click', function() {
-                        searchInput.value = cls.name;
-                        classList.style.display = 'none';
-                    });
                     classList.appendChild(listItem);
                 }
             });
             classList.style.display = 'block';
         }
-        </script>
+    </script>
 </body>
 </html>
 <title>College Wiki Button</title>
