@@ -78,8 +78,8 @@
     </p>
     <nav>
         <ul>
-            <li><a href="Search-page-results-list-2.0.html">Home</a></li>
-            <li><a href="Saved_Universities.html">Saved Universities</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="SavedUniversities.html">Saved Universities</a></li>
         </ul>
     </nav>
     <h1>Search Results</h1>
@@ -96,7 +96,7 @@
 
     <div id="search-results"></div>
 
-    <button id="saveButton" class="save-button" onclick="saveResults()" disabled>Save Results</button>
+    <button id="saveButton" class="save-button" onclick="saveUniversity(data-name)" disabled>Save Results</button>
 
     <div style="height: 500px; overflow-y: scroll; border: 1px solid black; padding: 10px;">
         <ul>
@@ -339,68 +339,108 @@
 
     <script>
     // Store all searchable terms
-    const searchableTerms = [];
-    const collegeElements = document.querySelectorAll('li');
-    collegeElements.forEach(element => {
-        const data = element.dataset;
-        // Add College Name
-        searchableTerms.push(data.name);
-        // Add College Location
-        searchableTerms.push(data.location);
-        // Add College Type
-        searchableTerms.push(data.type);
-    });
+    // Store all searchable terms with their metadata
+    function buildSearchableTerms() {
+        const searchableTerms = [];
+        const collegeElements = document.querySelectorAll('li[data-name]');
+    
+        collegeElements.forEach(element => {
+            const data = element.dataset;
+            // Add all searchable fields with type metadata
+            searchableTerms.push({
+                text: data.name,
+                type: 'name'
+            });
+            searchableTerms.push({
+                text: data.location,
+                type: 'location'
+            });
+            searchableTerms.push({
+                text: data.type,
+                type: 'type'
+            });
+            searchableTerms.push({
+                text: data.acceptanceRate,
+                type: 'acceptance'
+            });
+            searchableTerms.push({
+                text: `SAT ${data.satRange}`,
+                type: 'sat'
+            });
+            searchableTerms.push({
+                text: `ACT ${data.actRange}`,
+                type: 'act'
+            });
+        });
+    
+        return searchableTerms;
+    }
 
     function autocomplete(inp) {
-        let currentFocus;
-
+        const searchableTerms = buildSearchableTerms();
+        let currentFocus = -1;
+    
         inp.addEventListener("input", function(e) {
-            let val = this.value;
+            const val = this.value;
             closeAllLists();
+        
             if (!val) { return false; }
             currentFocus = -1;
-
+        
             const autocompleteList = document.getElementById("autocomplete-list");
         
+            // Filter matches based on input
             const matches = searchableTerms.filter(term => 
-                term.toLowerCase().includes(val.toLowerCase())
-        );
-
+                term.text.toLowerCase().includes(val.toLowerCase())
+            ).slice(0, 10); // Limit to top 10 matches
+        
             matches.forEach(match => {
                 const div = document.createElement("DIV");
                 // Highlight matching text
-                const matchIndex = match.toLowerCase().indexOf(val.toLowerCase());
-                div.innerHTML = match.substr(0, matchIndex);
-                div.innerHTML += "<strong>" + match.substr(matchIndex, val.length) + "</strong>";
-                div.innerHTML += match.substr(matchIndex + val.length);
+                const matchText = match.text;
+                const matchIndex = matchText.toLowerCase().indexOf(val.toLowerCase());
+            
+                div.innerHTML = matchText.substr(0, matchIndex);
+                div.innerHTML += "<strong>" + matchText.substr(matchIndex, val.length) + "</strong>";
+                div.innerHTML += matchText.substr(matchIndex + val.length);
+            
+                // Add type indicator if it's not a college name
+                if (match.type !== 'name') {
+                    div.innerHTML += ` <span style="color: #666; font-size: 0.9em;">(${match.type})</span>`;
+                }
             
                 div.addEventListener("click", function(e) {
-                    inp.value = match;
+                    inp.value = matchText;
                     closeAllLists();
-                    // Trigger form submit
-                    filterColleges(e);
+                    // Trigger the search
+                    filterColleges(new Event('submit'));
                 });
+            
                 autocompleteList.appendChild(div);
             });
         });
-
+    
+        // Key navigation
         inp.addEventListener("keydown", function(e) {
             let x = document.getElementById("autocomplete-list");
             if (x) x = x.getElementsByTagName("div");
-            if (e.keyCode == 40) { // arrow DOWN
+        
+            if (e.keyCode === 40) { // arrow DOWN
                 currentFocus++;
                 addActive(x);
-            } else if (e.keyCode == 38) { // arrow UP
+            } else if (e.keyCode === 38) { // arrow UP
                 currentFocus--;
                 addActive(x);
-            } else if (e.keyCode == 13) { // ENTER
+            } else if (e.keyCode === 13) { // ENTER
                 e.preventDefault();
                 if (currentFocus > -1) {
                     if (x) x[currentFocus].click();
+                } else {
+                    filterColleges(e);
                 }
             }
         });
-
+    
         function addActive(x) {
             if (!x) return false;
             removeActive(x);
@@ -408,72 +448,124 @@
             if (currentFocus < 0) currentFocus = (x.length - 1);
             x[currentFocus].classList.add("autocomplete-active");
         }
-
+    
         function removeActive(x) {
             for (let i = 0; i < x.length; i++) {
                 x[i].classList.remove("autocomplete-active");
             }
         }
-
+    
         function closeAllLists(elmnt) {
             const x = document.getElementById("autocomplete-list");
-            while (x.firstChild) {
+            while (x && x.firstChild) {
                 x.removeChild(x.firstChild);
             }
         }
-
+    
+        // Close autocomplete list when clicking outside
         document.addEventListener("click", function (e) {
-            closeAllLists(e.target);
+            if (e.target !== inp) {
+                closeAllLists(e.target);
+            }
         });
     }
-    // Initialize autocomplete
-    autocomplete(document.getElementById("search-input"));
+
+    // Initialize autocomplete when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        autocomplete(document.getElementById("search-input"));
+    
+        // Check for existing search query in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+    
+        if (searchQuery) {
+            const searchInput = document.getElementById("search-input");
+            searchInput.value = searchQuery;
+            filterColleges(new Event('submit'));
+        }
+    });
     
     function filterColleges(event) {
-        event.preventDefault();
-        var input = document.getElementById("search-input").value.toLowerCase();
-        var list = document.querySelector("ul");
-        var items = list.getElementsByTagName("li");
+        if (event) {
+            event.preventDefault();
+        }
+
+        var input = document.getElementById("search-input").value.toLowerCase().trim();
         var resultsDiv = document.getElementById("search-results");
         resultsDiv.innerHTML = "";
+
+        // Handle "Home" search
+        if (input === "home") {
+            window.location.href = "index.html";
+            return;
+        }
+
+        var foundResults = false;
+        var dialogs = document.getElementsByTagName('dialog');
+
+        Array.from(dialogs).forEach(dialog => {
+            var name = dialog.querySelector('h2').textContent.toLowerCase();
+            var location = dialog.querySelector('p:nth-child(2)').textContent.toLowerCase();
+            var type = dialog.querySelector('p:nth-child(3)').textContent.toLowerCase();
         
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            var data = item.dataset;
-            var match = false;
-            
-            if (!isNaN(input) && input.length > 0) {
-                // If input is a number, assume it's an ACT/SAT score
-                var satRange = data.satRange ? data.satRange.split("-") : [0, 1600];
-                var actRange = data.actRange ? data.actRange.split("-") : [0, 36];
-                var inputScore = parseInt(input);
-                match = (inputScore >= parseInt(satRange[0]) && inputScore <= parseInt(satRange[1])) ||
-                        (inputScore >= parseInt(actRange[0]) && inputScore <= parseInt(actRange[1]));
-            } else {
-                // If input is not a number, search as before
-                match = Object.values(data).some(value => value && value.toLowerCase().includes(input));
-            }
-            
-            if (match) {
+            if (name.includes(input) || location.includes(input) || type.includes(input)) {
+                foundResults = true;
                 var resultHTML = `
                     <div class="college-result">
-                        <h3>${data.name}</h3>
-                        <p><strong>Location:</strong> ${data.location}</p>
-                        <p><strong>Type:</strong> ${data.type}</p>
-                        <p><strong>Founded:</strong> ${data.founded}</p>
-                        <p><strong>Acceptance Rate:</strong> ${data.acceptanceRate}</p>
-                        <p><strong>SAT Range:</strong> ${data.satRange || 'N/A'}</p>
-                        <p><strong>ACT Range:</strong> ${data.actRange || 'N/A'}</p>
-                        <p><strong>Website:</strong> <a href="${data.website}" target="_blank">${data.website}</a></p>
+                        <h3>${dialog.querySelector('h2').textContent}</h3>
+                        ${dialog.innerHTML.split('<button')[0]}
                     </div>
-                `;
+            `   ;
                 resultsDiv.innerHTML += resultHTML;
             }
+        });
+
+        if (!foundResults) {
+            resultsDiv.innerHTML = `
+                <div class="alert alert-info" role="alert">
+                    No results found for "${input}". Try another search term.
+                </div>
+        `   ;
         }
+
+        // Update URL with search query
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('q', input);
+        window.history.pushState({}, '', newUrl);
+
+        // Update save button state
+        updateSaveButtonState();
     }
 
-    let savedUniversities = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+    // Add event listeners when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialize the save button state
+        updateSaveButtonState();
+    
+        // Add event listener for the search form
+        document.getElementById("search-form").addEventListener("submit", filterColleges);
+    
+        // Add event listener for the save button
+        document.getElementById("saveButton").addEventListener("click", saveResults);
+    
+        // Check for existing search query in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+    
+        if (searchQuery) {
+            const searchInput = document.getElementById("search-input");
+            searchInput.value = searchQuery;
+            filterColleges(new Event('submit'));
+        }
+    });
 
+    let savedUniversities = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+    function updateSaveButtonState() {
+        const searchResults = document.getElementById('search-results');
+        const saveButton = document.getElementById('saveButton');
+        const hasResults = searchResults.getElementsByClassName('college-result').length > 0;
+        saveButton.disabled = !hasResults;
+    }
     function saveUniversity(universityName) {
         if (!savedUniversities.includes(universityName)) {
             savedUniversities.push(universityName);
@@ -485,7 +577,29 @@
     }
 
     function saveResults() {
-        //This function is not used in this version.
+        const searchResults = document.getElementById('search-results');
+        const collegeResults = searchResults.getElementsByClassName('college-result');
+    
+        if (collegeResults.length === 0) {
+            alert('No results to save!');
+            return;
+        }
+    
+        let newSaves = false;
+        Array.from(collegeResults).forEach(result => {
+            const universityName = result.querySelector('h3').textContent;
+            if (!savedUniversities.includes(universityName)) {
+                savedUniversities.push(universityName);
+                newSaves = true;
+            }
+        });
+    
+        if (newSaves) {
+            localStorage.setItem('savedUniversities', JSON.stringify(savedUniversities));
+            alert('Search results saved successfully!');
+        } else {
+            alert('All displayed universities were already saved!');
+        }
     }
 
     document.getElementById("search-form").onsubmit = filterColleges;

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Universities</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #4CAF50;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .navbar a {
+            display: inline-block;
+            background-color: white;
+            color: #4CAF50;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid white;
+        }
+
+        .navbar a:hover {
+            background-color: #45a049;
+            color: white;
+            border-color: white;
+        }
+
+        /* Rest of your existing styles */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .clear-all {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .clear-all:hover {
+            background-color: #45a049;
+        }
+
+        .university-card {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .university-card h3 {
+            margin: 0;
+            color: #333;
+            padding-right: 100px;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .remove-btn:hover {
+            background-color: #45a049;
+        }
+
+        .no-universities {
+            text-align: center;
+            padding: 40px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .no-universities h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .no-universities p {
+            color: #666;
+            margin: 0;
+        }
+
+        .search-btn {
+            background-color: white;
+            color: #4CAF50;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 15px;
+            border: 1px solid #4CAF50;
+        }
+
+        .search-btn:hover {
+            background-color: #45a049;
+            color: white;
+            border-color: #45a049;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            width: 100%;
+            background-color: white;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="Search-page-results-list-2.0.html">Back to Search</a>
+    </div>
+
+    <div class="container">
+        <h1>Saved Universities</h1>
+        
+        <button id="clearAll" class="clear-all">Clear All Saved Universities</button>
+        
+        <div id="savedUniversitiesList">
+            <!-- Universities will be displayed here -->
+        </div>
+    </div>
+
+    <footer>
+        Group 5 | 2024
+    </footer>
+
+    <script>
+        function displaySavedUniversities() {
+            const savedUniversities = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+            const container = document.getElementById('savedUniversitiesList');
+            
+            if (savedUniversities.length === 0) {
+                container.innerHTML = `
+                    <div class="no-universities">
+                        <h3>No saved universities</h3>
+                        <p>Go to the search page to find and save universities.</p>
+                        <a href="Search-page-results-list-2.0.html" class="search-btn">Go to Search</a>
+                    </div>
+                `;
+                document.getElementById('clearAll').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('clearAll').style.display = 'block';
+            container.innerHTML = savedUniversities.map(university => `
+                <div class="university-card">
+                    <h3>${university}</h3>
+                    <button class="remove-btn" onclick="removeUniversity('${university}')">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function removeUniversity(universityName) {
+            let savedUniversities = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+            savedUniversities = savedUniversities.filter(uni => uni !== universityName);
+            localStorage.setItem('savedUniversities', JSON.stringify(savedUniversities));
+            displaySavedUniversities();
+        }
+
+        function clearAllUniversities() {
+            if (confirm('Are you sure you want to remove all saved universities?')) {
+                localStorage.setItem('savedUniversities', JSON.stringify([]));
+                displaySavedUniversities();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySavedUniversities();
+            document.getElementById('clearAll').addEventListener('click', clearAllUniversities);
+        });
+    </script>
+</body>
+</html>
