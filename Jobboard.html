@@ -22,6 +22,7 @@
 
         .back-button {
             position: absolute;
+            display: "inline-block";
             top: 10px;
             right: 10px;
             padding: 10px 20px;
@@ -48,6 +49,7 @@
         }
 
         .sidebar h2 {
+            padding-top: 20px;
             margin-bottom: 20px;
         }
 
@@ -192,12 +194,129 @@
         .job-detail-title {
             font-weight: bold;
         }
+
+        /* New styles for Edit button and User modal */
+        .edit-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .exit-edit-button {
+            position: fixed;
+            display: "none";
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+
+        .add-job-button {
+             position: absolute;
+             display: inline-block;
+             top: 10px;
+                right: 100px;  
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                text-decoration: none;
+                font-size: 1em;
+                border-radius: 5px;
+                border: 2px solid black;
+                cursor: pointer;
+            }
+
+            .add-job-button:hover {
+                background-color: #45a049;
+            }
+            .remove-button {
+                margin-left: 10px;
+                padding: 5px 10px;
+                background-color: #f44336; /* Red color */
+                color: white;
+                border: none;
+                border-radius: 3px;
+                font-size: 0.9em;
+                cursor: pointer;
+            }
+
+            .remove-button:hover {
+                background-color: #d32f2f;
+            }
+
+            /* The Modal (background) */
+            .add-modal {
+                display: none; /* Hidden by default */
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .add-modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 500px;
+                border-radius: 5px;
+                position: relative;
+            }
+
+            /* Close Button */
+            .add-close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .add-close:hover,
+            .add-close:focus {
+                color: black;
+                text-decoration: none;
+            }
+
+
+
+
+
+
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Back Button -->
-        <a href="index.html" class="back-button">Back</a>
+        <a href="index.html" class="back-button" id="back-button">Back</a>
+        <!-- Edit Button -->
+        <button class="edit-button" onclick="toggleEditMode()" id="edit-button">Edit</button>
+        <button class="exit-edit-button" onclick="toggleEditMode()" id="exit-edit-button">Exit Edit</button> 
+        <a class="add-job-button" onclick="openAddJobModal()" id="add-job-button">Add Job</a>
+        
+
 
         <!-- Sidebar -->
         <div class="sidebar">
@@ -218,6 +337,9 @@
             </div>
         </div>
 
+        
+
+
         <!-- Job Board -->
         <div class="job-board-container">
             <div class="header">
@@ -228,6 +350,24 @@
                 Placeholder: This is a sample job listing for positions at universities and colleges.
             </div>
 
+            <!-- Button to open the modal -->
+            <!-- Add Job Button -->
+            
+             <!-- Modal for adding a new job -->
+             <div id="addjobModal" class="add-modal">
+                <div class="add-modal-content">
+                    <span class="add-close" onclick="closeAddJobModal()">&times;</span>
+                    <h3>Add a New Job Listing</h3>
+                    <input type="text" id="jobTitle" placeholder="Job Title" required />
+                    <input type="text" id="jobLocation" placeholder="Location" required />
+                    <input type="text" id="jobDepartment" placeholder="Department" required />
+                    <input type="url" id="applyLink" placeholder="Apply Link" required />
+                    <button onclick="addJob()">Add Job</button>
+                </div>
+            </div>
+
+           
+
             <div class="job-list">
                 <ul id="jobList">
                     <li data-role="Academic">
@@ -236,6 +376,7 @@
                             <div class="job-details">Location: Stanford University<br>Department: School of Engineering</div>
                         </div>
                         <a href="http://dummy-address.com/apply/assistant-professor" class="apply-link" target="_blank">Apply</a>
+                        <button class="remove-button"  onclick="removeJob(this)">Remove</button>
                     </li>
                     <li data-role="Admissions">
                         <div class="job-info">
@@ -243,6 +384,7 @@
                             <div class="job-details">Location: Harvard University<br>Department: Undergraduate Admissions</div>
                         </div>
                         <a href="http://dummy-address.com/apply/admissions-counselor" class="apply-link" target="_blank">Apply</a>
+                        <button class="remove-button"  onclick="removeJob(this)">Remove</button>
                     </li>
                     <li data-role="Management">
                         <div class="job-info">
@@ -250,44 +392,19 @@
                             <div class="job-details">Location: University of California, Berkeley<br>Department: Student Services</div>
                         </div>
                         <a href="http://dummy-address.com/apply/director-student-affairs" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li data-role="Advising">
-                        <div class="job-info">
-                            <span class="job-title" data-location="New York University" data-experience="1-2 years" data-job-description="Academic Advisor, supporting students in the College of Arts and Science." data-job-role="Advising" data-full-time="Part-Time" data-expectations="Assist students with course selection.">Academic Advisor</span>
-                            <div class="job-details">Location: New York University<br>Department: College of Arts and Science</div>
-                        </div>
-                        <a href="http://dummy-address.com/apply/academic-advisor" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li data-role="Library Services">
-                        <div class="job-info">
-                            <span class="job-title" data-location="University of Texas, Austin" data-experience="3 years" data-job-description="Library Technician, assisting with the library’s daily operations." data-job-role="Library Services" data-full-time="Full-Time" data-expectations="Manage inventory, assist patrons.">Library Technician</span>
-                            <div class="job-details">Location: University of Texas, Austin<br>Department: University Library</div>
-                        </div>
-                        <a href="http://dummy-address.com/apply/library-technician" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li data-role="Research">
-                        <div class="job-info">
-                            <span class="job-title" data-location="MIT" data-experience="4 years" data-job-description="Research Scientist, focusing on artificial intelligence research." data-job-role="Research" data-full-time="Full-Time" data-expectations="Conduct research, publish findings.">Research Scientist</span>
-                            <div class="job-details">Location: MIT<br>Department: Research Laboratory</div>
-                        </div>
-                        <a href="http://dummy-address.com/apply/research-scientist" class="apply-link" target="_blank">Apply</a>
-                    </li>
-                    <li data-role="Career Services">
-                        <div class="job-info">
-                            <span class="job-title" data-location="University of Washington" data-experience="4 years" data-job-description="Career Services Advisor, providing guidance to students on job placements." data-job-role="Career Services" data-full-time="Part-Time" data-expectations="Conduct workshops and individual advising.">Career Services Advisor</span>
-                            <div class="job-details">Location: University of Washington<br>Department: Career Services</div>
-                        </div>
-                        <a href="http://dummy-address.com/apply/career-services-advisor" class="apply-link" target="_blank">Apply</a>
+                        <button class="remove-button"  onclick="removeJob(this)">Remove</button>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 
+    
+
     <!-- Modal Structure -->
     <div id="jobModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closeJobModal()">&times;</span>
             <h2 id="modalJobTitle">Job Title</h2>
             <div class="job-detail-item"><span class="job-detail-title">Location:</span> <span id="modalJobLocation"></span></div>
             <div class="job-detail-item"><span class="job-detail-title">Experience Requirement:</span> <span id="modalJobExperience"></span></div>
@@ -299,13 +416,31 @@
     </div>
 
     <script>
+        // State variables
+        let EDITMODE = false;
+        let USER = '';
+
         // Get modal and close button
         var modal = document.getElementById("jobModal");
         var span = document.getElementsByClassName("close")[0];
+        var addmodal = document.getElementById("addjobModal");
 
         // Get all job listings and add click event listener
         var jobListings = document.querySelectorAll(".job-info");
 
+        // Function to toggle edit mode and display the modal
+        function toggleEditMode() {
+            EDITMODE = !EDITMODE;
+            
+            updateBackButtonVisibility();  // Update the back button visibility
+           
+        }
+
+       
+        
+        // POPUP that displays the JOB information in more detail
+        //
+        //
         jobListings.forEach(function(listing) {
             listing.addEventListener("click", function(event) {
                 // Prevent modal from opening if the apply button is clicked
@@ -358,6 +493,131 @@
                 modal.style.display = "none";
             }
         }
+
+        
+
+        function updateBackButtonVisibility() {
+            const editButtons = document.getElementsByClassName("edit-button");
+            const eeButtons = document.getElementsByClassName("exit-edit-button");
+            const addButtons = document.getElementsByClassName("add-job-button");
+            const rmvButtons = document.getElementsByClassName("remove-button");
+
+            const displayStyle = EDITMODE ? "none" : "inline-block";
+            const hiddenStyle = EDITMODE ? "inline-block" : "none";
+
+            // Loop through all edit buttons
+            for (let button of editButtons) {
+                button.style.display = displayStyle;
+            }
+            
+            // Loop through all exit edit buttons
+            for (let button of eeButtons) {
+                button.style.display = hiddenStyle;
+            }
+            
+            // Loop through all add job buttons
+            for (let button of addButtons) {
+                button.style.display = hiddenStyle;
+            }
+            
+            // Loop through all remove buttons
+            for (let button of rmvButtons) {
+                button.style.display = hiddenStyle;
+            }
+        }
+
+        
+        // Initial call to set the button state
+        updateBackButtonVisibility();
+        
+
+        
+
+        
+
+        // Close modal on 'x' click or outside click
+        document.querySelector(".close").onclick = () => document.getElementById("jobModal").style.display = "none";
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("jobModal")) {
+                document.getElementById("jobModal").style.display = "none";
+            }
+        }
+
+        function removeJob(button) {
+            // Find the parent <li> element and remove it from the job list
+            const jobListing = button.closest("li");
+            jobListing.remove();
+        }
+
+                // Function to open the modal
+        function openJobModal() {
+            document.getElementById("jobModal").style.display = "block";
+        }
+
+        // Function to open the modal
+        function openAddJobModal() {
+            document.getElementById("addjobModal").style.display = "block";
+        }
+
+
+        // Function to close the modal
+        function closeJobModal() {
+            document.getElementById("jobModal").style.display = "none";
+        }
+
+        // Function to close the modal
+        function closeAddJobModal() {
+            document.getElementById("addjobModal").style.display = "none";
+        }
+
+        // Function to add a job listing
+        function addJob() {
+            // Get input values
+            const title = document.getElementById("jobTitle").value;
+            const location = document.getElementById("jobLocation").value;
+            const department = document.getElementById("jobDepartment").value;
+            const applyLink = document.getElementById("applyLink").value;
+
+            // Validate inputs
+            if (!title || !location || !department || !applyLink) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            // Create a new list item with the job details
+            const jobList = document.getElementById("jobList");
+            const newJob = document.createElement("li");
+            
+            newJob.innerHTML = `
+                <div class="job-info">
+                    <span class="job-title">${title}</span>
+                    <div class="job-details">Location: ${location}<br>Department: ${department}</div>
+                </div>
+                <a href="${applyLink}" class="apply-link" target="_blank">Apply</a>
+                <button class="remove-button" id="remove-button" onclick="removeJob(this)">Remove</button>
+            `;
+
+            // Append the new job listing to the job list
+            jobList.appendChild(newJob);
+
+            // Clear the form and close the modal
+            document.getElementById("jobTitle").value = "";
+            document.getElementById("jobLocation").value = "";
+            document.getElementById("jobDepartment").value = "";
+            document.getElementById("applyLink").value = "";
+            closeJobModal();
+        }
+
+        // Optional: Close modal when clicking outside of the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById("jobModal");
+            if (event.target === modal) {
+                closeJobModal();
+            }
+        }
+
+
+        
     </script>
 </body>
 </html>
