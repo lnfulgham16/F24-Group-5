@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head>
+            <title></title>
+            
+          <script defer="" data-domain="qwerty-qwerty.tiiny.co" src="https://analytics.tiiny.site/js/plausible.js"></script></head>
+          <body style="margin: 0; overflow: hidden;">
+            
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic AR Example</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
+
+
+  <a-scene embedded="" arjs="">
+    <!-- Camera -->
+    <a-marker preset="hiro">
+      <!-- AR Content: Fayetteville Background -->
+      <a-sky src="WelcomeToFayetteville-2023.jpg" rotation="0 -90 0"></a-sky>
+      
+      <!-- AR Content: Imgur Image -->
+      <a-image src="https://i.imgur.com/aRtkYeX.jpg" position="0 1 0" width="1" height="1" scale="1 1 1">
+      </a-image>
+    </a-marker>
+    
+    <!-- AR environment/background -->
+    <a-entity camera=""></a-entity>
+  </a-scene>
+
+
+
+          
+        </body></html>
