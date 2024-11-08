@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Schedule Filters</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .filter-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .filter-section label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .filter-section select, .filter-section input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .filter-section button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-section button:hover {
+            background-color: #45a049;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .schedule-table th {
+            background-color: #f2f2f2;
+        }
+
+        .schedule-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .schedule-table tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Class Schedule Filtering</h1>
+    
+    <div class="filter-section">
+        <h2>Filter Options</h2>
+        
+        <!-- Filter by Start Time -->
+        <label for="start-time">Filter by Start Time:</label>
+        <input type="time" id="start-time" name="start-time">
+        
+        <!-- Filter by Location (Advanced Filter) -->
+        <label for="location">Filter by Location:</label>
+        <select id="location" name="location">
+            <option value="">Select Location</option>
+            <option value="Main Campus">Main Campus</option>
+            <option value="Downtown Campus">Downtown Campus</option>
+            <option value="Online">Online</option>
+        </select>
+
+        <!-- Filter by Instructor (Advanced Filter) -->
+        <label for="instructor">Filter by Instructor:</label>
+        <select id="instructor" name="instructor">
+            <option value="">Select Instructor</option>
+            <option value="Dr. Smith">Dr. Smith</option>
+            <option value="Prof. Johnson">Prof. Johnson</option>
+            <option value="Dr. Lee">Dr. Lee</option>
+        </select>
+
+        <!-- Filter by Duration (Advanced Filter) -->
+        <label for="duration">Filter by Duration:</label>
+        <select id="duration" name="duration">
+            <option value="">Select Duration</option>
+            <option value="1 hour">1 hour</option>
+            <option value="1.5 hours">1.5 hours</option>
+            <option value="2 hours">2 hours</option>
+        </select>
+
+        <!-- Filter by Days/Weeks (Advanced Filter) -->
+        <label for="schedule">Filter by Days/Weeks:</label>
+        <select id="schedule" name="schedule">
+            <option value="">Select Day or Week</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Weekly">Weekly</option>
+        </select>
+
+        <!-- Apply Filter Button -->
+        <button type="button" onclick="applyFilters()">Apply Filters</button>
+    </div>
+    
+    <!-- Display Program Schedule -->
+    <h2>Program Schedule</h2>
+    
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Start Time</th>
+                <th>Instructor</th>
+                <th>Location</th>
+                <th>Duration</th>
+                <th>Day</th>
+            </tr>
+        </thead>
+        <tbody id="schedule-list">
+            <!-- Sample schedule entries -->
+            <tr>
+                <td>Math 101</td>
+                <td>08:30 AM</td>
+                <td>Dr. Smith</td>
+                <td>Main Campus</td>
+                <td>1 hour</td>
+                <td>Monday</td>
+            </tr>
+            <tr>
+                <td>Physics 201</td>
+                <td>10:00 AM</td>
+                <td>Prof. Johnson</td>
+                <td>Downtown Campus</td>
+                <td>1.5 hours</td>
+                <td>Tuesday</td>
+            </tr>
+            <tr>
+                <td>Chemistry 301</td>
+                <td>01:00 PM</td>
+                <td>Dr. Lee</td>
+                <td>Online</td>
+                <td>2 hours</td>
+                <td>Wednesday</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function applyFilters() {
+            const startTime = document.getElementById("start-time").value;
+            const location = document.getElementById("location").value;
+            const instructor = document.getElementById("instructor").value;
+            const duration = document.getElementById("duration").value;
+            const schedule = document.getElementById("schedule").value;
+
+            // Get all rows in the schedule table
+            const rows = document.querySelectorAll("#schedule-list tr");
+
+            rows.forEach(row => {
+                const rowStartTime = row.cells[1].textContent;
+                const rowLocation = row.cells[3].textContent;
+                const rowInstructor = row.cells[2].textContent;
+                const rowDuration = row.cells[4].textContent;
+                const rowSchedule = row.cells[5].textContent;
+
+                // Apply filters: Check if all selected filters match the row data
+                let isVisible = true;
+                
+                if (startTime && !rowStartTime.includes(startTime)) {
+                    isVisible = false;
+                }
+                if (location && !rowLocation.includes(location)) {
+                    isVisible = false;
+                }
+                if (instructor && !rowInstructor.includes(instructor)) {
+                    isVisible = false;
+                }
+                if (duration && !rowDuration.includes(duration)) {
+                    isVisible = false;
+                }
+                if (schedule && !rowSchedule.includes(schedule)) {
+                    isVisible = false;
+                }
+
+                // Show/hide row based on filters
+                if (isVisible) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
