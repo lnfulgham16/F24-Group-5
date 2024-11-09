@@ -4,18 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Search Results</title>
-        <title>College Search Results</title>
-</head>
-<body>
-    <p>
-        <strong>Search Bar Instructions:</strong> </p>Welcome! here, you can search for anything related to the website. Such as professors, programs, classes, greek life, etc:</p>
-        
-<br><br>- For colleges in particular, here are some examples of what you can search for: 
-
-        </p></br>- The college name (e.g., "Harvard")</p>- Location (e.g., "Massachusetts"),</p>- Type (e.g., "Private"), acceptance rate (e.g., "5%"),</p>- SAT score (e.g., "1500"),</p>- ACT score (e.g., "34").</p> <br>- <strong>Note:</strong> Type "Home" to go back to the Homepage/Landing page (this page) after searching.
-    </p>
-</body>
-</html>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         #search-results {
@@ -53,9 +41,47 @@
             display: inline-block;
             width: 300px;
         }
+        nav {
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+        .save-button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .save-button:disabled {
+            background-color: #ccc;
+            cursor: default;
+        }
     </style>
 </head>
 <body>
+    <p>
+        <strong>Search Bar Instructions:</strong> </p>Welcome! here, you can search for anything related to the website. Such as professors, programs, classes, greek life, etc:</p>
+        
+<br><br>- For colleges in particular, here are some examples of what you can search for: 
+
+        </p></br>- The college name (e.g., "Harvard")</p>- Location (e.g., "Massachusetts"),</p>- Type (e.g., "Private"), acceptance rate (e.g., "5%"),</p>- SAT score (e.g., "1500"),</p>- ACT score (e.g., "34").</p> <br>- <strong>Note:</strong> Type "Home" to go back to the Homepage/Landing page (this page) after searching.
+    </p>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="SavedUniversities.html">Saved Universities</a></li>
+        </ul>
+    </nav>
     <h1>Search Results</h1>
 
     <div>
@@ -69,6 +95,8 @@
     </div>
 
     <div id="search-results"></div>
+
+    <button id="saveButton" class="save-button" onclick="saveUniversity(data-name)" disabled>Save Results</button>
 
     <div style="height: 500px; overflow-y: scroll; border: 1px solid black; padding: 10px;">
         <ul>
@@ -185,6 +213,7 @@
         <p><strong>ACT Range:</strong> 33-35</p>
         <p><strong>Website:</strong> <a href="https://www.harvard.edu/" target="_blank">https://www.harvard.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('Harvard University')">Save</button>
     </dialog>
 
     <dialog id="stanford">
@@ -197,6 +226,7 @@
         <p><strong>ACT Range:</strong> 32-35</p>
         <p><strong>Website:</strong> <a href="https://www.stanford.edu/" target="_blank">https://www.stanford.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('Stanford University')">Save</button>
     </dialog>
 
     <dialog id="mit">
@@ -209,6 +239,7 @@
         <p><strong>ACT Range:</strong> 34-36</p>
         <p><strong>Website:</strong> <a href="https://www.mit.edu/" target="_blank">https://www.mit.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('Massachusetts Institute of Technology (MIT)')">Save</button>
     </dialog>
 
     <dialog id="berkeley">
@@ -221,6 +252,7 @@
         <p><strong>ACT Range:</strong> 29-35</p>
         <p><strong>Website:</strong> <a href="https://www.berkeley.edu/" target="_blank">https://www.berkeley.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('University of California, Berkeley')">Save</button>
     </dialog>
 
     <dialog id="yale">
@@ -233,6 +265,7 @@
         <p><strong>ACT Range:</strong> 33-35</p>
         <p><strong>Website:</strong> <a href="https://www.yale.edu/" target="_blank">https://www.yale.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('Yale University')">Save</button>
     </dialog>
 
     <dialog id="princeton">
@@ -245,6 +278,7 @@
         <p><strong>ACT Range:</strong> 32-35</p>
         <p><strong>Website:</strong> <a href="https://www.princeton.edu/" target="_blank">https://www.princeton.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('Princeton University')">Save</button>
     </dialog>
 
     <dialog id="caltech">
@@ -257,6 +291,7 @@
         <p><strong>ACT Range:</strong> 35-36</p>
         <p><strong>Website:</strong> <a href="https://www.caltech.edu/" target="_blank">https://www.caltech.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('California Institute of Technology (Caltech)')">Save</button>
     </dialog>
 
     <dialog id="uchicago">
@@ -269,6 +304,7 @@
         <p><strong>ACT Range:</strong> 33-35</p>
         <p><strong>Website:</strong> <a href="https://www.uchicago.edu/" target="_blank">https://www.uchicago.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('University of Chicago')">Save</button>
     </dialog>
 
     <dialog id="columbia">
@@ -281,6 +317,7 @@
         <p><strong>ACT Range:</strong> 33-35</p>
         <p><strong>Website:</strong> <a href="https://www.columbia.edu/" target="_blank">https://www.columbia.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('Columbia University')">Save</button>
     </dialog>
 
     <dialog id="upenn">
@@ -293,6 +330,7 @@
         <p><strong>ACT Range:</strong> 33-35</p>
         <p><strong>Website:</strong> <a href="https://www.upenn.edu/" target="_blank">https://www.upenn.edu/</a></p>
         <button onclick="this.closest('dialog').close()">Close</button>
+        <button onclick="saveUniversity('University of Pennsylvania')">Save</button>
     </dialog>
 
     <p style="margin-top: 20px; font-size: 14px; color: #666;">
@@ -301,68 +339,108 @@
 
     <script>
     // Store all searchable terms
-    const searchableTerms = [];
-    const collegeElements = document.querySelectorAll('li');
-    collegeElements.forEach(element => {
-        const data = element.dataset;
-        // Add College Name
-        searchableTerms.push(data.name);
-        // Add College Location
-        searchableTerms.push(data.location);
-        // Add College Type
-        searchableTerms.push(data.type);
-    });
+    // Store all searchable terms with their metadata
+    function buildSearchableTerms() {
+        const searchableTerms = [];
+        const collegeElements = document.querySelectorAll('li[data-name]');
+    
+        collegeElements.forEach(element => {
+            const data = element.dataset;
+            // Add all searchable fields with type metadata
+            searchableTerms.push({
+                text: data.name,
+                type: 'name'
+            });
+            searchableTerms.push({
+                text: data.location,
+                type: 'location'
+            });
+            searchableTerms.push({
+                text: data.type,
+                type: 'type'
+            });
+            searchableTerms.push({
+                text: data.acceptanceRate,
+                type: 'acceptance'
+            });
+            searchableTerms.push({
+                text: `SAT ${data.satRange}`,
+                type: 'sat'
+            });
+            searchableTerms.push({
+                text: `ACT ${data.actRange}`,
+                type: 'act'
+            });
+        });
+    
+        return searchableTerms;
+    }
 
     function autocomplete(inp) {
-        let currentFocus;
-
+        const searchableTerms = buildSearchableTerms();
+        let currentFocus = -1;
+    
         inp.addEventListener("input", function(e) {
-            let val = this.value;
+            const val = this.value;
             closeAllLists();
+        
             if (!val) { return false; }
             currentFocus = -1;
-
+        
             const autocompleteList = document.getElementById("autocomplete-list");
         
+            // Filter matches based on input
             const matches = searchableTerms.filter(term => 
-                term.toLowerCase().includes(val.toLowerCase())
-        );
-
+                term.text.toLowerCase().includes(val.toLowerCase())
+            ).slice(0, 10); // Limit to top 10 matches
+        
             matches.forEach(match => {
                 const div = document.createElement("DIV");
                 // Highlight matching text
-                const matchIndex = match.toLowerCase().indexOf(val.toLowerCase());
-                div.innerHTML = match.substr(0, matchIndex);
-                div.innerHTML += "<strong>" + match.substr(matchIndex, val.length) + "</strong>";
-                div.innerHTML += match.substr(matchIndex + val.length);
+                const matchText = match.text;
+                const matchIndex = matchText.toLowerCase().indexOf(val.toLowerCase());
+            
+                div.innerHTML = matchText.substr(0, matchIndex);
+                div.innerHTML += "<strong>" + matchText.substr(matchIndex, val.length) + "</strong>";
+                div.innerHTML += matchText.substr(matchIndex + val.length);
+            
+                // Add type indicator if it's not a college name
+                if (match.type !== 'name') {
+                    div.innerHTML += ` <span style="color: #666; font-size: 0.9em;">(${match.type})</span>`;
+                }
             
                 div.addEventListener("click", function(e) {
-                    inp.value = match;
+                    inp.value = matchText;
                     closeAllLists();
-                    // Trigger form submit
-                    filterColleges(e);
+                    // Trigger the search
+                    filterColleges(new Event('submit'));
                 });
+            
                 autocompleteList.appendChild(div);
             });
         });
-
+    
+        // Key navigation
         inp.addEventListener("keydown", function(e) {
             let x = document.getElementById("autocomplete-list");
             if (x) x = x.getElementsByTagName("div");
-            if (e.keyCode == 40) { // arrow DOWN
+        
+            if (e.keyCode === 40) { // arrow DOWN
                 currentFocus++;
                 addActive(x);
-            } else if (e.keyCode == 38) { // arrow UP
+            } else if (e.keyCode === 38) { // arrow UP
                 currentFocus--;
                 addActive(x);
-            } else if (e.keyCode == 13) { // ENTER
+            } else if (e.keyCode === 13) { // ENTER
                 e.preventDefault();
                 if (currentFocus > -1) {
                     if (x) x[currentFocus].click();
+                } else {
+                    filterColleges(e);
                 }
             }
         });
-
+    
         function addActive(x) {
             if (!x) return false;
             removeActive(x);
@@ -370,67 +448,157 @@
             if (currentFocus < 0) currentFocus = (x.length - 1);
             x[currentFocus].classList.add("autocomplete-active");
         }
-
+    
         function removeActive(x) {
             for (let i = 0; i < x.length; i++) {
                 x[i].classList.remove("autocomplete-active");
             }
         }
-
+    
         function closeAllLists(elmnt) {
             const x = document.getElementById("autocomplete-list");
-            while (x.firstChild) {
+            while (x && x.firstChild) {
                 x.removeChild(x.firstChild);
             }
         }
-
+    
+        // Close autocomplete list when clicking outside
         document.addEventListener("click", function (e) {
-            closeAllLists(e.target);
+            if (e.target !== inp) {
+                closeAllLists(e.target);
+            }
         });
     }
-    // Initialize autocomplete
-    autocomplete(document.getElementById("search-input"));
+
+    // Initialize autocomplete when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        autocomplete(document.getElementById("search-input"));
+    
+        // Check for existing search query in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+    
+        if (searchQuery) {
+            const searchInput = document.getElementById("search-input");
+            searchInput.value = searchQuery;
+            filterColleges(new Event('submit'));
+        }
+    });
     
     function filterColleges(event) {
-        event.preventDefault();
-        var input = document.getElementById("search-input").value.toLowerCase();
-        var list = document.querySelector("ul");
-        var items = list.getElementsByTagName("li");
+        if (event) {
+            event.preventDefault();
+        }
+
+        var input = document.getElementById("search-input").value.toLowerCase().trim();
         var resultsDiv = document.getElementById("search-results");
         resultsDiv.innerHTML = "";
+
+        // Handle "Home" search
+        if (input === "home") {
+            window.location.href = "index.html";
+            return;
+        }
+
+        var foundResults = false;
+        var dialogs = document.getElementsByTagName('dialog');
+
+        Array.from(dialogs).forEach(dialog => {
+            var name = dialog.querySelector('h2').textContent.toLowerCase();
+            var location = dialog.querySelector('p:nth-child(2)').textContent.toLowerCase();
+            var type = dialog.querySelector('p:nth-child(3)').textContent.toLowerCase();
         
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            var data = item.dataset;
-            var match = false;
-            
-            if (!isNaN(input) && input.length > 0) {
-                // If input is a number, assume it's an ACT/SAT score
-                var satRange = data.satRange ? data.satRange.split("-") : [0, 1600];
-                var actRange = data.actRange ? data.actRange.split("-") : [0, 36];
-                var inputScore = parseInt(input);
-                match = (inputScore >= parseInt(satRange[0]) && inputScore <= parseInt(satRange[1])) ||
-                        (inputScore >= parseInt(actRange[0]) && inputScore <= parseInt(actRange[1]));
-            } else {
-                // If input is not a number, search as before
-                match = Object.values(data).some(value => value && value.toLowerCase().includes(input));
-            }
-            
-            if (match) {
+            if (name.includes(input) || location.includes(input) || type.includes(input)) {
+                foundResults = true;
                 var resultHTML = `
                     <div class="college-result">
-                        <h3>${data.name}</h3>
-                        <p><strong>Location:</strong> ${data.location}</p>
-                        <p><strong>Type:</strong> ${data.type}</p>
-                        <p><strong>Founded:</strong> ${data.founded}</p>
-                        <p><strong>Acceptance Rate:</strong> ${data.acceptanceRate}</p>
-                        <p><strong>SAT Range:</strong> ${data.satRange || 'N/A'}</p>
-                        <p><strong>ACT Range:</strong> ${data.actRange || 'N/A'}</p>
-                        <p><strong>Website:</strong> <a href="${data.website}" target="_blank">${data.website}</a></p>
+                        <h3>${dialog.querySelector('h2').textContent}</h3>
+                        ${dialog.innerHTML.split('<button')[0]}
                     </div>
-                `;
+            `   ;
                 resultsDiv.innerHTML += resultHTML;
             }
+        });
+
+        if (!foundResults) {
+            resultsDiv.innerHTML = `
+                <div class="alert alert-info" role="alert">
+                    No results found for "${input}". Try another search term.
+                </div>
+        `   ;
+        }
+
+        // Update URL with search query
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('q', input);
+        window.history.pushState({}, '', newUrl);
+
+        // Update save button state
+        updateSaveButtonState();
+    }
+
+    // Add event listeners when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialize the save button state
+        updateSaveButtonState();
+    
+        // Add event listener for the search form
+        document.getElementById("search-form").addEventListener("submit", filterColleges);
+    
+        // Add event listener for the save button
+        document.getElementById("saveButton").addEventListener("click", saveResults);
+    
+        // Check for existing search query in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+    
+        if (searchQuery) {
+            const searchInput = document.getElementById("search-input");
+            searchInput.value = searchQuery;
+            filterColleges(new Event('submit'));
+        }
+    });
+
+    let savedUniversities = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+    function updateSaveButtonState() {
+        const searchResults = document.getElementById('search-results');
+        const saveButton = document.getElementById('saveButton');
+        const hasResults = searchResults.getElementsByClassName('college-result').length > 0;
+        saveButton.disabled = !hasResults;
+    }
+    function saveUniversity(universityName) {
+        if (!savedUniversities.includes(universityName)) {
+            savedUniversities.push(universityName);
+            localStorage.setItem('savedUniversities', JSON.stringify(savedUniversities));
+            alert(universityName + ' saved successfully!');
+        } else {
+            alert(universityName + ' is already saved!');
+        }
+    }
+
+    function saveResults() {
+        const searchResults = document.getElementById('search-results');
+        const collegeResults = searchResults.getElementsByClassName('college-result');
+    
+        if (collegeResults.length === 0) {
+            alert('No results to save!');
+            return;
+        }
+    
+        let newSaves = false;
+        Array.from(collegeResults).forEach(result => {
+            const universityName = result.querySelector('h3').textContent;
+            if (!savedUniversities.includes(universityName)) {
+                savedUniversities.push(universityName);
+                newSaves = true;
+            }
+        });
+    
+        if (newSaves) {
+            localStorage.setItem('savedUniversities', JSON.stringify(savedUniversities));
+            alert('Search results saved successfully!');
+        } else {
+            alert('All displayed universities were already saved!');
         }
     }
 
@@ -439,186 +607,3 @@
 </body>
 </html>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Search Results</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        #search-results {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        .college-result {
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        .autocomplete-items {
-            position: absolute;
-            border: 1px solid #d4d4d4;
-            border-top: none;
-            z-index: 99;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: white;
-        }
-        .autocomplete-items div {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .autocomplete-items div:hover {
-            background-color: #e9e9e9;
-        }
-        .autocomplete-active {
-            background-color: #e9e9e9;
-        }
-        .search-container {
-            position: relative;
-            display: inline-block;
-            width: 300px;
-        }
-        /* Style for the filter button */
-        .filter-button {
-            background-color: #ff6600; /* Orange color based on the image */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-left: 10px;
-            border-radius: 5px;
-        }
-        .filter-button:hover {
-            background-color: #e65c00; /* Slightly darker orange on hover */
-        }
-    </style>
-</head>
-<body>
-   
-    
-
- 
-            <!-- New Filter Button that links to the provided URL -->
-            <a href="https://react-javascript-hsowda.replit.app" class="filter-button">Filter</a>
-        </form>
-    </div></br></br></br></br></br></br></br></br></li>Need more results? If so, feel free to try our Google®-powered search bar! ↓<br>
-<script async src="https://cse.google.com/cse.js?cx=749eae6f3fa4849eb">
-</script>
-<div class="gcse-search"></div>
-
-    <div id="search-results"></div>
-
-    <div style="height: 500px; overflow-y: scroll; border: 1px solid black; padding: 10px;">
-
-            <!-- Add more items here -->
-        </ul>
-    </div>
-
-    <dialog id="harvard">
-        <h2>Harvard University</h2>
-        <p><strong>Location:</strong> Cambridge, Massachusetts</p>
-        <p><strong>Type:</strong> Private Ivy League research university</p>
-        <p><strong>Founded:</strong> 1636</p>
-        <p><strong>Acceptance Rate:</strong> 4.6%</p>
-        <p><strong>SAT Range:</strong> 1460-1570</p>
-        <p><strong>ACT Range:</strong> 33-35</p>
-        <p><strong>Website:</strong> <a href="https://www.harvard.edu/" target="_blank">https://www.harvard.edu/</a></p>
-        <button onclick="this.closest('dialog').close()">Close</button>
-    </dialog>
-
-    <dialog id="stanford">
-        <h2>Stanford University</h2>
-        <p><strong>Location:</strong> Stanford, California</p>
-        <p><strong>Type:</strong> Private research university</p>
-        <p><strong>Founded:</strong> 1885</p>
-        <p><strong>Acceptance Rate:</strong> 4.3%</p>
-        <p><strong>SAT Range:</strong> 1420-1570</p>
-        <p><strong>ACT Range:</strong> 32-35</p>
-        <p><strong>Website:</strong> <a href="https://www.stanford.edu/" target="_blank">https://www.stanford.edu/</a></p>
-        <button onclick="this.closest('dialog').close()">Close</button>
-    </dialog>
-
-    <!-- Add more dialog elements here if needed -->
-
-    <script>
-        // JavaScript to handle autocomplete and filtering goes here
-        function autocomplete(inp) {
-            let currentFocus;
-
-            inp.addEventListener("input", function(e) {
-                let val = this.value;
-                closeAllLists();
-                if (!val) { return false; }
-                currentFocus = -1;
-
-                const autocompleteList = document.getElementById("autocomplete-list");
-
-                const matches = searchableTerms.filter(term =>
-                    term.toLowerCase().includes(val.toLowerCase())
-                );
-
-                matches.forEach(match => {
-                    const div = document.createElement("DIV");
-                    div.innerHTML = match.substr(0, match.toLowerCase().indexOf(val.toLowerCase()));
-                    div.innerHTML += "<strong>" + match.substr(match.toLowerCase().indexOf(val.toLowerCase()), val.length) + "</strong>";
-                    div.innerHTML += match.substr(match.toLowerCase().indexOf(val.toLowerCase()) + val.length);
-                    div.addEventListener("click", function(e) {
-                        inp.value = match;
-                        closeAllLists();
-                        filterColleges(e);
-                    });
-                    autocompleteList.appendChild(div);
-                });
-            });
-
-            function closeAllLists() {
-                const x = document.getElementById("autocomplete-list");
-                while (x.firstChild) {
-                    x.removeChild(x.firstChild);
-                }
-            }
-
-            document.addEventListener("click", function() {
-                closeAllLists();
-            });
-        }
-        autocomplete(document.getElementById("search-input"));
-
-        function filterColleges(event) {
-            event.preventDefault();
-            const input = document.getElementById("search-input").value.toLowerCase();
-            const items = document.querySelectorAll('ul li');
-            const resultsDiv = document.getElementById("search-results");
-            resultsDiv.innerHTML = "";
-
-            items.forEach(item => {
-                const data = item.dataset;
-                const match = Object.values(data).some(value => value.toLowerCase().includes(input));
-                if (match) {
-                    const resultHTML = `
-                        <div class="college-result">
-                            <h3>${data.name}</h3>
-                            <p><strong>Location:</strong> ${data.location}</p>
-                            <p><strong>Type:</strong> ${data.type}</p>
-                            <p><strong>Founded:</strong> ${data.founded}</p>
-                            <p><strong>Acceptance Rate:</strong> ${data.acceptanceRate}</p>
-                            <p><strong>SAT Range:</strong> ${data.satRange || 'N/A'}</p>
-                            <p><strong>ACT Range:</strong> ${data.actRange || 'N/A'}</p>
-                            <p><strong>Website:</strong> <a href="${data.website}" target="_blank">${data.website}</a></p>
-                        </div>
-                    `;
-                    resultsDiv.innerHTML += resultHTML;
-                }
-            });
-        }
-
-        document.getElementById("search-form").onsubmit = filterColleges;
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

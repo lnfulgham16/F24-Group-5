@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Event Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        select, input, button {
+            margin: 5px 0;
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #eventManagement {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>University Event Management</h1>
+    
+    <div id="universitySelection">
+        <select id="universitySelector">
+            <option value="">Select University</option>
+            <option value="Stanford">Stanford University</option>
+            <option value="Brown">Brown University</option>
+            <option value="Columbia">Columbia University</option>
+            <option value="Cornell">Cornell University</option>
+            <option value="Dartmouth">Dartmouth College</option>
+            <option value="Harvard">Harvard University</option>
+            <option value="Princeton">Princeton University</option>
+            <option value="Yale">Yale University</option>
+            <option value="Duke">Duke University</option>
+            <option value="JohnsHopkins">Johns Hopkins University</option>
+            <option value="UPenn">University of Pennsylvania</option>
+            <option value="Caltech">California Institute of Technology</option>
+        </select>
+    </div>
+
+    <div id="eventManagement">
+        <h2 id="universityName"></h2>
+        <button id="backButton">Back to University Selection</button>
+        
+        <form id="eventForm">
+            <h3>Add/Edit/Update Event</h3>
+            <input type="text" id="eventName" placeholder="Event Name" required>
+            <input type="date" id="eventDate" required>
+            <input type="time" id="eventTime" required>
+            <input type="text" id="eventLocation" placeholder="Event Location" required>
+            
+            <select id="eventType" required>
+                <option value="">Event Type</option>
+                <option value="Educational">Educational</option>
+                <option value="Cultural">Cultural</option>
+            </select>
+            
+            <select id="foodAvailability" required>
+                <option value="">Food Availability</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snacks">Snacks</option>
+                <option value="All">All</option>
+            </select>
+            
+            <select id="registrationFees" required>
+                <option value="">Registration Fees</option>
+                <option value="No Fees">No Fees</option>
+                <option value="Specify Amount">Specify Amount</option>
+            </select>
+            
+            <input type="number" id="feeAmount" placeholder="Fee Amount" min="0" step="0.01" style="display: none;">
+            
+            <select id="goodiesAvailability" required>
+                <option value="">Goodies Availability</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+            
+            <button type="submit">Save Event</button>
+        </form>
+    </div>
+
+    <script>
+        const universitySelection = document.getElementById('universitySelection');
+        const universitySelector = document.getElementById('universitySelector');
+        const eventManagement = document.getElementById('eventManagement');
+        const universityName = document.getElementById('universityName');
+        const backButton = document.getElementById('backButton');
+        const eventForm = document.getElementById('eventForm');
+        const registrationFees = document.getElementById('registrationFees');
+        const feeAmount = document.getElementById('feeAmount');
+
+        universitySelector.addEventListener('change', function() {
+            const university = this.value;
+            if (university) {
+                showEventManagement(university);
+            }
+        });
+
+        function showEventManagement(university) {
+            universityName.textContent = universitySelector.options[universitySelector.selectedIndex].text;
+            universitySelection.style.display = 'none';
+            eventManagement.style.display = 'block';
+            eventForm.reset();
+        }
+
+        backButton.addEventListener('click', function() {
+            universitySelection.style.display = 'block';
+            eventManagement.style.display = 'none';
+            universitySelector.value = '';
+        });
+
+        registrationFees.addEventListener('change', function() {
+            feeAmount.style.display = this.value === 'Specify Amount' ? 'block' : 'none';
+            feeAmount.required = this.value === 'Specify Amount';
+        });
+
+        eventForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you can add code to save the event data
+            alert('Event saved successfully!');
+            eventForm.reset();
+        });
+    </script>
+</body>
+</html>

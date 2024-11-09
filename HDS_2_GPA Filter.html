@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Search by GPA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        input {
+            padding: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-left: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search for Colleges Based on GPA</h1>
+    <label for="gpa">Enter Your GPA:</label>
+    <input type="number" id="gpa" min="0" max="4.0" step="0.1" placeholder="e.g. 3.0">
+    <button onclick="filterColleges()">Search</button>
+
+    <h2>Colleges:</h2>
+    <ul id="collegeList">
+        <!-- Results will be populated here -->
+    </ul>
+
+    <script>
+        const colleges = [
+            { name: "Harvard University", minGPA: 3.9 },
+            { name: "Yale University", minGPA: 3.8 },
+            { name: "Stanford University", minGPA: 3.8 },
+            { name: "University of California, Berkeley", minGPA: 3.5 },
+            { name: "University of Michigan", minGPA: 3.4 },
+            { name: "University of Florida", minGPA: 3.0 },
+            { name: "Florida State University", minGPA: 2.5 },
+            { name: "Community College", minGPA: 0.0 }
+        ];
+
+        function filterColleges() {
+            const gpaInput = parseFloat(document.getElementById('gpa').value);
+            const collegeList = document.getElementById('collegeList');
+            collegeList.innerHTML = '';
+
+            if (isNaN(gpaInput) || gpaInput < 0 || gpaInput > 4.0) {
+                alert("Please enter a valid GPA between 0.0 and 4.0.");
+                return;
+            }
+
+            const filteredColleges = colleges.filter(college => college.minGPA <= gpaInput);
+
+            filteredColleges.forEach(college => {
+                const listItem = document.createElement('li');
+                listItem.textContent = college.name;
+                collegeList.appendChild(listItem);
+            });
+
+            if (filteredColleges.length === 0) {
+                collegeList.innerHTML = '<li>No colleges found for this GPA.</li>';
+            }
+        }
+    </script>
+</body>
+</html>

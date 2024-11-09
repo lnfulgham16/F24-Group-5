@@ -1,93 +1,697 @@
 <!DOCTYPE html>
-/* Landing Page for Wiki */
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group 5's Project</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column; /* Allow top bar and content to stack vertically */
-            align-items: center;
-            height: 100vh;
+        * {
             margin: 0;
-            background-color: #f0f0f0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        /* Navigation bar styling */
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #eef2ff, #ffffff);
+            min-height: 100vh;
+        }
+
+        /* Navigation Styles */
         .navbar {
-            width: 100%; /* Full width */
-            background-color: #4CAF50; /* Green background */
-            padding: 10px; /* Padding around the content */
-            text-align: center; /* Center the link inside */
-            position: relative; /* For proper button positioning */
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .navbar a {
-            background-color: white; /* White button */
-            color: #4CAF50; /* Green text */
-            padding: 10px 20px; /* Padding for the button */
-            text-decoration: none; /* No underline */
-            border-radius: 5px; /* Rounded corners */
-            font-size: 16px; /* Font size */
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .navbar a:hover {
-            background-color: #45a049; /* Darker green on hover */
-            color: white; /* White text on hover */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-        h1 {
-            color: #333;
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .sign-in-btn {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .sign-in-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
             text-align: center;
+            position: relative;
+        }
+
+        .sparkle {
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fbbf24;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #4b5563;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            max-width: 600px;
+            margin: 1rem auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 9999px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+            width: 100%;
+        }
+
+        .search-bar:hover {
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            outline: none;
+            border-radius: 9999px 0 0 9999px;
+        }
+
+        .search-btn {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0 9999px 9999px 0;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            margin-left: -1px;
+        }
+
+        .search-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Duration Filter Styles */
+        #durationFilter {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            font-family: inherit;
+            margin-left: 1rem;
+        }
+
+
+        /* Stats Section */
+        .stats {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            color: #4b5563;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Feature Cards */
+        .features {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        .learn-more {
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .learn-more i {
+            margin-left: 0.25rem;
+            transition: transform 0.3s;
+        }
+
+        .learn-more:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .wiki-button {
+            background: white;
+            border: 1px solid #ccc;
+            color: #333;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            margin: 0;
+        }
+        .wiki-button:hover {
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+        #classList {
+            list-style: none;
+            padding: 0;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1001;
+            margin-top: 5px;
+            width: 200px;
+        }
+        #classList li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        #global-autocomplete-list {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 300px;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        #global-autocomplete-list div {
+            padding: 8px 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        #global-autocomplete-list div:hover {
+            background-color: #f8f8f8;
+        }
+        #global-autocomplete-list div:last-child {
+            border-bottom: none;
+        }
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: white;
+            border-bottom: 1px solid #d4d4d4;
+        }
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+        .autocomplete-active {
+            background-color: #e9e9e9 !important;
+        }
+        .top-right-link {
+            position: fixed;
+            top: 30px; 
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <div class="navbar">
-        <a href="login.html">Login</a>
-        <a href="Jobboard.html">Go to Job Board</a>
-        <a href="Search-page-results-list-2.0.html">Search Results</a>
-        <a href="View University Admission Statistics.html">View Admission Statistics</a>
-
-        
-        <!-- Search bar on the right -->
-<div class="search-container">
-    <input type="text" id="search-bar" placeholder="Type here to search..." />
-    <button onclick="searchFunction()">Search</button>
-</div>
-
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                EduCompare
+            </div>
+            <div class="nav-links">
+                <a href="login.html">Login</a>
+                <a href="Jobboard.html">Go to Job Board</a>
+                <a href="Search-page-results-list-2.0.html">Search Results</a>
+                <a href="Degree-and{or}-Certificate-filter.html">Program Filter Tool</a>
+                <a href="View University Admission Statistics.html">View Admission Statistics</a>
+                <a href="ComingSoon.html">Coming Soon</a>
+                <a href="Campus_Event_Update.html">Campus Events</a>
+                <a href="SavedUniversities.html">Saved Universities</a>
+                <a href="Current Scholarship Recipient.html">Current Scholarship Recipient</a>
+            </div>
+            <div class="search-container">
+                <form id="global-search-form" action="Search-page-results-list-2.0.html" method="get">
+                    <div class="search-bar">
+                        <input type="text" id="search-bar" name="q" placeholder="Type here to search..." autocomplete="off" style="border-radius: 9999px 0 0 9999px;"/>
+                        <button type="submit" class="search-btn" style="border-radius: 0 9999px 9999px 0;">Search</button>
+                    </div>
+                    <div id="global-autocomplete-list"></div>
+                    <select id="durationFilter">
+                        <option value="">All Durations</option>
+                        <option value="1">1 Hour</option>
+                        <option value="1.5">1.5 Hours</option>
+                        <option value="2">2 Hours</option>
+                        <option value="2.5">2.5 Hours</option>
+                        <option value="3">3 Hours</option>
+                    </select>
+                </form>
+            </div>
+        </div>
     </div>
-    <h1>Welcome to Group 5's Project</h1>
-</body>
-</html>
-<title>College Wiki Button</title>
-<style>
-.wiki-button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  
-  /* New styles for positioning */
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  margin: 0; /* Remove margin */
-}
-.wiki-button:hover {
-  background-color: #45a049;
-}
-</style>
-</head>
-<body>
+    <ul id="classList"></ul>
+    <section class="hero">
+        <div class="sparkle">
+            <i class="fas fa-sparkles"></i>
+        </div>
+        <h1><span>Discover</span> Your Academic Journey</h1>
+        <p>Compare programs, discover scholarships, and connect with a community of students and educators.</p>
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Universities</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Programs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100K+</div>
+                <div class="stat-label">Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Scholarships</div>
+            </div>
+        </div>
+    </section>
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon" style="background: #f3e8ff;">
+                <i class="fas fa-users" style="color: #9333ea;"></i>
+            </div>
+            <h3>Student Community</h3>
+            <p>Connect with fellow students and share experiences</p>
+            <a href="#" class="learn-more">
+                Learn more <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background: #e0f2fe;">
+                <i class="fas fa-book-open" style="color: #0284c7;"></i>
+            </div>
+            <h3>Program Comparison</h3>
+            <p>Compare universities and find your ideal program</p>
+            <a href="#" class="learn-more">
+                Learn more <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background: #dcfce7;">
+                <i class="fas fa-globe" style="color: #16a34a;"></i>
+            </div>
+            <h3>International Resources</h3>
+            <p>Dedicated support for international students</p>
+            <a href="#" class="learn-more">
+                Learn more <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background: #fef3c7;">
+                <i class="fas fa-trophy" style="color: #d97706;"></i>
+            </div>
+            <h3>Athletic Opportunities</h3>
+            <p>Discover sports scholarships and programs</p>
+            <a href="#" class="learn-more">
+                Learn more <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background: #fee2e2;">
+                <i class="fas fa-bell" style="color: #dc2626;"></i>
+            </div>
+            <h3>Deadline Alerts</h3>
+            <p>Never miss important application deadlines</p>
+            <a href="#" class="learn-more">
+                Learn more <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background: #e0e7ff;">
+                <i class="fas fa-calendar" style="color: #4f46e5;"></i>
+            </div>
+            <h3>Event Calendar</h3>
+            <p>Stay updated with university events and webinars</p>
+            <a href="#" class="learn-more">
+                Learn more <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+    </section>
+    <main>
+    </main>
+    <a href="Wiki.html" class="wiki-button">College Specific Wiki Page</a>
+    <script>
+        const durationFilter = document.getElementById('durationFilter');
+        const classList = document.getElementById('classList');
+        const searchInput = document.getElementById('search-bar');
 
-<!-- Move the button outside of the navbar -->
-<a href="Wiki.html" class="wiki-button">College Specific Wiki Page</a>
+        const classes = [
+            { name: 'Intro to Programming', duration: 2 },
+            { name: 'Calculus I', duration: 1.5 },
+            { name: 'Linear Algebra', duration: 2.5 },
+            { name: 'History 101', duration: 1 },
+            { name: 'Physics I', duration: 3 }
+        ];
+
+        // Add college data
+        const collegeData = [
+            {
+                name: "Harvard University",
+                location: "Cambridge, Massachusetts",
+                type: "Private Ivy League research university"
+            },
+            {
+                name: "Stanford University",
+                location: "Stanford, California",
+                type: "Private research university"
+            },
+            {
+                name: "Massachusetts Institute of Technology (MIT)",
+                location: "Cambridge, Massachusetts",
+                type: "Private research university"
+            },
+            {
+                name: "University of California, Berkeley",
+                location: "Berkeley, California",
+                type: "Public research university"
+            },
+            {
+                name: "Yale University",
+                location: "New Haven, Connecticut",
+                type: "Private Ivy League research university"
+            },
+            {
+                name: "Princeton University",
+                location: "Princeton, New Jersey",
+                type: "Private Ivy League research university"
+            },
+            {
+                name: "California Institute of Technology (Caltech)",
+                location: "Pasadena, California",
+                type: "Private research university"
+            },
+            {
+                name: "University of Chicago",
+                location: "Chicago, Illinois",
+                type: "Private research university"
+            },
+            {
+                name: "Columbia University",
+                location: "New York City, New York",
+                type: "Private Ivy League research university"
+            },
+            {
+                name: "University of Pennsylvania",
+                location: "Philadelphia, Pennsylvania",
+                type: "Private Ivy League research university"
+            }
+            // Add more colleges as needed
+        ];
+
+        // Combine all searchable terms
+        const searchableTerms = [
+            ...classes.map(cls => cls.name),
+            ...collegeData.map(college => [college.name, college.location, college.type]).flat()
+        ];
+
+        function initializeAutocomplete() {
+            let currentFocus = -1;
+            const autocompleteList = document.getElementById("global-autocomplete-list");
+
+            searchInput.addEventListener("input", function(e) {
+                const val = this.value;
+                autocompleteList.innerHTML = "";
+                if (!val) return false;
+
+                const matches = searchableTerms.filter(term =>
+                    term.toLowerCase().includes(val.toLowerCase())
+                );
+
+                matches.forEach(match => {
+                    const div = document.createElement("DIV");
+                    const matchIndex = match.toLowerCase().indexOf(val.toLowerCase());
+                    div.innerHTML = match.substr(0, matchIndex);
+                    div.innerHTML += "<strong>" + match.substr(matchIndex, val.length) + "</strong>";
+                    div.innerHTML += match.substr(matchIndex + val.length);
+
+                    div.addEventListener("click", function(e) {
+                        searchInput.value = match;
+                        autocompleteList.innerHTML = "";
+                        document.getElementById("global-search-form").submit();
+                    });
+                    autocompleteList.appendChild(div);
+                });
+            });
+
+            searchInput.addEventListener("keydown", function(e) {
+                let items = autocompleteList.getElementsByTagName("div");
+
+                if (e.keyCode === 40) { // DOWN key
+                    currentFocus++;
+                    addActive(items);
+                } else if (e.keyCode === 38) { // UP key
+                    currentFocus--;
+                    addActive(items);
+                } else if (e.keyCode === 13) { // ENTER key
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        if (items) items[currentFocus].click();
+                    } else {
+                        document.getElementById("global-search-form").submit();
+                    }
+                }
+            });
+
+            function addActive(items) {
+                if (!items) return false;
+                removeActive(items);
+                if (currentFocus >= items.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (items.length - 1);
+                items[currentFocus].classList.add("autocomplete-active");
+            }
+
+            function removeActive(items) {
+                Array.from(items).forEach(item => {
+                    item.classList.remove("autocomplete-active");
+                });
+            }
+
+            // Close autocomplete list when clicking outside
+            document.addEventListener("click", function (e) {
+                if (e.target !== searchInput) {
+                    autocompleteList.innerHTML = "";
+                }
+            });
+        }
+
+        // Initialize everything when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            initializeAutocomplete();
+
+            durationFilter.addEventListener('change', updateClassList);
+        });
+
+        function updateClassList() {
+            const selectedDuration = parseFloat(durationFilter.value);
+            classList.innerHTML = '';
+            const durationFilterRect = durationFilter.getBoundingClientRect();
+            classList.style.top = `${durationFilterRect.bottom + 5}px`;
+            classList.style.left = `${durationFilterRect.left}px`;
+
+            classes.forEach(cls => {
+                if (!selectedDuration || cls.duration === selectedDuration) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${cls.name} (${cls.duration} hours)`;
+                    classList.appendChild(listItem);
+                }
+            });
+            classList.style.display = 'block';
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic AR Example</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+  <a-scene embedded arjs>
+    <!-- Camera -->
+    <a-marker preset="hiro">
+      <!-- AR Content: Fayetteville Background -->
+      <a-sky src="WelcomeToFayetteville-2023.jpg" rotation="0 -90 0"></a-sky>
+
+      <!-- AR Content: Red Text -->
+      <a-text
+        value="Please visit us today at: https://lnfulgham16.github.io/F24-Group-5/"
+        color="red"
+        position="0 1 0"
+        align="center"
+        scale="0.5 0.5 0.5">
+      </a-text>
+    </a-marker>
+    
+    <!-- AR environment/background -->
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
+</html>
