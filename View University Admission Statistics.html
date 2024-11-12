@@ -15,10 +15,24 @@
             text-align: center;
             color: #333;
         }
+        .filter-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+        .slider {
+            width: 100%;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
         th, td {
             border: 1px solid #ddd;
@@ -37,6 +51,27 @@
 </head>
 <body>
     <h1>University Admission Statistics</h1>
+    
+    <div class="filter-container">
+        <label for="sliderType">Choose Slider:</label>
+        <select id="sliderType">
+            <option value="none">None</option>
+            <option value="act">ACT</option>
+            <option value="sat">SAT</option>
+            <option value="both">Both</option>
+        </select>
+
+        <div id="actSliderContainer" style="display: none;">
+            <label for="actSlider">Filter by Minimum ACT Score: <span id="actValue">32</span></label>
+            <input type="range" id="actSlider" class="slider" min="1" max="36" value="32">
+        </div>
+
+        <div id="satSliderContainer" style="display: none;">
+            <label for="satSlider">Filter by Minimum SAT Score: <span id="satValue">1400</span></label>
+            <input type="range" id="satSlider" class="slider" min="400" max="1600" value="1400">
+        </div>
+    </div>
+    
     <table>
         <thead>
             <tr>
@@ -49,8 +84,8 @@
                 <th>Work Experience</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
+        <tbody id="universityTable">
+            <tr data-act-range="32-35" data-sat-range="1420-1570">
                 <td>Stanford University</td>
                 <td>32-35</td>
                 <td>1420-1570</td>
@@ -59,7 +94,7 @@
                 <td>3.96</td>
                 <td>3-5 years (MBA)</td>
             </tr>
-            <tr>
+            <tr data-act-range="34-36" data-sat-range="1500-1570">
                 <td>MIT</td>
                 <td>34-36</td>
                 <td>1500-1570</td>
@@ -68,7 +103,7 @@
                 <td>4.13</td>
                 <td>5 years (avg. for MBA)</td>
             </tr>
-            <tr>
+            <tr data-act-range="32-35" data-sat-range="1440-1560">
                 <td>Brown University</td>
                 <td>32-35</td>
                 <td>1440-1560</td>
@@ -77,7 +112,7 @@
                 <td>3.94</td>
                 <td>Varies by program</td>
             </tr>
-            <tr>
+            <tr data-act-range="33-35" data-sat-range="1450-1560">
                 <td>Columbia University</td>
                 <td>33-35</td>
                 <td>1450-1560</td>
@@ -86,7 +121,7 @@
                 <td>3.83</td>
                 <td>5 years (avg. for MBA)</td>
             </tr>
-            <tr>
+            <tr data-act-range="32-35" data-sat-range="1400-1540">
                 <td>Cornell University</td>
                 <td>32-35</td>
                 <td>1400-1540</td>
@@ -95,7 +130,7 @@
                 <td>3.9</td>
                 <td>2-5 years (MBA)</td>
             </tr>
-            <tr>
+            <tr data-act-range="32-35" data-sat-range="1440-1560">
                 <td>Dartmouth College</td>
                 <td>32-35</td>
                 <td>1440-1560</td>
@@ -104,7 +139,7 @@
                 <td>3.9</td>
                 <td>5 years (avg. for MBA)</td>
             </tr>
-            <tr>
+            <tr data-act-range="33-36" data-sat-range="1460-1580">
                 <td>Harvard University</td>
                 <td>33-36</td>
                 <td>1460-1580</td>
@@ -113,7 +148,7 @@
                 <td>3.9</td>
                 <td>4-5 years (MBA)</td>
             </tr>
-            <tr>
+            <tr data-act-range="33-35" data-sat-range="1450-1570">
                 <td>Princeton University</td>
                 <td>33-35</td>
                 <td>1450-1570</td>
@@ -122,7 +157,7 @@
                 <td>3.9</td>
                 <td>Varies by program</td>
             </tr>
-            <tr>
+            <tr data-act-range="33-35" data-sat-range="1460-1580">
                 <td>Yale University</td>
                 <td>33-35</td>
                 <td>1460-1580</td>
@@ -131,7 +166,7 @@
                 <td>3.95</td>
                 <td>5 years (avg. for MBA)</td>
             </tr>
-            <tr>
+            <tr data-act-range="33-35" data-sat-range="1450-1570">
                 <td>Duke University</td>
                 <td>33-35</td>
                 <td>1450-1570</td>
@@ -140,7 +175,7 @@
                 <td>3.94</td>
                 <td>5 years (avg. for MBA)</td>
             </tr>
-            <tr>
+            <tr data-act-range="33-35" data-sat-range="1470-1560">
                 <td>Johns Hopkins University</td>
                 <td>33-35</td>
                 <td>1470-1560</td>
@@ -149,7 +184,7 @@
                 <td>3.93</td>
                 <td>Varies by program</td>
             </tr>
-            <tr>
+            <tr data-act-range="33-35" data-sat-range="1460-1570">
                 <td>University of Pennsylvania</td>
                 <td>33-35</td>
                 <td>1460-1570</td>
@@ -158,7 +193,7 @@
                 <td>3.9</td>
                 <td>5 years (avg. for MBA)</td>
             </tr>
-            <tr>
+            <tr data-act-range="35-36" data-sat-range="1530-1580">
                 <td>California Institute of Technology</td>
                 <td>35-36</td>
                 <td>1530-1580</td>
@@ -167,7 +202,173 @@
                 <td>4.19</td>
                 <td>Varies by program</td>
             </tr>
+            <tr data-act-range="22-28" data-sat-range="1120-1290">
+                <td>University of Arkansas</td>
+                <td>22-28</td>
+                <td>1120-1290</td>
+                <td>289</td>
+                <td>655</td>
+                <td>3.7</td>
+                <td>2-4 years (MBA)</td>
+            </tr>
+            <tr data-act-range="21-26" data-sat-range="1050-1250">
+                <td>Hendrix College</td>
+                <td>21-26</td>
+                <td>1050-1250</td>
+                <td>286</td>
+                <td>620</td>
+                <td>3.5</td>
+                <td>4 years</td>
+            </tr>
+            <tr data-act-range="19-25" data-sat-range="1030-1200">
+                <td>University of Central Arkansas</td>
+                <td>19-25</td>
+                <td>1030-1200</td>
+                <td>280</td>
+                <td>600</td>
+                <td>3.4</td>
+                <td>2-3 years (MBA)</td>
+            </tr>
+            <tr data-act-range="18-24" data-sat-range="1000-1180">
+                <td>Arkansas State University</td>
+                <td>18-24</td>
+                <td>1000-1180</td>
+                <td>275</td>
+                <td>590</td>
+                <td>3.3</td>
+                <td>2-3 years (MBA)</td>
+            </tr>
+            <tr data-act-range="20-25" data-sat-range="1020-1210">
+                <td>Ouachita Baptist University</td>
+                <td>20-25</td>
+                <td>1020-1210</td>
+                <td>278</td>
+                <td>610</td>
+                <td>3.6</td>
+                <td>Varies by program</td>
+            </tr>
+            <tr data-act-range="19-24" data-sat-range="1010-1190">
+                <td>University of Arkansas at Little Rock</td>
+                <td>19-24</td>
+                <td>1010-1190</td>
+                <td>272</td>
+                <td>580</td>
+                <td>3.2</td>
+                <td>2-4 years (MBA)</td>
+            </tr>
+            <tr data-act-range="20-25" data-sat-range="1030-1200">
+                <td>Harding University</td>
+                <td>20-25</td>
+                <td>1030-1200</td>
+                <td>276</td>
+                <td>605</td>
+                <td>3.5</td>
+                <td>Varies by program</td>
+            </tr>
+            <tr data-act-range="18-23" data-sat-range="990-1170">
+                <td>Arkansas Tech University</td>
+                <td>18-23</td>
+                <td>990-1170</td>
+                <td>270</td>
+                <td>575</td>
+                <td>3.1</td>
+                <td>2-3 years (MBA)</td>
+            </tr>
+            <tr data-act-range="19-25" data-sat-range="1000-1190">
+                <td>Southern Arkansas University</td>
+                <td>19-25</td>
+                <td>1000-1190</td>
+                <td>273</td>
+                <td>590</td>
+                <td>3.3</td>
+                <td>Varies by program</td>
+            </tr>
+            <tr data-act-range="18-24" data-sat-range="980-1160">
+                <td>University of Arkansas at Pine Bluff</td>
+                <td>18-24</td>
+                <td>980-1160</td>
+                <td>268</td>
+                <td>570</td>
+                <td>3.0</td>
+                <td>2-4 years (MBA)</td>
+            </tr>
+            
+            <!-- Add the remaining rows similarly with data-act-range and data-sat-range attributes -->
         </tbody>
     </table>
+
+    <script>
+        const sliderType = document.getElementById('sliderType');
+        const actSliderContainer = document.getElementById('actSliderContainer');
+        const satSliderContainer = document.getElementById('satSliderContainer');
+        const actSlider = document.getElementById('actSlider');
+        const actValue = document.getElementById('actValue');
+        const satSlider = document.getElementById('satSlider');
+        const satValue = document.getElementById('satValue');
+        const universityTable = document.getElementById('universityTable');
+
+        // Dropdown change event to toggle sliders
+        sliderType.addEventListener('change', function() {
+            switch (sliderType.value) {
+                case 'none':
+                    actSliderContainer.style.display = 'none';
+                    satSliderContainer.style.display = 'none';
+                    break;
+                case 'act':
+                    actSliderContainer.style.display = '';
+                    satSliderContainer.style.display = 'none';
+                    break;
+                case 'sat':
+                    actSliderContainer.style.display = 'none';
+                    satSliderContainer.style.display = '';
+                    break;
+                case 'both':
+                    actSliderContainer.style.display = '';
+                    satSliderContainer.style.display = '';
+                    break;
+            }
+            filterUniversities();
+        });
+
+        // Update display value and filter for ACT slider
+        actSlider.addEventListener('input', function() {
+            actValue.textContent = actSlider.value;
+            filterUniversities();
+        });
+
+        // Update display value and filter for SAT slider
+        satSlider.addEventListener('input', function() {
+            satValue.textContent = satSlider.value;
+            filterUniversities();
+        });
+
+        // Filter universities based on selected sliders
+        function filterUniversities() {
+            const minActScore = parseInt(actSlider.value);
+            const minSatScore = parseInt(satSlider.value);
+
+            Array.from(universityTable.getElementsByTagName('tr')).forEach(row => {
+                const actRange = row.getAttribute('data-act-range').split('-').map(Number);
+                const satRange = row.getAttribute('data-sat-range').split('-').map(Number);
+                const minActRangeScore = actRange[0];
+                const minSatRangeScore = satRange[0];
+                
+                const actVisible = sliderType.value === 'act' || sliderType.value === 'both';
+                const satVisible = sliderType.value === 'sat' || sliderType.value === 'both';
+
+                const meetsActCriteria = !actVisible || minActRangeScore <= minActScore;
+                const meetsSatCriteria = !satVisible || minSatRangeScore <= minSatScore;
+
+                if (meetsActCriteria && meetsSatCriteria) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Initial filter application
+        filterUniversities();
+    </script>
 </body>
 </html>
