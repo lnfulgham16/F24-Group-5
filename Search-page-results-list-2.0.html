@@ -3,102 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Search Results</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>College Search - EduCompare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        #search-results {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        .college-result {
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        .autocomplete-items {
-            position: absolute;
-            border: 1px solid #d4d4d4;
-            border-top: none;
-            z-index: 99;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: white;
-        }
-        .autocomplete-items div {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .autocomplete-items div:hover {
-            background-color: #e9e9e9;
-        }
-        .autocomplete-active {
-            background-color: #e9e9e9;
-        }
-        .search-container {
-            position: relative;
-            display: inline-block;
-            width: 300px;
-        }
-        nav {
-            background-color: #f0f0f0;
-            padding: 10px;
-        }
-        nav ul {
-            list-style: none;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        nav li {
-            display: inline;
-            margin-right: 20px;
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
         }
-        .save-button {
-            margin-top: 10px;
-            padding: 8px 16px;
-            background-color: #4CAF50;
+
+        body {
+            background: linear-gradient(to bottom, #eef2ff, #ffffff);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-button {
+            background: linear-gradient(to right, #6366f1, #818cf8);
             color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s;
             border: none;
             cursor: pointer;
         }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-instructions {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-instructions h2 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .search-instructions p {
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 9999px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 0.5rem;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .autocomplete-items div {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .autocomplete-items div:hover,
+        .autocomplete-active {
+            background-color: var(--light-bg);
+        }
+
+        .college-result {
+            background: var(--light-bg);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .college-result:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .college-result h3 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .result-info {
+            display: grid;
+            gap: 0.5rem;
+            color: #6b7280;
+        }
+
+        dialog {
+            background: white;
+            border: none;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        dialog h2 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        dialog p {
+            margin-bottom: 0.75rem;
+            color: #6b7280;
+        }
+
+        dialog .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: flex-end;
+        }
+
+        dialog button {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+        }
+
+        dialog button.secondary {
+            background: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        dialog button:hover {
+            opacity: 0.9;
+        }
+
+        .save-button {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+            margin-top: 1rem;
+        }
+
         .save-button:disabled {
-            background-color: #ccc;
-            cursor: default;
+            background: #e5e7eb;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .save-button:not(:disabled):hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #6b7280;
+            margin-top: 2rem;
+        }
+
+        .results-list {
+            max-height: 500px;
+            overflow-y: auto;
+            margin: 1rem 0;
+            padding-right: 0.5rem;
+        }
+
+        .results-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .results-list::-webkit-scrollbar-track {
+            background: var(--light-bg);
+            border-radius: 4px;
+        }
+
+        .results-list::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
-    <p>
-        <strong>Search Bar Instructions:</strong> </p>Welcome! here, you can search for anything related to the website. Such as professors, programs, classes, greek life, etc:</p>
-        
-<br><br>- For colleges in particular, here are some examples of what you can search for: 
-
-        </p></br>- The college name (e.g., "Harvard")</p>- Location (e.g., "Massachusetts"),</p>- Type (e.g., "Private"), acceptance rate (e.g., "5%"),</p>- SAT score (e.g., "1500"),</p>- ACT score (e.g., "34").</p> <br>- <strong>Note:</strong> Type "Home" to go back to the Homepage/Landing page (this page) after searching.
-    </p>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="SavedUniversities.html">Saved Universities</a></li>
-        </ul>
-    </nav>
-    <h1>Search Results</h1>
-
-    <div>
-        <form id="search-form" action="#" method="get" onsubmit="filterColleges(event)">
-            <div class="search-container">
-                <input type="text" id="search-input" name="q" placeholder="Enter name, criteria, etc." required>
-                <div id="autocomplete-list" class="autocomplete-items"></div>
-            </div>
-            <input type="submit" value="Search">
-        </form>
+    <div class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            EduCompare
+        </a>
+        <a href="SavedUniversities.html" class="nav-button">
+            <i class="fas fa-bookmark"></i> Saved Universities
+        </a>
     </div>
 
-    <div id="search-results"></div>
+    <div class="container">
+        <div class="search-instructions">
+            <h2><i class="fas fa-info-circle"></i> Search Instructions</h2>
+            <p>Welcome to EduCompare! You can search for:</p>
+            <p>• College names (e.g., "Harvard")</p>
+            <p>• Locations (e.g., "Massachusetts")</p>
+            <p>• University types (e.g., "Private")</p>
+            <p>• Acceptance rates (e.g., "5%")</p>
+            <p>• Test scores (SAT: "1500", ACT: "34")</p>
+            <p><strong>Note:</strong> Type "Home" to return to the homepage</p>
+        </div>
 
-    <button id="saveButton" class="save-button" onclick="saveUniversity(data-name)" disabled>Save Results</button>
+        <form id="search-form" class="search-form" action="#" method="get" onsubmit="filterColleges(event)">
+            <div class="search-container">
+                <input type="text" 
+                       id="search-input" 
+                       class="search-input"
+                       name="q" 
+                       placeholder="Enter college name, location, or criteria..." 
+                       required>
+                <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
+            <button type="submit" class="nav-button">
+                <i class="fas fa-search"></i> Search
+            </button>
+        </form>
 
-    <div style="height: 500px; overflow-y: scroll; border: 1px solid black; padding: 10px;">
+        <div id="search-results"></div>
+        
+        <button id="saveButton" class="save-button" disabled>
+            <i class="fas fa-save"></i> Save Results
+        </button>
+
+    <div class="results-list">
         <ul>
             <li data-name="Harvard University"
                 data-location="Cambridge, Massachusetts"
@@ -333,11 +551,38 @@
         <button onclick="saveUniversity('University of Pennsylvania')">Save</button>
     </dialog>
 
-    <p style="margin-top: 20px; font-size: 14px; color: #666;">
+    <footer>
         Group 5  |  2024
-    </p>
+    </footer>
 
     <script>
+    function saveResults() {
+        const searchResults = document.getElementById('search-results');
+        const collegeResults = searchResults.getElementsByClassName('college-result');
+    
+        if (collegeResults.length === 0) {
+            alert('No results to save!');
+            return;
+        }
+    
+        let savedUniversities = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+        let newSaves = false;
+    
+        Array.from(collegeResults).forEach(result => {
+            const universityName = result.querySelector('h3').textContent;
+            if (!savedUniversities.includes(universityName)) {
+            savedUniversities.push(universityName);
+            newSaves = true;
+            }
+        });
+    
+        if (newSaves) {
+            localStorage.setItem('savedUniversities', JSON.stringify(savedUniversities));
+            alert('Universities saved successfully! You can view them in your account page.');
+        } else {
+            alert('All displayed universities were already saved!');
+        }
+    }
     // Store all searchable terms
     // Store all searchable terms with their metadata
     function buildSearchableTerms() {
@@ -507,11 +752,11 @@
             var name = dialog.querySelector('h2').textContent.toLowerCase();
             var location = dialog.querySelector('p:nth-child(2)').textContent.toLowerCase();
             var type = dialog.querySelector('p:nth-child(3)').textContent.toLowerCase();
-        
+    
             if (name.includes(input) || location.includes(input) || type.includes(input)) {
                 foundResults = true;
                 var resultHTML = `
-                    <div class="college-result">
+                    <div class="college-result" onclick="window.location.href='universities-${name.replace(/\s+/g, '-').toLowerCase()}.html'" style="cursor: pointer;">
                         <h3>${dialog.querySelector('h2').textContent}</h3>
                         ${dialog.innerHTML.split('<button')[0]}
                     </div>
@@ -525,7 +770,7 @@
                 <div class="alert alert-info" role="alert">
                     No results found for "${input}". Try another search term.
                 </div>
-        `   ;
+        `      ;
         }
 
         // Update URL with search query
@@ -567,12 +812,13 @@
         saveButton.disabled = !hasResults;
     }
     function saveUniversity(universityName) {
+        let savedUniversities = JSON.parse(localStorage.getItem('savedUniversities')) || [];
         if (!savedUniversities.includes(universityName)) {
             savedUniversities.push(universityName);
             localStorage.setItem('savedUniversities', JSON.stringify(savedUniversities));
-            alert(universityName + ' saved successfully!');
+            alert('University saved successfully! You can view it in your account page.');
         } else {
-            alert(universityName + ' is already saved!');
+            alert('This university is already saved!');
         }
     }
 

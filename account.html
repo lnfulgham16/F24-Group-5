@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saved Universities - EduCompare</title>
+    <title>Account - EduCompare</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -23,8 +23,6 @@
         body {
             background: linear-gradient(to bottom, #eef2ff, #ffffff);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         .navbar {
@@ -53,12 +51,7 @@
             color: transparent;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .nav-button {
+        .logout-button {
             background: linear-gradient(to right, #6366f1, #818cf8);
             color: white;
             padding: 0.75rem 1.5rem;
@@ -70,50 +63,106 @@
             cursor: pointer;
         }
 
-        .nav-button:hover {
+        .logout-button:hover {
             opacity: 0.9;
         }
 
-        .container {
+        .account-container {
             max-width: 800px;
             margin: 2rem auto;
             padding: 2rem;
             background: white;
             border-radius: 1rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            flex-grow: 1;
         }
 
-        h1 {
+        .welcome-message {
             text-align: center;
-            color: var(--text-color);
-            font-size: 2rem;
             margin-bottom: 2rem;
         }
 
-        .clear-all {
-            background: linear-gradient(to right, #6366f1, #818cf8);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: opacity 0.3s;
-            display: block;
-            margin: 0 auto 2rem;
+        .welcome-message h1 {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
         }
 
-        .clear-all:hover {
-            opacity: 0.9;
+        .welcome-message p {
+            color: #6b7280;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #6b7280;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+        }
+
+        .tab-content {
+            padding: 1rem;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .account-info {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 0.5rem;
+        }
+
+        .info-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            width: 24px;
+        }
+
+        .info-label {
+            font-weight: 500;
+            color: var(--text-color);
+            width: 120px;
         }
 
         .university-card {
             background: var(--light-bg);
             border-radius: 0.5rem;
-            padding: 1.5rem;
+            padding: 1rem;
             margin-bottom: 1rem;
-            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -125,10 +174,9 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .university-card h3 {
+        .university-info h3 {
             color: var(--text-color);
-            font-size: 1.1rem;
-            margin-right: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .remove-btn {
@@ -157,17 +205,12 @@
             margin-bottom: 1rem;
         }
 
-        .no-universities h3 {
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-        }
-
         .no-universities p {
             color: #6b7280;
-            margin-bottom: 1.5rem;
+            margin: 1rem 0;
         }
 
-        .search-btn {
+        .search-link {
             background: linear-gradient(to right, #6366f1, #818cf8);
             color: white;
             padding: 0.75rem 1.5rem;
@@ -178,17 +221,8 @@
             display: inline-block;
         }
 
-        .search-btn:hover {
+        .search-link:hover {
             opacity: 0.9;
-        }
-
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            color: #6b7280;
-            background: white;
-            border-top: 1px solid #e5e7eb;
-            margin-top: auto;
         }
     </style>
 </head>
@@ -198,53 +232,105 @@
             <i class="fas fa-graduation-cap"></i>
             EduCompare
         </a>
-        <div class="nav-links">
-            <a href="Search-page-results-list-2.0.html" class="nav-button">
-                <i class="fas fa-search"></i> Back to Search
-            </a>
-        </div>
-    </div>
-
-    <div class="container">
-        <h1>Saved Universities</h1>
-        
-        <button id="clearAll" class="clear-all">
-            <i class="fas fa-trash-alt"></i> Clear All Saved Universities
+        <button onclick="logout()" class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Logout
         </button>
-        
-        <div id="savedUniversitiesList">
-            <!-- Universities will be displayed here -->
-        </div>
     </div>
 
-    <footer>
-        Group 5 | 2024
-    </footer>
+    <div class="account-container">
+        <div class="welcome-message">
+            <h1>Welcome Back, <span id="userName">John Doe</span>!</h1>
+            <p>Manage your account and saved universities</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('account-info')">Account Information</button>
+            <button class="tab" onclick="switchTab('saved-universities')">Saved Universities</button>
+        </div>
+
+        <div id="account-info" class="tab-content active">
+            <div class="account-info">
+                <div class="info-item">
+                    <i class="fas fa-user"></i>
+                    <span class="info-label">First Name:</span>
+                    <span id="firstName">John</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-user"></i>
+                    <span class="info-label">Last Name:</span>
+                    <span id="lastName">Doe</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span class="info-label">Email:</span>
+                    <span id="email">G5Demo@example.com</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="info-label">Username:</span>
+                    <span id="username">G5Demo</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="saved-universities" class="tab-content">
+            <div id="saved-universities-list">
+                <!-- Universities will be populated here -->
+            </div>
+        </div>
+    </div>
 
     <script>
+        // Check if user is logged in
+        window.onload = function() {
+            const user = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (!user) {
+                window.location.href = 'login.html';
+            }
+            displaySavedUniversities();
+        }
+
+        // Tab switching functionality
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            if (tabId === 'saved-universities') {
+                displaySavedUniversities();
+            }
+        }
+
         function displaySavedUniversities() {
             const savedUniversities = JSON.parse(localStorage.getItem('savedUniversities')) || [];
-            const container = document.getElementById('savedUniversitiesList');
+            const container = document.getElementById('saved-universities-list');
             
             if (savedUniversities.length === 0) {
                 container.innerHTML = `
                     <div class="no-universities">
                         <i class="fas fa-university"></i>
-                        <h3>No saved universities</h3>
-                        <p>Go to the search page to find and save universities.</p>
-                        <a href="Search-page-results-list-2.0.html" class="search-btn">
-                            <i class="fas fa-search"></i> Go to Search
+                        <h3>No Saved Universities</h3>
+                        <p>Start exploring universities to save them to your profile!</p>
+                        <a href="Search-page-results-list-2.0.html" class="search-link">
+                            <i class="fas fa-search"></i> Search Universities
                         </a>
                     </div>
                 `;
-                document.getElementById('clearAll').style.display = 'none';
                 return;
             }
             
-            document.getElementById('clearAll').style.display = 'block';
             container.innerHTML = savedUniversities.map(university => `
                 <div class="university-card">
-                    <h3>${university}</h3>
+                    <div class="university-info">
+                        <h3>${university}</h3>
+                    </div>
                     <button class="remove-btn" onclick="removeUniversity('${university}')">
                         <i class="fas fa-times"></i> Remove
                     </button>
@@ -259,17 +345,10 @@
             displaySavedUniversities();
         }
 
-        function clearAllUniversities() {
-            if (confirm('Are you sure you want to remove all saved universities?')) {
-                localStorage.setItem('savedUniversities', JSON.stringify([]));
-                displaySavedUniversities();
-            }
+        function logout() {
+            sessionStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            displaySavedUniversities();
-            document.getElementById('clearAll').addEventListener('click', clearAllUniversities);
-        });
     </script>
 </body>
 </html>
