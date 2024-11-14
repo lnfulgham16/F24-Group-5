@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College State Filter - EduCompare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #eef2ff, #ffffff);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-button {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-instructions {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-instructions h2 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .search-instructions p {
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+        .select-container {
+            margin-bottom: 2rem;
+        }
+
+        .select-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .select-container select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 9999px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .select-container select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .college-result {
+            background: var(--light-bg);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .college-result:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .college-result h3 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .result-info {
+            display: grid;
+            gap: 0.5rem;
+            color: #6b7280;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #6b7280;
+            margin-top: 2rem;
+        }
+
+        .results-list {
+            max-height: 500px;
+            overflow-y: auto;
+            margin: 1rem 0;
+            padding-right: 0.5rem;
+        }
+
+        .results-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .results-list::-webkit-scrollbar-track {
+            background: var(--light-bg);
+            border-radius: 4px;
+        }
+
+        .results-list::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            EduCompare
+        </a>
+        <a href="SavedUniversities.html" class="nav-button">
+            <i class="fas fa-bookmark"></i> Saved Universities
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="select-container">
+            <label for="stateSelect">Select State:</label>
+            <select id="stateSelect">
+                <option value="">Select State</option>
+                <option value="Massachusetts">Massachusetts</option>
+                <option value="California">California</option>
+                <option value="Connecticut">Connecticut</option>
+                <option value="New Jersey">New Jersey</option>
+                <option value="Illinois">Illinois</option>
+                <option value="New York">New York</option>
+                <option value="Pennsylvania">Pennsylvania</option>
+            </select>
+        </div>
+
+        <div id="universityList">
+            <h2>Universities</h2>
+            <ul id="universityListUl"></ul>
+        </div>
+
+        <script>
+            const stateSelect = document.getElementById('stateSelect');
+            const universityListUl = document.getElementById('universityListUl');
+
+            const universityData = {
+                Massachusetts: ["Harvard University", "Massachusetts Institute of Technology (MIT)"],
+                California: ["Stanford University", "University of California, Berkeley", "California Institute of Technology (Caltech)", "University of California, Los Angeles (UCLA)", "University of California, San Diego (UCSD)", "University of Southern California (USC)", "University of California, San Francisco (UCSF)"],
+                Connecticut: ["Yale University"],
+                "New Jersey": ["Princeton University"],
+                Illinois: ["University of Chicago", "Northwestern University"],
+                "New York": ["Columbia University"],
+                Pennsylvania: ["University of Pennsylvania", "Pennsylvania State University"]
+            };
+
+            stateSelect.addEventListener('change', () => {
+                const selectedState = stateSelect.value;
+                universityListUl.innerHTML = ''; // Clear previous list
+
+                if (selectedState && universityData[selectedState]) {
+                    universityData[selectedState].forEach(university => {
+                        const li = document.createElement('li');
+                        li.textContent = university;
+                        universityListUl.appendChild(li);
+                    });
+                } else {
+                    universityListUl.innerHTML = '<li>Select a state to see universities.</li>';
+                }
+            });
+        </script>
+    </div>
+
+    <footer>
+        Group 5  |  2024
+    </footer>
+</body>
+</html>
