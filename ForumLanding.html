@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Landing Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Inherit styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+        }
+        body {
+            background: linear-gradient(to bottom, #eef2ff, #ffffff);
+            min-height: 100vh;
+        }
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        /* Forum section styling */
+        .forum-section {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .forum-section h2 {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .forum-links a {
+            display: block;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .forum-links a:hover {
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-graduation-cap"></i> EduCompare Forum
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="Jobboard.html">Job Board</a>
+                <a href="Campus_Event_Update.html">Campus Events</a>
+                <a href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Forum Section -->
+    <div class="forum-section">
+        <h2>Community Forum</h2>
+        <div class="forum-links">
+            <a href="general_discussions.html">General Discussions</a>
+            <a href="academic_help.html">Academic Help</a>
+            <a href="career_advice.html">Career Advice</a>
+            <a href="campus_life.html">Campus Life</a>
+            <a href="study_abroad.html">Study Abroad</a>
+            <a href="alumni_connect.html">Alumni Connect</a>
+        </div>
+    </div>
+</body>
+</html>
