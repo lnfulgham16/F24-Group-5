@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Search by City</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .filter-container {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .filter-container h2 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .filter-container label {
+            display: block;
+            margin: 10px 0;
+        }
+        .filter-container select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .filter-container button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .filter-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="filter-container">
+        <h2>Filter Colleges by City</h2>
+        <form id="city-filter-form">
+            <label for="cities">Select a City:</label>
+            <select id="cities" name="cities" multiple>
+                <option value="Philadelphia">Philadelphia</option>
+                <option value="New York">New York</option>
+                <option value="Boston">Boston</option>
+                <option value="Chicago">Chicago</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="San Francisco">San Francisco</option>
+                <option value="Washington DC">Washington DC</option>
+                <option value="Austin">Austin</option>
+                <option value="Miami">Miami</option>
+                <!-- Add more cities as needed -->
+            </select>
+            <button type="button" onclick="applyCityFilter()">Apply City Filter</button>
+        </form>
+    </div>
+
+    <script>
+        function applyCityFilter() {
+            const form = document.getElementById("city-filter-form");
+            const selectedCities = Array.from(form.querySelector('#cities').selectedOptions).map(option => option.value);
+
+            // Here you can use the selectedCities array to filter colleges (e.g., make an API call or update the UI)
+            if (selectedCities.length > 0) {
+                alert('Filtered cities: ' + selectedCities.join(', '));
+            } else {
+                alert('Please select at least one city.');
+            }
+        }
+    </script>
+
+</body>
+</html>
