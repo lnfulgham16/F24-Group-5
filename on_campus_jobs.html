@@ -308,19 +308,41 @@ a {
 tbody tr:hover {
     background-color: #f0f0f0; /* Light gray on hover */
 }
+td:last-child {
+    text-align: center;
+}
+#filterContainer {
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+    align-items: center;
+    margin-bottom: 1rem;
+}
+#filterContainer label {
+    margin-right: 0.5rem;
+}
+#filter {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
 </style>
 </head>
 <body>
 
-<h1>On-Campus Part-Time Jobs</h1>
-
-<label for="filter">Filter:</label>
-<select id="filter">
-  <option value="">All</option>
-  <option value="libraryJobs">Library Jobs</option>
-  <option value="academicOfficeJobs">Academic Office Jobs</option>
-  <option value="shuttleJobs">Shuttle Jobs</option>
-</select>
+<div id="filterContainer">
+    <h1>On-Campus Part-Time Jobs</h1>
+    <label for="filter">Filter</label>
+    <select id="filter">
+      <option value="">All</option>
+      <option value="libraryJobs">Library Jobs</option>
+      <option value="academicOfficeJobs">Academic Office Jobs</option>
+      <option value="shuttleJobs">Shuttle Jobs</option>
+    </select>
+</div>
 
 <table>
   <thead>
@@ -364,7 +386,7 @@ function renderUniversities(filteredUniversities) {
     const applyCell = row.insertCell();
     const applyButton = document.createElement('a');
     applyButton.href = uni.url;
-    applyButton.textContent = 'Apply';
+    applyButton.textContent = 'Apply on University Website';
     applyButton.target = '_blank';
     applyCell.appendChild(applyButton);
   });
