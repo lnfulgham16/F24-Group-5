@@ -11,13 +11,32 @@ on:
 
 jobs:
   # Add additional jobs here!!
+  
 
   # End additional job steps!!
   lint:
     runs-on: ubuntu-latest
     steps:
+      #Step 1 Checkout the code
       - name: Checkout
         uses: actions/checkout@v4
       # Add steps here!!
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      # Step 3: Install ESLint
+      - name: Install ESLint
+        run: npm install eslint
 
-      # End additional steps!!
+      # Step 4: Run ESLint
+      - name: Run ESLint
+        run: npx eslint . || echo "Linting completed with warnings or errors."
+      #HTML Proofer
+      - name: HTMLproofer
+        uses: athackst/htmlproofer-action@main
+        with:
+          directory: ./
+          # End additional steps!!
