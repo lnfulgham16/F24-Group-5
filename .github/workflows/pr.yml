@@ -11,28 +11,7 @@ on:
 
 jobs:
   # Add additional jobs here!!
-  htmlproofer:
-    runs-on: ubuntu-latest
-    steps:
-    # Step 1: Checkout the code
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    # Step 2: Set up Ruby environment (HTMLProofer requires Ruby)
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.0'  # You can change the Ruby version if needed
-
-    # Step 3: Install HTMLProofer
-    - name: Install HTMLProofer
-      run: |
-        gem install html-proofer
-
-    # Step 4: Run HTMLProofer with correct options
-    - name: Run HTMLProofer
-      run: |
-        htmlproofer ./_site --check-html --check-links --check-external
+  
 
   # End additional job steps!!
   lint:
@@ -47,7 +26,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-
+      
       # Step 3: Install ESLint
       - name: Install ESLint
         run: npm install eslint
@@ -55,4 +34,9 @@ jobs:
       # Step 4: Run ESLint
       - name: Run ESLint
         run: npx eslint . || echo "Linting completed with warnings or errors."
+      #HTML Proofer
+      - name: HTMLproofer
+        uses: athackst/htmlproofer-action@main
+        with:
+          directory: ./
           # End additional steps!!
