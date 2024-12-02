@@ -29,10 +29,10 @@ jobs:
       run: |
         gem install html-proofer
 
-    # Step 4: Run HTMLProofer
+    # Step 4: Run HTMLProofer with correct options
     - name: Run HTMLProofer
       run: |
-        htmlproofer ./_site --check-html --disable-external
+        htmlproofer ./_site --check-html-links --disable-external
   # End additional job steps!!
   lint:
     runs-on: ubuntu-latest
