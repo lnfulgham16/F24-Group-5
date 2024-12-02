@@ -11,7 +11,7 @@ on:
 
 jobs:
   # Add additional jobs here!!
-  htmlproofer:
+htmlproofer:
     runs-on: ubuntu-latest
     steps:
     # Step 1: Checkout the code
@@ -32,7 +32,7 @@ jobs:
     # Step 4: Run HTMLProofer with correct options
     - name: Run HTMLProofer
       run: |
-        htmlproofer ./_site --check-html-links --disable-external
+        htmlproofer ./_site --check-html --check-links --check-external
   # End additional job steps!!
   lint:
     runs-on: ubuntu-latest
