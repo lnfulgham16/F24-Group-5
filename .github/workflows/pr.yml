@@ -27,7 +27,7 @@ jobs:
     # Step 3: Install HTMLProofer
     - name: Install HTMLProofer
       run: |
-        gem install htmlproofer
+        gem install html-proofer
 
     # Step 4: Run HTMLProofer
     - name: Run HTMLProofer
