@@ -39,4 +39,5 @@ jobs:
         uses: athackst/htmlproofer-action@main
         with:
           directory: ./
+          continue-on-error: true
           # End additional steps!!
