@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>On-Campus Part-Time Jobs</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #818cf8;
+    --text-color: #1f2937;
+    --light-bg: #f3f4f6;
+}
+
+body {
+    background: linear-gradient(to bottom, #eef2ff, #ffffff);
+    min-height: 100vh;
+}
+
+/* Navigation Styles */
+.navbar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #6366f1, #818cf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.sign-in-btn {
+    background: linear-gradient(to right, #6366f1, #818cf8);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.sign-in-btn:hover {
+    opacity: 0.9;
+}
+
+/* Hero Section Styles */
+.hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.sparkle {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fbbf24;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.hero h1 span {
+    background: linear-gradient(to right, #6366f1, #818cf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: #4b5563;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Search Bar Styles */
+.search-container {
+    flex: 1;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 9999px;
+    padding: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+    width: 100%;
+}
+
+.search-bar:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 9999px 0 0 9999px;
+}
+
+.search-btn {
+    background: linear-gradient(to right, #6366f1, #818cf8);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 0 9999px 9999px 0;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    margin-left: -1px;
+}
+
+.search-btn:hover {
+    opacity: 0.9;
+}
+
+/* Duration Filter Styles */
+#durationFilter {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    border-radius: 9999px;
+    font-family: inherit;
+    margin-left: 1rem;
+}
+
+
+/* Stats Section */
+.stats {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #6366f1, #818cf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.stat-label {
+    color: #4b5563;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Feature Cards */
+.features {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    color: #4b5563;
+    margin-bottom: 1rem;
+}
+
+.learn-more {
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.learn-more i {
+    margin-left: 0.25rem;
+    transition: transform 0.3s;
+}
+
+.learn-more:hover i {
+    transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+tbody tr:hover {
+    background-color: #f0f0f0; /* Light gray on hover */
+}
+td:last-child {
+    text-align: center;
+}
+#filterContainer {
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+    align-items: center;
+    margin-bottom: 1rem;
+}
+#filterContainer label {
+    margin-right: 0.5rem;
+}
+#filter {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+</style>
+</head>
+<body>
+
+<div id="filterContainer">
+    <h1>On-Campus Part-Time Jobs</h1>
+    <label for="filter">Filter</label>
+    <select id="filter">
+      <option value="">All</option>
+      <option value="libraryJobs">Library Jobs</option>
+      <option value="academicOfficeJobs">Academic Office Jobs</option>
+      <option value="shuttleJobs">Shuttle Jobs</option>
+    </select>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>University</th>
+      <th>Library Jobs</th>
+      <th>Academic Office Jobs</th>
+      <th>Shuttle Jobs</th>
+      <th>Apply</th>
+    </tr>
+  </thead>
+  <tbody id="universityList">
+  </tbody>
+</table>
+
+<script>
+const universities = [
+  { "university": "Harvard University", "libraryJobs": true, "academicOfficeJobs": false, "shuttleJobs": true, "url": "https://www.harvard.edu" },
+  { "university": "Stanford University", "libraryJobs": false, "academicOfficeJobs": true, "shuttleJobs": false, "url": "https://www.stanford.edu" },
+  { "university": "MIT", "libraryJobs": true, "academicOfficeJobs": true, "shuttleJobs": true, "url": "https://www.mit.edu" },
+  { "university": "UC Berkeley", "libraryJobs": false, "academicOfficeJobs": false, "shuttleJobs": true, "url": "https://www.berkeley.edu" },
+  { "university": "Yale University", "libraryJobs": true, "academicOfficeJobs": true, "shuttleJobs": false, "url": "https://www.yale.edu" },
+  { "university": "Princeton University", "libraryJobs": false, "academicOfficeJobs": true, "shuttleJobs": true, "url": "https://www.princeton.edu" },
+  { "university": "California Institute of Technology", "libraryJobs": true, "academicOfficeJobs": false, "shuttleJobs": false, "url": "https://www.caltech.edu" },
+  { "university": "University of Chicago", "libraryJobs": false, "academicOfficeJobs": true, "shuttleJobs": true, "url": "https://www.uchicago.edu" },
+  { "university": "Columbia University", "libraryJobs": true, "academicOfficeJobs": true, "shuttleJobs": false, "url": "https://www.columbia.edu" },
+  { "university": "University of Pennsylvania", "libraryJobs": false, "academicOfficeJobs": false, "shuttleJobs": true, "url": "https://www.upenn.edu" }
+];
+
+const universityList = document.getElementById('universityList');
+const filterSelect = document.getElementById('filter');
+
+function renderUniversities(filteredUniversities) {
+  universityList.innerHTML = '';
+  filteredUniversities.forEach(uni => {
+    const row = universityList.insertRow();
+    row.insertCell().textContent = uni.university;
+    row.insertCell().textContent = uni.libraryJobs ? 'Yes' : 'No';
+    row.insertCell().textContent = uni.academicOfficeJobs ? 'Yes' : 'No';
+    row.insertCell().textContent = uni.shuttleJobs ? 'Yes' : 'No';
+    const applyCell = row.insertCell();
+    const applyButton = document.createElement('a');
+    applyButton.href = uni.url;
+    applyButton.textContent = 'Apply on University Website';
+    applyButton.target = '_blank';
+    applyCell.appendChild(applyButton);
+  });
+}
+
+filterSelect.addEventListener('change', () => {
+  const filterValue = filterSelect.value;
+  const filteredUniversities = filterValue ? universities.filter(uni => uni[filterValue]) : universities;
+  renderUniversities(filteredUniversities);
+});
+
+renderUniversities(universities);
+</script>
+
+</body>
+</html>
