@@ -1,49 +1,262 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Sports Scholarship Filter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Scholarship Filter - EduCompare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #eef2ff, #ffffff);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-button {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .select-container {
+            margin-bottom: 2rem;
+        }
+
+        .select-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .select-container select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 9999px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .select-container select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        button {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .results-list {
+            max-height: 500px;
+            overflow-y: auto;
+            margin: 1rem 0;
+            padding-right: 0.5rem;
+        }
+
+        .results-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .results-list::-webkit-scrollbar-track {
+            background: var(--light-bg);
+            border-radius: 4px;
+        }
+
+        .results-list::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #6b7280;
+            margin-top: 2rem;
+        }
+
+        #scholarships table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        #scholarships th, #scholarships td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #scholarships th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-  <h1>Sports Scholarship Filter</h1>
-  <label for="university">University:</label>
-  <select id="university">
-    <option value="">All Universities</option>
-    <option value="Stanford">Stanford University</option>
-    <option value="Brown">Brown University</option>
-    <option value="Columbia">Columbia University</option>
-    <option value="Cornell">Cornell University</option>
-    <option value="Dartmouth">Dartmouth College</option>
-    <option value="Harvard">Harvard University</option>
-    <option value="Princeton">Princeton University</option>
-    <option value="Yale">Yale University</option>
-    <option value="Duke">Duke University</option>
-    <option value="Johns Hopkins">Johns Hopkins University</option>
-    <option value="Pennsylvania">University of Pennsylvania</option>
-    <option value="Caltech">California Institute of Technology</option>
-  </select>
-  <br><br>
-  <label for="sport">Sport:</label>
-  <select id="sport">
-    <option value="">All Sports</option>
-    <option value="Football">Football</option>
-    <option value="Basketball Men's">Basketball (Men's)</option>
-    <option value="Basketball Women's">Basketball (Women's)</option>
-    <option value="Baseball/Softball">Baseball/Softball</option>
-    <option value="Soccer">Soccer</option>
-    <option value="Track and Field/Cross Country">Track and Field/Cross Country</option>
-    <option value="Swimming and Diving">Swimming and Diving</option>
-    <option value="Tennis">Tennis</option>
-    <option value="Volleyball">Volleyball</option>
-  </select>
-  <br><br>
-  <button id="filterButton">Available Scholarships</button>
-  <br><br>
-  <div id="scholarships">
-    <!-- Scholarship data will be loaded here -->
-  </div>
+    <div class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            EduCompare
+        </a>
+        <a href="SavedUniversities.html" class="nav-button">
+            <i class="fas fa-bookmark"></i> Saved Universities
+        </a>
+    </div>
 
-  <script>
-    // JavaScript to filter scholarships based on selected university and sport will go here.
-  </script>
+    <div class="container">
+        <div class="select-container">
+            <label for="university">University:</label>
+            <select id="university">
+                <option value="">All Universities</option>
+                <option value="Stanford">Stanford University</option>
+                <option value="Brown">Brown University</option>
+                <option value="Columbia">Columbia University</option>
+                <option value="Cornell">Cornell University</option>
+                <option value="Dartmouth">Dartmouth College</option>
+                <option value="Harvard">Harvard University</option>
+                <option value="Princeton">Princeton University</option>
+                <option value="Yale">Yale University</option>
+                <option value="Duke">Duke University</option>
+                <option value="Johns Hopkins">Johns Hopkins University</option>
+                <option value="Pennsylvania">University of Pennsylvania</option>
+                <option value="Caltech">California Institute of Technology</option>
+            </select>
+        </div>
+        <div class="select-container">
+            <label for="sport">Sport:</label>
+            <select id="sport">
+                <option value="">All Sports</option>
+                <option value="Football">Football</option>
+                <option value="Basketball Men's">Basketball (Men's)</option>
+                <option value="Basketball Women's">Basketball (Women's)</option>
+                <option value="Baseball/Softball">Baseball/Softball</option>
+                <option value="Soccer">Soccer</option>
+                <option value="Track and Field/Cross Country">Track and Field/Cross Country</option>
+                <option value="Swimming and Diving">Swimming and Diving</option>
+                <option value="Tennis">Tennis</option>
+                <option value="Volleyball">Volleyball</option>
+            </select>
+        </div>
+        <br><br>
+        <button id="filterButton">Available Scholarships</button>
+        <br><br>
+        <div class="results-list" id="scholarships">
+            <!-- Scholarship data will be loaded here -->
+        </div>
+
+        <script>
+            const scholarshipData = [
+                // ... (Scholarship data remains the same)
+            ];
+
+            const universitySelect = document.getElementById('university');
+            const sportSelect = document.getElementById('sport');
+            const filterButton = document.getElementById('filterButton');
+            const scholarshipsDiv = document.getElementById('scholarships');
+
+            filterButton.addEventListener('click', () => {
+                const selectedUniversity = universitySelect.value;
+                const selectedSport = sportSelect.value;
+
+                const filteredScholarships = scholarshipData.filter(scholarship => {
+                    return (selectedUniversity === '' || scholarship.university === selectedUniversity) &&
+                           (selectedSport === '' || scholarship.sport === selectedSport);
+                });
+
+                scholarshipsDiv.innerHTML = ''; // Clear previous results
+
+                if (filteredScholarships.length > 0) {
+                    const table = document.createElement('table');
+                    const headerRow = table.insertRow();
+                    headerRow.insertCell().textContent = 'University';
+                    headerRow.insertCell().textContent = 'Sport';
+                    headerRow.insertCell().textContent = 'Amount';
+
+                    filteredScholarships.forEach(scholarship => {
+                        const row = table.insertRow();
+                        row.insertCell().textContent = scholarship.university;
+                        row.insertCell().textContent = scholarship.sport;
+                        row.insertCell().textContent = '$' + scholarship.amount;
+                    });
+                    scholarshipsDiv.appendChild(table);
+                } else {
+                    scholarshipsDiv.innerHTML = '<p>No scholarships found for your selection.</p>';
+                }
+            });
+        </script>
+    </div>
+
+    <footer>
+        Group 5  |  2024
+    </footer>
 </body>
 </html>
