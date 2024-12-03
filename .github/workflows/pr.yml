@@ -11,6 +11,7 @@ on:
 
 jobs:
   # Add additional jobs here!!
+    #Release tracker ----------------
   update_release_draft:
     permissions:
       # write permission is required to create a github release
@@ -33,6 +34,7 @@ jobs:
         #   disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #End of Release tracker --------------
 
   # End additional job steps!!
   lint:
