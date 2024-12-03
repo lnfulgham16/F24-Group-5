@@ -1,4 +1,4 @@
-#This action needs its own 
+#This action needs its own file due to run conditions 
 name: Release Drafter
 
 on:
