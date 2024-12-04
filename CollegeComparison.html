@@ -192,6 +192,34 @@
                 font-size: 2rem;
             }
         }
+        .university-title {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .university-title:hover {
+            color: var(--secondary-color);
+        }
+
+        .view-details-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .view-details-btn:hover {
+            background-color: var(--secondary-color);
+        }
     </style>
 </head>
 <body>
@@ -216,16 +244,16 @@
                 <div class="select-container">
                     <select id="university1" onchange="updateUniversityData(1)">
                         <option value="">Select First University</option>
-                        <option value="universities-stanford-university.html">Stanford University</option>
-                        <option value="universities-harvard-university.html">Harvard University</option>
-                        <option value="universities-massachusetts-institute-of-technology-(mit).html">MIT</option>
-                        <option value="universities-california-institute-of-technology-(caltech).html">California Institute of Technology</option>
-                        <option value="universities-columbia-university.html">Columbia University</option>
-                        <option value="universities-princeton-university.html">Princeton University</option>
-                        <option value="universities-university-of-california,-berkeley.html">University of California - Berkeley</option>
-                        <option value="universities-university-of-chicago.html">University of Chicago</option>
-                        <option value="universities-yale-university.html">Yale University</option>
-                        <option value="universities-university-of-pennsylvania.html">University of Pennsylvania</option>
+                        <option value="universities-stanford-university.html" data-url="universities-stanford-university.html">Stanford University</option>
+                        <option value="universities-harvard-university.html" data-url="universities-harvard-university.html">Harvard University</option>
+                        <option value="universities-massachusetts-institute-of-technology-(mit).html" data-url="universities-massachusetts-institute-of-technology-(mit).html">MIT</option>
+                        <option value="universities-california-institute-of-technology-(caltech).html" data-url="universities-california-institute-of-technology-(caltech).html">California Institute of Technology</option>
+                        <option value="universities-columbia-university.html" data-url="universities-columbia-university.html">Columbia University</option>
+                        <option value="universities-princeton-university.html" data-url="universities-princeton-university.html">Princeton University</option>
+                        <option value="universities-university-of-california,-berkeley.html" data-url="universities-university-of-california,-berkeley.html">University of California - Berkeley</option>
+                        <option value="universities-university-of-chicago.html" data-url="universities-university-of-chicago.html">University of Chicago</option>
+                        <option value="universities-yale-university.html" data-url="universities-yale-university.html">Yale University</option>
+                        <option value="universities-university-of-pennsylvania.html" data-url="universities-university-of-pennsylvania.html">University of Pennsylvania</option>
                     </select>
                 </div>
                 <div id="university1-data">
@@ -237,17 +265,17 @@
             <div class="university-column">
                 <div class="select-container">
                     <select id="university2" onchange="updateUniversityData(2)">
-                        <option value="">Select Second University</option>
-                        <option value="universities-stanford-university.html">Stanford University</option>
-                        <option value="universities-harvard-university.html">Harvard University</option>
-                        <option value="universities-massachusetts-institute-of-technology-(mit).html">MIT</option>
-                        <option value="universities-california-institute-of-technology-(caltech).html">California Institute of Technology</option>
-                        <option value="universities-columbia-university.html">Columbia University</option>
-                        <option value="universities-princeton-university.html">Princeton University</option>
-                        <option value="universities-university-of-california,-berkeley.html">University of California - Berkeley</option>
-                        <option value="universities-university-of-chicago.html">University of Chicago</option>
-                        <option value="universities-yale-university.html">Yale University</option>
-                        <option value="universities-university-of-pennsylvania.html">University of Pennsylvania</option>
+                        <option value="">Select First University</option>
+                        <option value="universities-stanford-university.html" data-url="universities-stanford-university.html">Stanford University</option>
+                        <option value="universities-harvard-university.html" data-url="universities-harvard-university.html">Harvard University</option>
+                        <option value="universities-massachusetts-institute-of-technology-(mit).html" data-url="universities-massachusetts-institute-of-technology-(mit).html">MIT</option>
+                        <option value="universities-california-institute-of-technology-(caltech).html" data-url="universities-california-institute-of-technology-(caltech).html">California Institute of Technology</option>
+                        <option value="universities-columbia-university.html" data-url="universities-columbia-university.html">Columbia University</option>
+                        <option value="universities-princeton-university.html" data-url="universities-princeton-university.html">Princeton University</option>
+                        <option value="universities-university-of-california,-berkeley.html" data-url="universities-university-of-california,-berkeley.html">University of California - Berkeley</option>
+                        <option value="universities-university-of-chicago.html" data-url="universities-university-of-chicago.html">University of Chicago</option>
+                        <option value="universities-yale-university.html" data-url="universities-yale-university.html">Yale University</option>
+                        <option value="universities-university-of-pennsylvania.html" data-url="universities-university-of-pennsylvania.html">University of Pennsylvania</option>
                     </select>
                 </div>
                 <div id="university2-data">
@@ -340,6 +368,9 @@
             const selectElement = document.getElementById(`university${columnNumber}`);
             const dataContainer = document.getElementById(`university${columnNumber}-data`);
             const selectedValue = selectElement.value;
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const universityName = selectedOption.text;
+            const universityUrl = selectedOption.dataset.url;
 
             if (!selectedValue) {
                 dataContainer.innerHTML = '<p class="loading">Select a university to view details</p>';
@@ -357,6 +388,7 @@
                 const universityData = await fetchUniversityData(selectedValue);
                 
                 dataContainer.innerHTML = `
+                    <a href="${universityUrl}" class="university-title">${universityName}</a>
                     <div class="comparison-section">
                         <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
                         <p>${universityData.location}</p>
@@ -389,6 +421,7 @@
                             ${universityData.facilities.map(facility => `<li>${facility}</li>`).join('')}
                         </ul>
                     </div>
+                    <a href="${universityUrl}" class="view-details-btn">View Full Details</a>
                 `;
             } catch (error) {
                 console.error('Error updating university data:', error);
