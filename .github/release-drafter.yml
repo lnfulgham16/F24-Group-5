@@ -1,4 +1,4 @@
-name-template: 'v$NEXT_PATCH_VERSION 🌟'
+name-template: 'v$NEXT_PATCH_VERSION '
 tag-template: 'v$NEXT_PATCH_VERSION'
 categories:
   - title: 🚀 Features
@@ -17,5 +17,5 @@ template: |
   $CHANGES
 
   ## Contributors
-  Thanks to all the contributors! 💖
+  Thanks to all the contributors! 
   $CONTRIBUTORS
