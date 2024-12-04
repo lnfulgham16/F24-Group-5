@@ -36,6 +36,13 @@ jobs:
         uses: actions/checkout@v4
       # Add steps here!!
 
+
+      - name: ChatGPT CodeReviewer
+        uses: anc95/ChatGPT-CodeReview@v1.0.19
+      # Added by Hunter Sowda  |  12.03.2024
+      # https://github.com/marketplace/actions/chatgpt-codereviewer
+
+              
       # End additional steps!!
       - name: Setup Pages
         uses: actions/configure-pages@v5
