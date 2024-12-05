@@ -405,14 +405,22 @@
             background: white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-decoration: none;
         }
 
         .profile-link:hover {
             opacity: 0.8;
             transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-text {
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            color: var(--text-color);
         }
     </style>
 </head>
@@ -425,7 +433,6 @@
                 EduCompare
             </div>
             <div class="nav-links">
-                <a href="login.html">Login</a>
                 <a href="ForumLanding.html">Forum</a>
                 <a href="Degree-and{or}-Certificate-filter.html">Program Filter Tool</a>
                 <a href="View University Admission Statistics.html">View Admission Statistics</a>
@@ -455,6 +462,7 @@
                 </div>
                 <a href="account.html" class="profile-link">
                     <i class="fas fa-user-circle"></i>
+                    <span class="profile-text">Signup/Login</span>
                 </a>
             </div>
         </div>
@@ -500,9 +508,9 @@
             <div class="feature-icon" style="background: #e0f2fe;">
                 <i class="fas fa-book-open" style="color: #0284c7;"></i>
             </div>
-            <h3>Program Comparison</h3>
+            <h3>University Comparison</h3>
             <p>Compare universities and find your ideal program</p>
-            <a href="#" class="learn-more">
+            <a href="CollegeComparison.html" class="learn-more">
                 Learn more <i class="fas fa-chevron-right"></i>
             </a>
         </div>
