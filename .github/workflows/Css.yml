@@ -1,4 +1,4 @@
-name: CSS Linting Workflow
+#name: CSS Linting Workflow
 
 on:
   pull_request:
