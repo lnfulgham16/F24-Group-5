@@ -1,0 +1,37 @@
+name: CSS Property Check Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-properties:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm install -g jq
+      - name: Check CSS properties
+        id: check-properties
+        run: |
+          if [ -f css_properties.json ]; then
+            valid_properties=$(jq -r '.properties[]' css_properties.json)
+            echo "::set-output name=valid_properties::$valid_properties"
+          else
+            echo "::set-output name=valid_properties::[]"
+          fi
+      - name: Report results
+        run: |
+          properties=$(echo "${{ steps.check-properties.outputs.valid_properties }}")
+          if [[ -z "$properties" ]]; then
+            echo "No CSS properties found in css_properties.json"
+          else
+            echo "CSS properties found: $properties"
+          fi
