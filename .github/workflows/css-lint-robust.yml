@@ -1,0 +1,35 @@
+name: Robust CSS Linting Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-css:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm install -g stylelint stylelint-config-standard
+      - name: Check for CSS files
+        id: check-css
+        run: |
+          files=$(find . -name "*.css" -print)
+          if [[ -z "$files" ]]; then
+            echo "::set-output name=css_files_found::false"
+          else
+            echo "::set-output name=css_files_found::true"
+          fi
+      - name: Run stylelint (if CSS files exist)
+        if: steps.check-css.outputs.css_files_found == 'true'
+        run: stylelint "**/*.css"
+      - name: Report if no CSS files found
+        if: steps.check-css.outputs.css_files_found == 'false'
+        run: echo "No CSS files found in the repository."
