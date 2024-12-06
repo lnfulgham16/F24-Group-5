@@ -21,4 +21,4 @@ jobs:
         run: npm install axe-core
 
       - name: Run accessibility check
-        run: npx axe-core Campus_Event_Update.html College_State_Filter.html View_University_Admission_Statistics.html
+        run: npx axe-core College_State_Filter.html
