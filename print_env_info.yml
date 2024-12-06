@@ -1,0 +1,14 @@
+# YAML file to print environment information
+
+jobs:
+  print_info:
+    runs-on: ubuntu-latest # Or another suitable runner
+    steps:
+      - name: Print Operating System Information
+        run: uname -a
+      - name: Print Disk Usage
+        run: df -h
+      - name: Print Current Working Directory
+        run: pwd
+      - name: Print Current Time
+        run: date
