@@ -16,18 +16,5 @@ jobs:
         uses: actions/checkout@v3
 
       # Step 2: Set up Trivy
-      - name: Download and Install Trivy
-        run: |
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
-
-      # Step 3: Scan Dependencies
-      - name: Run Trivy Dependency Scan
-        run: |
-          trivy fs . --exit-code 1 --severity HIGH,CRITICAL
-
-      # Step 4: Scan Container Image (if applicable)
-      # Uncomment the lines below if scanning a Docker image
-      # - name: Scan Docker Image
-      #   run: |
-      #     docker build -t my-app .
-      #     trivy image my-app
+      - name: Vulnerability scan
+        uses: wetransform/gha-trivy@v2.3.2
