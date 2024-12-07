@@ -58,13 +58,3 @@ jobs:
       # Step 6: GitHub - Activity - Readme
         # - Updates README with the recent GitHub activity of a user
         # - Learn more about this action here: https://github.com/jamesgeorge007/github-activity-readme
-      - name: GitHub - Activity - Readme
-        uses: jamesgeorge007/github-activity-readme@v0.4.4
-
-      # Step 7: First interaction
-        # - An action for filtering pull requests and issues from first-time contributors.
-        # - Learn more about this action here: https://github.com/marketplace/actions/first-interaction
-      - name: First interaction
-      - uses: actions/first-interaction@v1.3.0
-            
-          # End additional steps!!
