@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Research Grants - EduCompare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #eef2ff, #ffffff);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-button {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #6b7280;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            EduCompare
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>University Research Grant Opportunities (2022 Estimates)</h1>
+        <table>
+            <tr>
+                <th>University Name</th>
+                <th>Grant Amount (USD)</th>
+                <th>Research Focus</th>
+            </tr>
+            <tr>
+                <td>Johns Hopkins University</td>
+                <td>$3.4 billion</td>
+                <td>Biomedical, defense, engineering</td>
+            </tr>
+            <tr>
+                <td>Stanford University</td>
+                <td>$1.98 billion</td>
+                <td>Medicine, engineering, natural sciences</td>
+            </tr>
+            <tr>
+                <td>Massachusetts Institute of Technology (MIT)</td>
+                <td>$1.13 billion</td>
+                <td>Computer science, engineering, physics</td>
+            </tr>
+            <tr>
+                <td>University of Pennsylvania</td>
+                <td>Over $1 billion</td>
+                <td>Perelman School of Medicine, Wharton School</td>
+            </tr>
+            <tr>
+                <td>Cornell University</td>
+                <td>Over $1 billion</td>
+                <td>Life sciences, engineering, agriculture</td>
+            </tr>
+            <tr>
+                <td>Harvard University</td>
+                <td>$1–$1.2 billion</td>
+                <td>Biomedical, climate research</td>
+            </tr>
+            <tr>
+                <td>Yale University</td>
+                <td>$700 million - $900 million</td>
+                <td>Life sciences, humanities</td>
+            </tr>
+            <tr>
+                <td>Columbia University</td>
+                <td>$800 million - $1 billion</td>
+                <td>Health sciences, engineering</td>
+            </tr>
+            <tr>
+                <td>Duke University</td>
+                <td>$800 million - $1 billion</td>
+                <td>Health sciences, engineering</td>
+            </tr>
+            <tr>
+                <td>Brown University</td>
+                <td>$800 million - $1 billion</td>
+                <td>Health sciences, engineering</td>
+            </tr>
+            <tr>
+                <td>California Institute of Technology (Caltech)</td>
+                <td>$400 million - $500 million</td>
+                <td>Space exploration, physical sciences</td>
+            </tr>
+            <tr>
+                <td>Dartmouth College</td>
+                <td>Hundreds of millions</td>
+                <td>Climate change, cancer immunotherapy, cybersecurity</td>
+            </tr>
+        </table>
+    </div>
+
+    <footer>
+        Group 5  |  2024
+    </footer>
+</body>
+</html>

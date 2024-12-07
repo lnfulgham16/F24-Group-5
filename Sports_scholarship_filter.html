@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Scholarship Filter - EduCompare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #eef2ff, #ffffff);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-button {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .select-container {
+            margin-bottom: 2rem;
+        }
+
+        .select-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .select-container select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 9999px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .select-container select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        button {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .results-list {
+            max-height: 500px;
+            overflow-y: auto;
+            margin: 1rem 0;
+            padding-right: 0.5rem;
+        }
+
+        .results-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .results-list::-webkit-scrollbar-track {
+            background: var(--light-bg);
+            border-radius: 4px;
+        }
+
+        .results-list::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #6b7280;
+            margin-top: 2rem;
+        }
+        #scholarships p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            EduCompare
+        </a>
+        <a href="SavedUniversities.html" class="nav-button">
+            <i class="fas fa-bookmark"></i> Saved Universities
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="select-container">
+            <label for="university">University:</label>
+            <select id="university">
+                <option value="">All Universities</option>
+                <option value="Stanford">Stanford University</option>
+                <option value="Brown">Brown University</option>
+                <option value="Columbia">Columbia University</option>
+                <option value="Cornell">Cornell University</option>
+                <option value="Dartmouth">Dartmouth College</option>
+                <option value="Harvard">Harvard University</option>
+                <option value="Princeton">Princeton University</option>
+                <option value="Yale">Yale University</option>
+                <option value="Duke">Duke University</option>
+                <option value="Johns Hopkins">Johns Hopkins University</option>
+                <option value="Pennsylvania">University of Pennsylvania</option>
+                <option value="Caltech">California Institute of Technology</option>
+            </select>
+        </div>
+        <div class="select-container">
+            <label for="sport">Sport:</label>
+            <select id="sport">
+                <option value="">All Sports</option>
+                <option value="Football">Football</option>
+                <option value="Basketball Men's">Basketball (Men's)</option>
+                <option value="Basketball Women's">Basketball (Women's)</option>
+                <option value="Baseball/Softball">Baseball/Softball</option>
+                <option value="Soccer">Soccer</option>
+                <option value="Track and Field/Cross Country">Track and Field/Cross Country</option>
+                <option value="Swimming and Diving">Swimming and Diving</option>
+                <option value="Tennis">Tennis</option>
+                <option value="Volleyball">Volleyball</option>
+            </select>
+        </div>
+        <br><br>
+        <button id="filterButton">Available Scholarships</button>
+        <br><br>
+        <div class="results-list" id="scholarships">
+            <!-- Scholarship data will be loaded here -->
+        </div>
+
+        <script>
+            const scholarshipData = [
+                {"university": "Stanford", "sport": "Football", "amount": 39768},
+                {"university": "Stanford", "sport": "Basketball Men's", "amount": 38052},
+                {"university": "Stanford", "sport": "Basketball Women's", "amount": 30483},
+                {"university": "Stanford", "sport": "Baseball/Softball", "amount": 32062},
+                {"university": "Stanford", "sport": "Soccer", "amount": 37603},
+                {"university": "Stanford", "sport": "Track and Field/Cross Country", "amount": 45583},
+                {"university": "Stanford", "sport": "Swimming and Diving", "amount": 32005},
+                {"university": "Stanford", "sport": "Tennis", "amount": 27128},
+                {"university": "Stanford", "sport": "Volleyball", "amount": 39144},
+                {"university": "Brown", "sport": "Football", "amount": 49635},
+                {"university": "Brown", "sport": "Basketball Men's", "amount": 32783},
+                {"university": "Brown", "sport": "Basketball Women's", "amount": 37062},
+                {"university": "Brown", "sport": "Baseball/Softball", "amount": 44472},
+                {"university": "Brown", "sport": "Soccer", "amount": 44883},
+                {"university": "Brown", "sport": "Track and Field/Cross Country", "amount": 31688},
+                {"university": "Brown", "sport": "Swimming and Diving", "amount": 24547},
+                {"university": "Brown", "sport": "Tennis", "amount": 40283},
+                {"university": "Brown", "sport": "Volleyball", "amount": 45159},
+                {"university": "Columbia", "sport": "Football", "amount": 30183},
+                {"university": "Columbia", "sport": "Basketball Men's", "amount": 26260},
+                {"university": "Columbia", "sport": "Basketball Women's", "amount": 30911},
+                {"university": "Columbia", "sport": "Baseball/Softball", "amount": 39713},
+                {"university": "Columbia", "sport": "Soccer", "amount": 40289},
+                {"university": "Columbia", "sport": "Track and Field/Cross Country", "amount": 41089},
+                {"university": "Columbia", "sport": "Swimming and Diving", "amount": 21079},
+                {"university": "Columbia", "sport": "Tennis", "amount": 49156},
+                {"university": "Columbia", "sport": "Volleyball", "amount": 45329},
+                {"university": "Cornell", "sport": "Football", "amount": 41796},
+                {"university": "Cornell", "sport": "Basketball Men's", "amount": 39604},
+                {"university": "Cornell", "sport": "Basketball Women's", "amount": 45321},
+                {"university": "Cornell", "sport": "Baseball/Softball", "amount": 33763},
+                {"university": "Cornell", "sport": "Soccer", "amount": 25630},
+                {"university": "Cornell", "sport": "Track and Field/Cross Country", "amount": 45976},
+                {"university": "Cornell", "sport": "Swimming and Diving", "amount": 41075},
+                {"university": "Cornell", "sport": "Tennis", "amount": 44842},
+                {"university": "Cornell", "sport": "Volleyball", "amount": 47376},
+                {"university": "Dartmouth", "sport": "Football", "amount": 24975},
+                {"university": "Dartmouth", "sport": "Basketball Men's", "amount": 47623},
+                {"university": "Dartmouth", "sport": "Basketball Women's", "amount": 41479},
+                {"university": "Dartmouth", "sport": "Baseball/Softball", "amount": 20256},
+                {"university": "Dartmouth", "sport": "Soccer", "amount": 49465},
+                {"university": "Dartmouth", "sport": "Track and Field/Cross Country", "amount": 45811},
+                {"university": "Dartmouth", "sport": "Swimming and Diving", "amount": 35034},
+                {"university": "Dartmouth", "sport": "Tennis", "amount": 33584},
+                {"university": "Dartmouth", "sport": "Volleyball", "amount": 40159},
+                {"university": "Harvard", "sport": "Football", "amount": 31238},
+                {"university": "Harvard", "sport": "Basketball Men's", "amount": 46024},
+                {"university": "Harvard", "sport": "Basketball Women's", "amount": 43767},
+                {"university": "Harvard", "sport": "Baseball/Softball", "amount": 24226},
+                {"university": "Harvard", "sport": "Soccer", "amount": 32327},
+                {"university": "Harvard", "sport": "Track and Field/Cross Country", "amount": 41450},
+                {"university": "Harvard", "sport": "Swimming and Diving", "amount": 41928},
+                {"university": "Harvard", "sport": "Tennis", "amount": 45717},
+                {"university": "Harvard", "sport": "Volleyball", "amount": 41715},
+                {"university": "Princeton", "sport": "Football", "amount": 48705},
+                {"university": "Princeton", "sport": "Basketball Men's", "amount": 20995},
+                {"university": "Princeton", "sport": "Basketball Women's", "amount": 23869},
+                {"university": "Princeton", "sport": "Baseball/Softball", "amount": 21026},
+                {"university": "Princeton", "sport": "Soccer", "amount": 41765},
+                {"university": "Princeton", "sport": "Track and Field/Cross Country", "amount": 37572},
+                {"university": "Princeton", "sport": "Swimming and Diving", "amount": 39912},
+                {"university": "Princeton", "sport": "Tennis", "amount": 25986},
+                {"university": "Princeton", "sport": "Volleyball", "amount": 38372},
+                {"university": "Yale", "sport": "Football", "amount": 32471},
+                {"university": "Yale", "sport": "Basketball Men's", "amount": 44194},
+                {"university": "Yale", "sport": "Basketball Women's", "amount": 27678},
+                {"university": "Yale", "sport": "Baseball/Softball", "amount": 21033},
+                {"university": "Yale", "sport": "Soccer", "amount": 28163},
+                {"university": "Yale", "sport": "Track and Field/Cross Country", "amount": 24311},
+                {"university": "Yale", "sport": "Swimming and Diving", "amount": 46686},
+                {"university": "Yale", "sport": "Tennis", "amount": 42217},
+                {"university": "Yale", "sport": "Volleyball", "amount": 21091},
+                {"university": "Duke", "sport": "Football", "amount": 28325},
+                {"university": "Duke", "sport": "Basketball Men's", "amount": 48126},
+                {"university": "Duke", "sport": "Basketball Women's", "amount": 43264},
+                {"university": "Duke", "sport": "Baseball/Softball", "amount": 30542},
+                {"university": "Duke", "sport": "Soccer", "amount": 21097},
+                {"university": "Duke", "sport": "Track and Field/Cross Country", "amount": 47066},
+                {"university": "Duke", "sport": "Swimming and Diving", "amount": 47004},
+                {"university": "Duke", "sport": "Tennis", "amount": 47218},
+                {"university": "Duke", "sport": "Volleyball", "amount": 20446},
+                {"university": "Johns Hopkins", "sport": "Football", "amount": 41454},
+                {"university": "Johns Hopkins", "sport": "Basketball Men's", "amount": 28638},
+                {"university": "Johns Hopkins", "sport": "Basketball Women's", "amount": 38851},
+                {"university": "Johns Hopkins", "sport": "Baseball/Softball", "amount": 29971},
+                {"university": "Johns Hopkins", "sport": "Soccer", "amount": 34989},
+                {"university": "Johns Hopkins", "sport": "Track and Field/Cross Country", "amount": 25495},
+                {"university": "Johns Hopkins", "sport": "Swimming and Diving", "amount": 31270},
+                {"university": "Johns Hopkins", "sport": "Tennis", "amount": 27891},
+                {"university": "Johns Hopkins", "sport": "Volleyball", "amount": 21505},
+                {"university": "Pennsylvania", "sport": "Football", "amount": 27090},
+                {"university": "Pennsylvania", "sport": "Basketball Men's", "amount": 40888},
+                {"university": "Pennsylvania", "sport": "Basketball Women's", "amount": 23180},
+                {"university": "Pennsylvania", "sport": "Baseball/Softball", "amount": 30440},
+                {"university": "Pennsylvania", "sport": "Soccer", "amount": 47566},
+                {"university": "Pennsylvania", "sport": "Track and Field/Cross Country", "amount": 41399},
+                {"university": "Pennsylvania", "sport": "Swimming and Diving", "amount": 29503},
+                {"university": "Pennsylvania", "sport": "Tennis", "amount": 41364},
+                {"university": "Pennsylvania", "sport": "Volleyball", "amount": 28780},
+                {"university": "Caltech", "sport": "Football", "amount": 37641},
+                {"university": "Caltech", "sport": "Basketball Men's", "amount": 40105},
+                {"university": "Caltech", "sport": "Basketball Women's", "amount": 45368},
+                {"university": "Caltech", "sport": "Baseball/Softball", "amount": 46361},
+                {"university": "Caltech", "sport": "Soccer", "amount": 33553},
+                {"university": "Caltech", "sport": "Track and Field/Cross Country", "amount": 25749},
+                {"university": "Caltech", "sport": "Swimming and Diving", "amount": 27313},
+                {"university": "Caltech", "sport": "Tennis", "amount": 49178},
+                {"university": "Caltech", "sport": "Volleyball", "amount": 29933}
+            ];
+
+            const universitySelect = document.getElementById('university');
+            const sportSelect = document.getElementById('sport');
+            const filterButton = document.getElementById('filterButton');
+            const scholarshipsDiv = document.getElementById('scholarships');
+
+            filterButton.addEventListener('click', () => {
+                const selectedUniversity = universitySelect.value;
+                const selectedSport = sportSelect.value;
+
+                const filteredScholarships = scholarshipData.filter(scholarship => {
+                    return (selectedUniversity === '' || scholarship.university === selectedUniversity) &&
+                           (selectedSport === '' || scholarship.sport === selectedSport);
+                });
+
+                scholarshipsDiv.innerHTML = ''; // Clear previous results
+
+                if (filteredScholarships.length > 0) {
+                    filteredScholarships.forEach(scholarship => {
+                        const p = document.createElement('p');
+                        p.textContent = `${scholarship.university} offers $${scholarship.amount} for ${scholarship.sport}.`;
+                        scholarshipsDiv.appendChild(p);
+                    });
+                } else {
+                    scholarshipsDiv.innerHTML = '<p>No scholarships found for your selection.</p>';
+                }
+            });
+        </script>
+    </div>
+
+    <footer>
+        Group 5  |  2024
+    </footer>
+</body>
+</html>

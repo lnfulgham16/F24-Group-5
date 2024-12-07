@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Comparison Tool - EduCompare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #eef2ff, #ffffff);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .comparison-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .comparison-header h1 span {
+            background: linear-gradient(to right, #6366f1, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .comparison-header p {
+            color: #4b5563;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .university-column {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .select-container {
+            margin-bottom: 1.5rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: var(--text-color);
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        select:hover, select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            outline: none;
+        }
+
+        .comparison-section {
+            background: var(--light-bg);
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-section h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comparison-section h3 i {
+            font-size: 1rem;
+        }
+
+        .comparison-section ul {
+            list-style: none;
+        }
+
+        .comparison-section ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            color: var(--text-color);
+        }
+
+        .comparison-section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-color);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #b91c1c;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-header h1 {
+                font-size: 2rem;
+            }
+        }
+        .university-title {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .university-title:hover {
+            color: var(--secondary-color);
+        }
+
+        .view-details-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .view-details-btn:hover {
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                EduCompare
+            </a>
+        </div>
+    </div>
+
+    <div class="comparison-container">
+        <div class="comparison-header">
+            <h1>University <span>Comparison</span></h1>
+            <p>Compare universities side by side to make an informed decision about your academic future.</p>
+        </div>
+
+        <div class="comparison-grid">
+            <!-- First University Column -->
+            <div class="university-column">
+                <div class="select-container">
+                    <select id="university1" onchange="updateUniversityData(1)">
+                        <option value="">Select First University</option>
+                        <option value="universities-stanford-university.html" data-url="universities-stanford-university.html">Stanford University</option>
+                        <option value="universities-harvard-university.html" data-url="universities-harvard-university.html">Harvard University</option>
+                        <option value="universities-massachusetts-institute-of-technology-(mit).html" data-url="universities-massachusetts-institute-of-technology-(mit).html">MIT</option>
+                        <option value="universities-california-institute-of-technology-(caltech).html" data-url="universities-california-institute-of-technology-(caltech).html">California Institute of Technology</option>
+                        <option value="universities-columbia-university.html" data-url="universities-columbia-university.html">Columbia University</option>
+                        <option value="universities-princeton-university.html" data-url="universities-princeton-university.html">Princeton University</option>
+                        <option value="universities-university-of-california,-berkeley.html" data-url="universities-university-of-california,-berkeley.html">University of California - Berkeley</option>
+                        <option value="universities-university-of-chicago.html" data-url="universities-university-of-chicago.html">University of Chicago</option>
+                        <option value="universities-yale-university.html" data-url="universities-yale-university.html">Yale University</option>
+                        <option value="universities-university-of-pennsylvania.html" data-url="universities-university-of-pennsylvania.html">University of Pennsylvania</option>
+                    </select>
+                </div>
+                <div id="university1-data">
+                    <p class="loading">Select a university to view details</p>
+                </div>
+            </div>
+
+            <!-- Second University Column -->
+            <div class="university-column">
+                <div class="select-container">
+                    <select id="university2" onchange="updateUniversityData(2)">
+                        <option value="">Select First University</option>
+                        <option value="universities-stanford-university.html" data-url="universities-stanford-university.html">Stanford University</option>
+                        <option value="universities-harvard-university.html" data-url="universities-harvard-university.html">Harvard University</option>
+                        <option value="universities-massachusetts-institute-of-technology-(mit).html" data-url="universities-massachusetts-institute-of-technology-(mit).html">MIT</option>
+                        <option value="universities-california-institute-of-technology-(caltech).html" data-url="universities-california-institute-of-technology-(caltech).html">California Institute of Technology</option>
+                        <option value="universities-columbia-university.html" data-url="universities-columbia-university.html">Columbia University</option>
+                        <option value="universities-princeton-university.html" data-url="universities-princeton-university.html">Princeton University</option>
+                        <option value="universities-university-of-california,-berkeley.html" data-url="universities-university-of-california,-berkeley.html">University of California - Berkeley</option>
+                        <option value="universities-university-of-chicago.html" data-url="universities-university-of-chicago.html">University of Chicago</option>
+                        <option value="universities-yale-university.html" data-url="universities-yale-university.html">Yale University</option>
+                        <option value="universities-university-of-pennsylvania.html" data-url="universities-university-of-pennsylvania.html">University of Pennsylvania</option>
+                    </select>
+                </div>
+                <div id="university2-data">
+                    <p class="loading">Select a university to view details</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchUniversityData(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const html = await response.text();
+                return parseUniversityData(html);
+            } catch (error) {
+                console.error('Error fetching university data:', error);
+                throw error;
+            }
+        }
+
+        function parseUniversityData(html) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            // More robust parsing that handles variations in the HTML structure
+            const data = {
+                location: getContentFromSection(doc, 'location'),
+                programs: getListFromSection(doc, 'programs'),
+                admissionRequirements: getListFromSection(doc, 'admission'),
+                tuition: getListFromSection(doc, 'tuition'),
+                facilities: getListFromSection(doc, 'facilities')
+            };
+
+            // Add fallback data if any section is missing
+            if (!data.location) data.location = 'Information not available';
+            if (!data.programs.length) data.programs = ['Information not available'];
+            if (!data.admissionRequirements.length) data.admissionRequirements = ['Information not available'];
+            if (!data.tuition.length) data.tuition = ['Information not available'];
+            if (!data.facilities.length) data.facilities = ['Information not available'];
+
+            return data;
+        }
+
+        function getContentFromSection(doc, sectionId) {
+            try {
+                const section = doc.querySelector(`#${sectionId}`);
+                if (!section) return null;
+                
+                // Try to get text from paragraph first
+                const paragraph = section.querySelector('p');
+                if (paragraph) return paragraph.textContent.trim();
+                
+                // If no paragraph, get all text content from the section
+                return section.textContent.trim();
+            } catch (error) {
+                console.error(`Error getting content from section ${sectionId}:`, error);
+                return null;
+            }
+        }
+
+        function getListFromSection(doc, sectionId) {
+            try {
+                const section = doc.querySelector(`#${sectionId}`);
+                if (!section) return [];
+                
+                // Try to get list items
+                const items = Array.from(section.querySelectorAll('li'));
+                if (items.length > 0) {
+                    return items.map(item => item.textContent.trim());
+                }
+                
+                // If no list items, try to get paragraphs
+                const paragraphs = Array.from(section.querySelectorAll('p'));
+                if (paragraphs.length > 0) {
+                    return paragraphs.map(p => p.textContent.trim());
+                }
+                
+                return [];
+            } catch (error) {
+                console.error(`Error getting list from section ${sectionId}:`, error);
+                return [];
+            }
+        }
+
+        async function updateUniversityData(columnNumber) {
+            const selectElement = document.getElementById(`university${columnNumber}`);
+            const dataContainer = document.getElementById(`university${columnNumber}-data`);
+            const selectedValue = selectElement.value;
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const universityName = selectedOption.text;
+            const universityUrl = selectedOption.dataset.url;
+
+            if (!selectedValue) {
+                dataContainer.innerHTML = '<p class="loading">Select a university to view details</p>';
+                return;
+            }
+
+            dataContainer.innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-circle-notch"></i>
+                    <p>Loading university data...</p>
+                </div>
+            `;
+
+            try {
+                const universityData = await fetchUniversityData(selectedValue);
+                
+                dataContainer.innerHTML = `
+                    <a href="${universityUrl}" class="university-title">${universityName}</a>
+                    <div class="comparison-section">
+                        <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                        <p>${universityData.location}</p>
+                    </div>
+
+                    <div class="comparison-section">
+                        <h3><i class="fas fa-book"></i> Academic Programs</h3>
+                        <ul>
+                            ${universityData.programs.map(program => `<li>${program}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="comparison-section">
+                        <h3><i class="fas fa-user-graduate"></i> Admission Requirements</h3>
+                        <ul>
+                            ${universityData.admissionRequirements.map(req => `<li>${req}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="comparison-section">
+                        <h3><i class="fas fa-dollar-sign"></i> Tuition</h3>
+                        <ul>
+                            ${universityData.tuition.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="comparison-section">
+                        <h3><i class="fas fa-building"></i> Facilities</h3>
+                        <ul>
+                            ${universityData.facilities.map(facility => `<li>${facility}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <a href="${universityUrl}" class="view-details-btn">View Full Details</a>
+                `;
+            } catch (error) {
+                console.error('Error updating university data:', error);
+                dataContainer.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Failed to load university data. Please try again later.</p>
+                        <p>Error details: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

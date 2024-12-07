@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Search Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .filter-container {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .filter-container h2 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .filter-container label {
+            display: block;
+            margin: 10px 0;
+        }
+        .filter-container input {
+            margin-right: 10px;
+        }
+        .filter-container button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .filter-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="filter-container">
+        <h2>Filter Colleges by Setting</h2>
+        <form id="college-filter-form">
+            <label>
+                <input type="checkbox" name="setting" value="Urban" id="urban">
+                Urban (City-based)
+            </label>
+            <label>
+                <input type="checkbox" name="setting" value="Suburban" id="suburban">
+                Suburban (Outskirts of a city)
+            </label>
+            <label>
+                <input type="checkbox" name="setting" value="Rural" id="rural">
+                Rural (Countryside, small towns)
+            </label>
+            <button type="button" onclick="applyFilter()">Apply Filter</button>
+        </form>
+    </div>
+
+    <script>
+        function applyFilter() {
+            const form = document.getElementById("college-filter-form");
+            const selectedSettings = [];
+
+            // Loop through the checkboxes and collect the selected settings
+            const settings = form.querySelectorAll('input[name="setting"]:checked');
+            settings.forEach((checkbox) => {
+                selectedSettings.push(checkbox.value);
+            });
+
+            // Here you can use the selectedSettings array to filter colleges (e.g., make an API call or update the UI)
+            alert('Filtered settings: ' + selectedSettings.join(', '));
+        }
+    </script>
+
+</body>
+</html>
